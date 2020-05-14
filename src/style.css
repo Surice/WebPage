@@ -3,11 +3,17 @@
     padding: 0;
     scroll-behavior: smooth;
 }
+
 body{
     overflow: hidden;
     overflow-y: scroll;
 }
+body::-webkit-scrollbar {
+    display: none;
+}
+
 .navbar{
+    z-index: 99;
     position: fixed;
     display: block;
     background-color: rgba(37, 37, 37, 0.849);
@@ -24,12 +30,8 @@ body{
     color: lightskyblue;
 }
 
-
-.container{
-
-}
 #home{
-    background-image: url('../img/ocean_dock.jpg');
+    background-image: url('./img/ocean_dock.jpg');
     background-size: 100%;
     width: 100%;
     height: 100%;
@@ -45,13 +47,48 @@ body{
     font-weight: 500;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+#intro{
+    background-color: rgb(22, 109, 136);
+    width: 100%;
+    height: 100%;
+}
+.intro-head{
+    padding: 50px;
+    font-size: 60px;
+}
+.intro-txt{
+    position: absolute;
+    color: black;
+    top: 150%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%,-80%);
+    font-size: 38px;
+    font-weight: 500;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.intro-table{
+    background-color: rgba(179, 179, 179, 0.3);
+    border: 2px solid;
+    border-radius: 3px;
+    border-color: rgb(88, 88, 88);
+    padding: 3px;
+    position: absolute;
+    top: 130%;
+    left: 50px;
+    width: 300px;
+}
+
 #comming{
     background-color: #333;
+    width: 100%;
+    height: 100%;
 }
 .comming-txt{
     position: absolute;
     color: white;
-    top: 150%;
+    top: 250%;
     left: 50%;
     text-align: center;
     transform: translate(-50%,-50%);
@@ -59,6 +96,26 @@ body{
     font-weight: 500;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+#impressum{
+    top: 350%;
+    width: 100%;
+    height: 100%;
+
+}
+.impressum-txt{
+    padding: 10px;
+    margin-top: 20px;
+    font-size: smaller;
+}
+.dat-txt{
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: auto;
+    font-size: smaller;
+}
+
 section{
     display: flex;
     flex-direction: column;
