@@ -1,8 +1,4 @@
-window.onload = function() {
-    if(location.hash != "home"){
-        window.location.hash = "home";
-    }
-}
+
 
 
 

@@ -50,7 +50,7 @@ body::-webkit-scrollbar {
 }
 
 #intro{
-    background-color: rgb(22, 109, 136);
+    background-image: url('./img/stone_ground.jpg');
     background-attachment: fixed;
     width: 100%;
     height: 100%;
@@ -61,25 +61,73 @@ body::-webkit-scrollbar {
 }
 .intro-txt{
     position: absolute;
-    color: black;
+    color: rgb(226, 0, 105);
     top: 150%;
     left: 50%;
     text-align: center;
     transform: translate(-50%,-80%);
-    font-size: 38px;
-    font-weight: 500;
+    font-size: 42px;
+    font-weight: bolder;
     font-family: Arial, Helvetica, sans-serif;
+    display: inline-block;
+    background-color: rgba(109, 109, 109, 0.28);
+}
+.intro-table-head, .social-table-head{
+    color: rgb(114, 189, 16);
+    font-size: 20px;
+    text-align: center;
 }
 .intro-table{
-    background-color: rgba(179, 179, 179, 0.3);
+    background-color: rgba(109, 109, 109, 0.493);
+    color: rgb(231, 231, 231);
     border: 2px solid;
-    border-radius: 3px;
-    border-color: rgb(88, 88, 88);
+    border-radius: 1.5px;
+    border-color: rgb(65, 65, 65);
     padding: 3px;
     position: absolute;
     top: 130%;
     left: 50px;
     width: 300px;
+}
+.social-table{
+    background-color: rgba(109, 109, 109, 0.693);
+    color: rgb(231, 231, 231);
+    border: 2px solid;
+    border-radius: 1.5px;
+    border-color: rgb(155, 155, 155);
+    padding: 3px;
+    position: absolute;
+    top: 110%;
+    right: 8%;
+    width: auto;
+}
+.fa-discord{
+    padding: 10px;
+    color: rgb(62, 60, 153);
+    text-decoration: none;
+}
+.fa-instagram{
+    padding: 0.131%;
+    color: rgb(255, 255, 255);
+    background-image: linear-gradient(#405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80);
+    border: 0.1px solid;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.fa-spotify{
+    padding: 10px;
+    color: rgb(54, 207, 54);
+    text-decoration: none;
+}
+.fa-twitch{
+    padding: 10px;
+    color: rgb(138, 62, 209);
+    text-decoration: none;
+}
+.fa-github{
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
 }
 
 #comming{
