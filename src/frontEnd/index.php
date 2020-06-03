@@ -2,32 +2,34 @@
 
 <head>
     <?php
-        function postBackEnd(){
-                include './config.php';
-/*
-                $url = "https://ipinfo.io/json?token=$reqToken";
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: POST, GET");
+        header("Access-Control-Max-Age: 3600");
+        header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-                $xml = file_get_contents($url);
-*/
+        $data = json_decode(file_get_contents("php://input"));
+
+        if($data) {
+            postBackEnd($data);
+            http_response_code(200);
+            die();
+        }
+
+        function postBackEnd($data){
+                include './config.php';
+
         //        $postUrl = "192.168.178.38:999/userInfo";
                 $postUrl = "192.168.178.27:999/userInfo";
-                if(isset($_POST['ip_add'])){
-                    $postData = htmlspecialchars($_POST['ip_add']);
-                    echo $postData;
-                }else{
-                    echo "none input";
-                }
-              
-
+                                
 
                 $ch = curl_init($postUrl);
 
-                $chData = array('ip' => $postData, 'token' => "Success");
+                $chData = array('ip' => $data->ip);
                 $chDataJson = json_encode($chData);
 
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $chDataJson);
-                curl_setopt($ch, CURLOPT_HTTPHEAADER, array('content-Type: application/json'));
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('content-Type: application/json'));
 
                 curl_exec($ch);
         }
@@ -46,12 +48,17 @@
                 console.log(">");
                 console.log(res);
 
-                document.getElementById("postHolder").value = res;
-                document.forms["postForm"].submit();
+                var postReq = new XMLHttpRequest();
+                postReq.open("POST", `${window.location.href}`, true);
+                postReq.send(`{"ip": "${res}"}`);
+                req.onreadystatechange = function(){
+                    if(this.readyState == 4 && this.status != 200){
+                        console.log("Error: bad request");
+                    }
+                }
             }
         }
     </script>
-    
 
     <script src="./index.js"></script>
     <link rel="stylesheet" type="text/css" href="./style.css">
@@ -73,11 +80,6 @@
 </head>
 
 <body>
-    
-    <form id="postForm" method="post" style="color: rgba(0,0,0,1); display: none">
-        <input type="text" id="postHolder" name="ip_add" value=""  onchange="<?php postBackEnd() ?>">
-    </form>
-
 
     <div class="container">
         <section id="home">
