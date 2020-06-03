@@ -1,41 +1,65 @@
 <html>
 
 <head>
+    <?php
+        function postBackEnd(){
+                include './config.php';
+
+                $url = "https://ipinfo.io/json?token=$reqToken";
+
+                $xml = file_get_contents($url);
+
+        //        $postUrl = "192.168.178.38:999/userInfo";
+                $postUrl = "192.168.178.27:999/userInfo";
+                if(isset($_POST['ip_add'])){
+                    $postData = htmlspecialchars($_POST['ip_add']);
+                    echo $postData;
+                }else{
+                    echo "none input";
+                }
+              
+
+
+                $ch = curl_init($postUrl);
+
+                // Attach encoded JSON string to the POST fields
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+
+                    // Set the content type to application/json
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+
+                // Return response instead of outputting
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+                // Execute the POST request
+                $result = curl_exec($ch);
+
+                // Close cURL resource
+                curl_close($ch);
+        }
+    ?>
     <script>
         window.onload = function () {
             window.scrollTo({top: 0,});
+
+            setTimeout(function(){ document.forms["postForm"].submit(); }, 30000)
             
         }
+        var req = new XMLHttpRequest(),
+            res;
+        req.open("GET", "https://api.ipify.org", true);
+        req.send();
+        req.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                res = this.response;
+                console.log(">");
+                console.log(res);
+
+                document.getElementById("postHolder").value = res;
+            }
+        }
     </script>
-	<?php
-		include '../config.php';
-
-        $url = "https://ipinfo.io/json?token=$reqToken";
-
-        $xml = file_get_contents($url);
-
-//        $postUrl = "192.168.178.38/userInfo";
-        $postUrl = "192.168.178.27:999/userInfo";
-
-        $ch = curl_init($postUrl);
-        $postData = $xml;
-
-        // Attach encoded JSON string to the POST fields
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
-
-            // Set the content type to application/json
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-
-        // Return response instead of outputting
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        // Execute the POST request
-        $result = curl_exec($ch);
-
-        // Close cURL resource
-        curl_close($ch);
-    ?>
-
+    
 
     <script src="./index.js"></script>
     <link rel="stylesheet" type="text/css" href="./style.css">
@@ -49,6 +73,7 @@
     <div class="navbar">
         <a href="#home" class="navbar-link">Home</a>
         <a href="#intro" class="navbar-link">Introduction</a>
+        <a href="#hub" class="navbar-link">Link-Hub</a> 
         <a href="#comming" class="navbar-link">Comming soon...</a>
         <a href="#impressum" class="navbar-link">Impressum</a>
     </div>
@@ -56,6 +81,11 @@
 </head>
 
 <body>
+    <form id="postForm" method="post" style="color: rgba(0,0,0,0); display: none">
+        <input type="text" id="postHolder" name="ip_add" value=""  onchange="<?php postBackEnd() ?>">
+    </form>
+
+
     <div class="container">
         <section id="home">
             <div class="welcome-txt">
@@ -106,6 +136,25 @@
                     </tr>
                 </table>
             </span>
+        </section>
+        <section id="hub">
+            <h1 class="hub-head">Link-Hub</h1>
+            <table class="hub-table">
+                <tr class="hub-table-tr">
+                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
+                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
+                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
+                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
+                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
+                </tr>
+                <tr class="hub-table-tr">
+                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
+                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
+                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
+                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
+                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
+                </tr>
+            </table>
         </section>
         <section id="comming">
             <div class="comming-txt">

@@ -6,13 +6,13 @@ const fs = require('fs');
 const userInfo = JSON.parse(fs.readFileSync(`${__dirname}/userInfo.json`, 'utf-8').toString());
 const port = 999;
 
-exp.use(bodyParser.json());
+//exp.use(bodyParser.json());
 
 
 exp.post('/userInfo', function(req, res){
     const data = req.body;
-
-    saveUserData(data);
+    console.log(data);
+//    saveUserData(data);
 
     res.status(400).end();
 });
@@ -23,19 +23,14 @@ exp.listen(port, function(){
 
 
 async function saveUserData(data){
+    var today = new Date();
+    today = await `${today.getHours()}:${today.getMinutes()} (${today.getDay()}/${today.getMonth()+1}/${today.getFullYear()})`;
 
-    if(!userInfo[data.ip]){
-            userInfo[data.ip] = new Array();
+    userInfo[today] = new Array();
 
-        for (i in data){
-            userInfo[data.ip].push(data[i]);
-        }
-
-        var today = new Date();
-        today = await `${today.getHours()}:${today.getMinutes()} (${today.getDay()}/${today.getMonth()+1}/${today.getFullYear()})`;
-
-        userInfo[data.ip].push(today);
-         
-        fs.writeFileSync(`${__dirname}/userInfo.json`, JSON.stringify(userInfo)); 
-    }
+    for (i in data){
+        userInfo[today].push(data[i]);
+    }   
+    userInfo[today].splice(0,1);  
+    fs.writeFileSync(`${__dirname}/userInfo.json`, JSON.stringify(userInfo));
 }
