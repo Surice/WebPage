@@ -7,9 +7,36 @@
             
         }
     </script>
+	<?php
+		include '../config.php';
+
+        $url = "https://ipinfo.io/json?token=$reqToken";
+
+        $xml = file_get_contents($url);
+
+//        $postUrl = "192.168.178.38/userInfo";
+        $postUrl = "192.168.178.27:999/userInfo";
+
+        $ch = curl_init($postUrl);
+        $postData = $xml;
+
+        // Attach encoded JSON string to the POST fields
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+
+            // Set the content type to application/json
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+
+        // Return response instead of outputting
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        // Execute the POST request
+        $result = curl_exec($ch);
+
+        // Close cURL resource
+        curl_close($ch);
+    ?>
 
 
-    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <script src="./index.js"></script>
     <link rel="stylesheet" type="text/css" href="./style.css">
     <link rel="stylesheet" href="./fontawesome/css/all.min.css">
