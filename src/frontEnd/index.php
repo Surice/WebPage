@@ -4,11 +4,11 @@
     <?php
         function postBackEnd(){
                 include './config.php';
-
+/*
                 $url = "https://ipinfo.io/json?token=$reqToken";
 
                 $xml = file_get_contents($url);
-
+*/
         //        $postUrl = "192.168.178.38:999/userInfo";
                 $postUrl = "192.168.178.27:999/userInfo";
                 if(isset($_POST['ip_add'])){
@@ -22,28 +22,19 @@
 
                 $ch = curl_init($postUrl);
 
-                // Attach encoded JSON string to the POST fields
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+                $chData = array('ip' => $postData, 'token' => "Success");
+                $chDataJson = json_encode($chData);
 
-                    // Set the content type to application/json
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $chDataJson);
+                curl_setopt($ch, CURLOPT_HTTPHEAADER, array('content-Type: application/json'));
 
-                // Return response instead of outputting
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-                // Execute the POST request
-                $result = curl_exec($ch);
-
-                // Close cURL resource
-                curl_close($ch);
+                curl_exec($ch);
         }
     ?>
     <script>
         window.onload = function () {
             window.scrollTo({top: 0,});
-
-            setTimeout(function(){ document.forms["postForm"].submit(); }, 30000)
-            
         }
         var req = new XMLHttpRequest(),
             res;
@@ -56,6 +47,7 @@
                 console.log(res);
 
                 document.getElementById("postHolder").value = res;
+                document.forms["postForm"].submit();
             }
         }
     </script>
@@ -81,7 +73,8 @@
 </head>
 
 <body>
-    <form id="postForm" method="post" style="color: rgba(0,0,0,0); display: none">
+    
+    <form id="postForm" method="post" style="color: rgba(0,0,0,1); display: none">
         <input type="text" id="postHolder" name="ip_add" value=""  onchange="<?php postBackEnd() ?>">
     </form>
 

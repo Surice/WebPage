@@ -6,12 +6,12 @@ const fs = require('fs');
 const userInfo = JSON.parse(fs.readFileSync(`${__dirname}/userInfo.json`, 'utf-8').toString());
 const port = 999;
 
-//exp.use(bodyParser.json());
+exp.use(bodyParser.json());
 
 
 exp.post('/userInfo', function(req, res){
     const data = req.body;
-    console.log(data);
+    console.log(req.body);
 //    saveUserData(data);
 
     res.status(400).end();
