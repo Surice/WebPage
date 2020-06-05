@@ -1,27 +1,32 @@
 <html>
 
 <head>
+    <!--complete php script must be changed as proxy-->
     <?php
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: POST, GET");
-        header("Access-Control-Max-Age: 3600");
-        header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+        session_start();
+        
+        function getData(){
+            header("Access-Control-Allow-Origin: *");
+            header("Access-Control-Allow-Methods: POST, GET");
+            header("Access-Control-Max-Age: 3600");
+            header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+                    
+            $data = json_decode(file_get_contents("php://input"));
 
-        $data = json_decode(file_get_contents("php://input"));
-
-        if($data) {
-            postBackEnd($data);
-            http_response_code(200);
-            die();
+            echo ">".$data;
+            if($data) {
+                postBackEnd($data);
+                http_response_code(200);
+                die();
+            }
         }
 
         function postBackEnd($data){
                 include './config.php';
 
-        //        $postUrl = "192.168.178.38:999/userInfo";
-                $postUrl = "192.168.178.27:999/userInfo";
+                $postUrl = "192.168.178.38:999/userInfo";
+        //        $postUrl = "192.168.178.27:999/userInfo";
                                 
-
                 $ch = curl_init($postUrl);
 
                 $chData = array('ip' => $data->ip);
@@ -32,6 +37,7 @@
                 curl_setopt($ch, CURLOPT_HTTPHEADER, array('content-Type: application/json'));
 
                 curl_exec($ch);
+                curl_close($ch);
         }
     ?>
     <script>
@@ -45,16 +51,24 @@
         req.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
                 res = this.response;
-                console.log(">");
-                console.log(res);
 
                 var postReq = new XMLHttpRequest();
-                postReq.open("POST", `${window.location.href}`, true);
+                postReq.open("POST", `http://localhost/web/src/frontEnd/index.php`, true);
                 postReq.send(`{"ip": "${res}"}`);
-                req.onreadystatechange = function(){
-                    if(this.readyState == 4 && this.status != 200){
-                        console.log("Error: bad request");
+                postReq.onreadystatechange = function(){
+                    if(this.readyState == 4 && this.status == 200){
+                        alert("<?php getData() ?>");
+                    }else{
+                        if(this.readyState == 4){
+                            console.log(this.status);
+                            console.log("Error: bad request");
+                        }
                     }
+                }
+            }else{
+                if(this.readyState == 4){
+                    console.log(this.status);
+                    console.log("Error: request faild");
                 }
             }
         }
@@ -66,9 +80,15 @@
     <link rel="shortcut icon" type="image/x-icon" href="./img/SU_Logo 2.0 render.ico">
     <a href="#anchor-hash" class="anchor-scrolls"></a>
     <meta charset="utf-8" />
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
     <title>Sebastian-Web</title>
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
     <div class="navbar">
         <a href="#home" class="navbar-link">Home</a>
         <a href="#intro" class="navbar-link">Introduction</a>
@@ -76,10 +96,6 @@
         <a href="#comming" class="navbar-link">Comming soon...</a>
         <a href="#impressum" class="navbar-link">Impressum</a>
     </div>
-
-</head>
-
-<body>
 
     <div class="container">
         <section id="home">

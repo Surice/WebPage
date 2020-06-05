@@ -17,9 +17,14 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
         <meta name="viewport" content="width=device-width, initial-scale = 1">
     </head>
     <body>
-        <a href="./login.php?action=logout"><button class="logout btn btn-outline-danger">Log Out!</button></a>
-        <h1>Welcome!</h1>
-        <a href="userInfo/index.php"><button>Visitors</button></a>
-        <a href="ipLog/index.php"><button>Log</button></a>
+        <ul class="navbar-me">
+            <li class="li"><a class="nav-a" href="./index.php">Home</a></li>
+            <li class="li"><a class="nav-a" href="userInfo/index.php">Visitors</a></li>
+            <li class="li"><a class="nav-a" href="ipLog/index.php">Log</a></li>
+            <li class="li"><a class="nav-a" href="">None</a></li>
+            <li class="li"><a href="./login.php?action=logout"><button class="logout btn btn-outline-danger">Log Out!</button></a></li>
+            <li class="li"><code class="logDat">Logged in as: <?php echo $_SESSION["user"] ?></code></li>
+        </ul>
+        <b><h1 class="head-txt">Welcome <?php echo $_SESSION["user"] ?>!</h1></b>
     </body>
 </html>

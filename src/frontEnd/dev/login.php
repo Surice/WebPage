@@ -18,6 +18,8 @@ if (!empty($_POST) && !empty($_POST['password']) && !empty($_POST['username']) &
     //    echo $recaptcha->score;
     if ($_POST["password"] == $password && $recaptcha->score >= 0.8 && $_POST["username"] == $username) {
         $_SESSION["loggedIn"] = true;
+        $_SESSION["user"] = $_POST["username"];
+
         header("Location: ./index.php");
     } else {
         if ($_POST["password"] != $password || $_POST["username"] != $username) {

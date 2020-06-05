@@ -6,7 +6,7 @@ const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
 const token = "dbed90d4b22213";
 
-const userInfo = JSON.parse(fs.readFileSync(`${__dirname}/userInfo.json`, 'utf-8').toString());
+var userInfo = JSON.parse(fs.readFileSync(`${__dirname}/userInfo.json`, 'utf-8').toString());
 const port = 999;
 
 exp.use(bodyParser.json());
@@ -18,10 +18,14 @@ exp.post('/userInfo', function(req, res){
 
     res.status(400).end();
 });
+exp.get('/getUser', function(req, res){
+    res.send(userInfo);
+});
+
 
 exp.listen(port, function(){
     console.log(`listen on port ${port}`);
-})
+});
 
 
 async function saveUserData(data){
@@ -33,19 +37,29 @@ async function saveUserData(data){
     xml.send();
     xml.onreadystatechange = async function(){
         if(xml.readyState == 4 && xml.status == 200){
-            var data = xml.responseText;
-            console.log(data);
-            today = await `${today.getHours()}:${today.getMinutes()} (${today.getDay()}/${today.getMonth()+1}/${today.getFullYear()})`;
+            var data = JSON.parse(xml.responseText);
+
+            if(today.getMinutes() < 10){
+                var min = "0"+today.getMinutes();
+            }else{var min = today.getMinutes()};
+            if(today.getHours() < 10){
+                var hou = "0"+today.getHours();
+            }else{var hou = today.getHours()};
+            
+            today = await `${hou}:${min} (${today.getDay()}/${today.getMonth()+1}/${today.getFullYear()})`;
 
             userInfo[today] = new Array();
-
+;
             for (i in data){
                 userInfo[today].push(data[i]);
-            }   
-            userInfo[today].splice(0,1);  
+            }
+
+            var ip = userInfo[today].splice(0,1);
+            var domain = userInfo[today].splice(0,1);
+            console.log(ip);
             fs.writeFileSync(`${__dirname}/userInfo.json`, JSON.stringify(userInfo));
         }else{
-            console.log(this.status)
+            console.log(xml.status)
         }
     };
 
