@@ -2,3 +2,6 @@
 /src/frontEnd/fontawesome
 
 /src/backEnd/node_modules
+/src/backEnd/config.json
+
+/src/proxy/node_modules

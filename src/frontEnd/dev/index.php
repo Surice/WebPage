@@ -21,6 +21,7 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
             <li class="li"><a class="nav-a" href="./index.php">Home</a></li>
             <li class="li"><a class="nav-a" href="userInfo/index.php">Visitors</a></li>
             <li class="li"><a class="nav-a" href="ipLog/index.php">Log</a></li>
+            <li class="li"><a class="nav-a" href="cloud/index.php">Cloud</a></li>
             <li class="li"><a class="nav-a" href="">None</a></li>
             <li class="li"><a href="./login.php?action=logout"><button class="logout btn btn-outline-danger">Log Out!</button></a></li>
             <li class="li"><code class="logDat">Logged in as: <?php echo $_SESSION["user"] ?></code></li>

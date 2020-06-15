@@ -1,45 +1,10 @@
 <html>
 
 <head>
-    <!--complete php script must be changed as proxy-->
     <?php
-        session_start();
-        
-        function getData(){
-            header("Access-Control-Allow-Origin: *");
-            header("Access-Control-Allow-Methods: POST, GET");
-            header("Access-Control-Max-Age: 3600");
-            header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-                    
-            $data = json_decode(file_get_contents("php://input"));
 
-            echo ">".$data;
-            if($data) {
-                postBackEnd($data);
-                http_response_code(200);
-                die();
-            }
-        }
-
-        function postBackEnd($data){
-                include './config.php';
-
-                $postUrl = "192.168.178.38:999/userInfo";
-        //        $postUrl = "192.168.178.27:999/userInfo";
-                                
-                $ch = curl_init($postUrl);
-
-                $chData = array('ip' => $data->ip);
-                $chDataJson = json_encode($chData);
-
-                curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $chDataJson);
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array('content-Type: application/json'));
-
-                curl_exec($ch);
-                curl_close($ch);
-        }
     ?>
+
     <script>
         window.onload = function () {
             window.scrollTo({top: 0,});
@@ -52,19 +17,9 @@
             if(this.readyState == 4 && this.status == 200){
                 res = this.response;
 
-                var postReq = new XMLHttpRequest();
-                postReq.open("POST", `http://localhost/web/src/frontEnd/index.php`, true);
-                postReq.send(`{"ip": "${res}"}`);
-                postReq.onreadystatechange = function(){
-                    if(this.readyState == 4 && this.status == 200){
-                        alert("<?php getData() ?>");
-                    }else{
-                        if(this.readyState == 4){
-                            console.log(this.status);
-                            console.log("Error: bad request");
-                        }
-                    }
-                }
+                var xml = new XMLHttpRequest();
+                xml.open("POST", "https://sebastian-web.de:9999/infoUser");
+                xml.send(res);
             }else{
                 if(this.readyState == 4){
                     console.log(this.status);

@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 
-const token = "dbed90d4b22213";
 
+const config = JSON.parse(fs.readFileSync(`${__dirname}/config.json`, "utf-8").toString());
 var userInfo = JSON.parse(fs.readFileSync(`${__dirname}/userInfo.json`, 'utf-8').toString());
 const port = 999;
 
