@@ -9,24 +9,9 @@
         window.onload = function () {
             window.scrollTo({top: 0,});
         }
-        var req = new XMLHttpRequest(),
-            res;
-        req.open("GET", "https://api.ipify.org", true);
-        req.send();
-        req.onreadystatechange = function(){
-            if(this.readyState == 4 && this.status == 200){
-                res = this.response;
-
-                var xml = new XMLHttpRequest();
-                xml.open("POST", "https://sebastian-web.de:9999/infoUser");
-                xml.send(res);
-            }else{
-                if(this.readyState == 4){
-                    console.log(this.status);
-                    console.log("Error: request faild");
-                }
-            }
-        }
+        var xml = new XMLHttpRequest();
+        xml.open("GET", "http://sebastian-web.de:9999/infoUser");
+        xml.send();
     </script>
 
     <script src="./index.js"></script>
@@ -34,6 +19,7 @@
     <link rel="stylesheet" href="./fontawesome/css/all.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="./img/SU_Logo 2.0 render.ico">
     <a href="#anchor-hash" class="anchor-scrolls"></a>
+    <meta name="viewport" content="width=device-width, initial-scale = 1">
     <meta charset="utf-8" />
 <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

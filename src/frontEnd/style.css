@@ -46,7 +46,8 @@ body::-webkit-scrollbar {
     transform: translate(-50%,-50%);
     font-size: 50px;
     font-weight: 500;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif, Segoe UI;
+    text-shadow: 3px 3px 4px rgb(80, 80, 80);
 }
 
 #intro{
@@ -58,6 +59,9 @@ body::-webkit-scrollbar {
 .intro-head, .hub-head{
     padding: 50px;
     font-size: 60px;
+    color: white;
+    font-family: Times, "Times New Roman", Georgia, serif;
+    text-shadow: 3px 3px 4px rgb(43, 43, 43);
 }
 .intro-txt{
     position: absolute;
@@ -69,8 +73,7 @@ body::-webkit-scrollbar {
     font-size: 42px;
     font-weight: bolder;
     font-family: Arial, Helvetica, sans-serif;
-    display: inline-block;
-    background-color: rgba(109, 109, 109, 0.28);
+    text-shadow: 3px 3px 4px rgb(80, 80, 80);
 }
 .intro-table-head, .social-table-head{
     color: rgb(114, 189, 16);

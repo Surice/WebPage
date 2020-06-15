@@ -11,10 +11,11 @@ const urlInt = '192.168.178.38:999';
 exp.use(bodyParser.json());
 
 
-exp.post('/userInfo', function(req, res){
+exp.get('/userInfo', function(req, res){
     var data = req.connection.remoteAddress;
 
     console.log(data);
+    /*
     var xml = new XMLHttpRequest();
     xml.open('POST', `${urlInt}/userInfo`);
     xml.send(data);
@@ -23,8 +24,8 @@ exp.post('/userInfo', function(req, res){
             console.log(this.status);
         }
     }
-
-    res.status(400).end();
+    */
+    res.status(200).end();
 });
 
 
