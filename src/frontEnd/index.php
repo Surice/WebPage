@@ -10,7 +10,7 @@
             window.scrollTo({top: 0,});
         }
         var xml = new XMLHttpRequest();
-        xml.open("GET", "http://sebastian-web.de:9999/infoUser");
+        xml.open("GET", "https://sebastian-web.de:9876/infoUser");
         xml.send();
     </script>
 
