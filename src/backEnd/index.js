@@ -21,6 +21,12 @@ exp.post('/userInfo', function(req, res){
 exp.get('/getUser', function(req, res){
     res.send(userInfo);
 });
+exp.get('/steamG', function(req, res){
+    steamSearch = require(`${__dirname}/modules/steamSearch.js`);
+    let response = steamSearch();
+
+    res.send(response);
+});
 
 
 exp.listen(port, function(){
