@@ -155,10 +155,11 @@ body::-webkit-scrollbar {
     transform: translate(0, -50%);
     align-content: center;
     text-align: center;
-    display: flex;
-    justify-content: space-evenly;
 }
 .proj-table-tr, .proj-table-th{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
     border: 10% solid;
 }
 .btn-dum{
