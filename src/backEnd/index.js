@@ -1,31 +1,63 @@
+#!/usr/bin/env node
+
 const express = require('express');
 const exp = express();
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+const jwt = require('jsonwebtoken');
 
 
 const config = JSON.parse(fs.readFileSync(`${__dirname}/config.json`, "utf-8").toString());
 var userInfo = JSON.parse(fs.readFileSync(`${__dirname}/userInfo.json`, 'utf-8').toString());
-const port = 999;
+
+const port = 8082;
+const bURL = '/api/v1';
 
 exp.use(bodyParser.json());
 
 
-exp.post('/userInfo', function(req, res){
-    var data = req.body;
-    saveUserData(data);
+exp.get(`${bURL}/userInfo`, function(req, res){
+    var ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
+    saveUserData(ip);
 
-    res.status(400).end();
+    res.status(200).end();
 });
-exp.get('/getUser', function(req, res){
-    res.send(userInfo);
+
+
+exp.get(`${bURL}/getUsers`, function(req, res){
+    //hard gecodet. fehlt user index
+    console.log(req.headers);
+    if(req.body.token && jwt.verify(req.body.token, config.apiSecret) == config.user){
+        res.status(200).send(userInfo).end();
+    }else{
+        res.status(401).json({"error": "Token Invalid!"}).end();
+    }
 });
-exp.get('/steamG', function(req, res){
-    steamSearch = require(`${__dirname}/modules/steamSearch.js`);
-    let response = steamSearch();
+
+
+exp.post(`${bURL}/users`, function(req, res){
+    console.log(req.body);
+
+    if(req.body.username){
+        const user = req.body.username;
+
+        var token = jwt.sign(user, config.apiSecret);
+        res.status(200).json({ "token": token }).end();
+    }
+});
+
+
+exp.get(`${bURL}/steamG`, function(req, res){
+    const response = fs.readFileSync(`${__dirname}/modules/steamGames.json`);
 
     res.send(response);
+});
+
+
+exp.get(`${bURL}/test`, function(req, res){
+    res.status(200);
+    res.send("Succsess").end();
 });
 
 
@@ -35,11 +67,11 @@ exp.listen(port, function(){
 
 
 async function saveUserData(data){
-    var today = new Date(),
-    data = data.ip;
+    var today = new Date();
+    console.log("data: "+ data);
 
     var xml = new XMLHttpRequest();
-    xml.open('GET', `https://ipinfo.io/${data}?token=${token}`, true);
+    xml.open('GET', `https://ipinfo.io/${data}?token=${config.token}`, true);
     xml.send();
     xml.onreadystatechange = async function(){
         if(xml.readyState == 4 && xml.status == 200){
@@ -65,7 +97,7 @@ async function saveUserData(data){
             console.log(ip);
             fs.writeFileSync(`${__dirname}/userInfo.json`, JSON.stringify(userInfo));
         }else{
-            console.log(xml.status)
+            console.log(xml.status);
         }
     };
 

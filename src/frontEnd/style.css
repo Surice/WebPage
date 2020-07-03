@@ -32,6 +32,10 @@ body::-webkit-scrollbar {
 
 #home{
     background-image: url('./img/ocean_dock.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #464646;
     background-attachment: fixed;
     background-size: 100%;
     width: 100%;
@@ -44,7 +48,7 @@ body::-webkit-scrollbar {
     left: 50%;
     text-align: center;
     transform: translate(-50%,-50%);
-    font-size: 50px;
+    font-size: 3.2vw;
     font-weight: 500;
     font-family: Arial, Helvetica, sans-serif, Segoe UI;
     text-shadow: 3px 3px 4px rgb(80, 80, 80);
@@ -52,11 +56,14 @@ body::-webkit-scrollbar {
 
 #intro{
     background-image: url('./img/stone_ground.jpg');
-    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #464646;
     width: 100%;
     height: 100%;
 }
-.intro-head, .hub-head{
+.intro-head, .proj-head{
     padding: 50px;
     font-size: 60px;
     color: white;
@@ -133,20 +140,23 @@ body::-webkit-scrollbar {
     text-decoration: none;
 }
 
-#hub{
+#proj{
     background-image: url('./img/clean-blue.jpg');
-    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #464646;
     width: 100%;
     height: 100%;
 }
-.hub-table{
+.proj-table{
     position: absolute;
     top: 250%;
     transform: translate(0, -50%);
     align-content: center;
     text-align: center;
 }
-.hub-table-tr, .hub-table-th{
+.proj-table-tr, .proj-table-th{
     border: 10% solid;
 }
 .btn-dum{
@@ -157,8 +167,10 @@ body::-webkit-scrollbar {
 }
 
 #comming{
-    background-color: #333;
-    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #464646;
     width: 100%;
     height: 100%;
 }

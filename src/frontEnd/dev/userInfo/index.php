@@ -45,6 +45,24 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
     </body>
 
     <script>
+        myf();
+        async function myf(){
+            var token = await getCo();
+            console.log(token);
+
+            xml = new XMLHttpRequest();
+            xml.open('GET', 'https://sebastian-web.de/api/v1/getUsers');
+            xml.setRequestHeader('authorization', token);
+            xml.setRequestHeader("Content-Type", "application/json");
+            xml.send();
+            xml.onReadyStateChange = () =>{
+
+            }
+        }
+
+//old code
+        createTable(data, dat, count);
+
         function createTable(data, dat, count){
             for (var e in data) {
                     var output = `<tr><th>${dat[count]}</th>`;
@@ -58,30 +76,17 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
                     count--;
             }
         }
-        function req(){
-                var data = <?php echo file_get_contents($file); ?>,
-                    dat = Object.keys(data),
-                    count = dat.length -1;
 
-                createTable(data, dat, count);
-        }  
+
+        function getCo(){
+            var co = document.cookie.split(";");
+            console.log(co);
+            co.forEach(e=>{
+                if(e.startsWith("token=")){
+                    e = e.slice(6);
+                    return e;
+                }
+            });
+        }
     </script>
-    <?php
-            
-            //the get request to backend
-//            $getUrl = "192.168.178.38:999/getUser";
-            $getUrl = "192.168.178.27:999/getUser";
-
-            $ch = curl_init($getUrl);
-
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-            $response = curl_exec($ch);
-            curl_close($ch);
-
-
-            file_put_contents($file, $response);
-            echo '<script type="text/javascript">','req();','</script>';
-;
-        ?>
 </html>

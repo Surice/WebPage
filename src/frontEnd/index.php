@@ -1,44 +1,38 @@
 <html>
-
 <head>
-    <?php
-
-    ?>
-
     <script>
         window.onload = function () {
             window.scrollTo({top: 0,});
         }
         var xml = new XMLHttpRequest();
-        xml.open("GET", "https://sebastian-web.de:9876/infoUser");
+        xml.open("GET", "https://sebastian-web.de/api/v1/userInfo");
         xml.send();
     </script>
 
     <script src="./index.js"></script>
     <link rel="stylesheet" type="text/css" href="./style.css">
     <link rel="stylesheet" href="./fontawesome/css/all.min.css">
-    <link rel="shortcut icon" type="image/x-icon" href="./img/SU_Logo 2.0 render.ico">
     <a href="#anchor-hash" class="anchor-scrolls"></a>
     <meta name="viewport" content="width=device-width, initial-scale = 1">
     <meta charset="utf-8" />
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+<!-- Import Bootstrap -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-
     <title>Sebastian-Web</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./img/SU_Logo_2.0_render.ico">
 </head>
 
-<body data-spy="scroll" data-target=".navbar" data-offset="50">
-    <div class="navbar">
+<body>
+    <div class="navbar" id="navbar">
         <a href="#home" class="navbar-link">Home</a>
         <a href="#intro" class="navbar-link">Introduction</a>
-        <a href="#hub" class="navbar-link">Link-Hub</a> 
+        <a href="#proj" class="navbar-link">Projects</a> 
         <a href="#comming" class="navbar-link">Comming soon...</a>
         <a href="#impressum" class="navbar-link">Impressum</a>
     </div>
 
-    <div class="container">
+    <div class="container" data-spy="scroll" data-target="#navbar" data-offset="0">
         <section id="home">
             <div class="welcome-txt">
                 <h5>Hello, my name is Sebastian.</h5>
@@ -59,7 +53,7 @@
                     </tr>
                     <br>
                     <tr>
-                        <td>> I&acute;m Sebastian and 16 years old&nbsp;</td>
+                        <td>> I&acute;m Sebastian and 17 years old&nbsp;</td>
                     </tr>
                     <br>
                     <tr>
@@ -68,7 +62,7 @@
                     </tr>
                     <br>
                     <tr>
-                        <td>> currently i´m attending the 11th class of a vocational school Commercial assistant
+                        <td>> currently i´m attending the 12th class of a vocational school Commercial assistant
                             specialising in IT and will probably leave in a year</td>
                     </tr>
                 </table>
@@ -89,22 +83,22 @@
                 </table>
             </span>
         </section>
-        <section id="hub">
-            <h1 class="hub-head">Link-Hub</h1>
-            <table class="hub-table">
-                <tr class="hub-table-tr">
-                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
-                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
-                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
-                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
-                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
+        <section id="proj">
+            <h1 class="proj-head">Projects</h1>
+            <table class="proj-table">
+                <tr class="proj-table-tr">
+                    <th class="proj-table-th"><a href="./subSites/steamSearch.php"><button class="btn-dum">Steam-Games</button></a></th>
+                    <th class="proj-table-th"><button class="btn-dum">dummy</button></th>
+                    <th class="proj-table-th"><button class="btn-dum">dummy</button></th>
+                    <th class="proj-table-th"><button class="btn-dum">dummy</button></th>
+                    <th class="proj-table-th"><button class="btn-dum">dummy</button></th>
                 </tr>
-                <tr class="hub-table-tr">
-                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
-                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
-                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
-                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
-                    <th class="hub-table-th"><button class="btn-dum">dummy</button></th>
+                <tr class="proj-table-tr">
+                    <th class="proj-table-th"><button class="btn-dum">dummy</button></th>
+                    <th class="proj-table-th"><button class="btn-dum">dummy</button></th>
+                    <th class="proj-table-th"><button class="btn-dum">dummy</button></th>
+                    <th class="proj-table-th"><button class="btn-dum">dummy</button></th>
+                    <th class="proj-table-th"><button class="btn-dum">dummy</button></th>
                 </tr>
             </table>
         </section>

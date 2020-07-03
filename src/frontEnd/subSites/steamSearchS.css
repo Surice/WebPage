@@ -1,0 +1,46 @@
+body{
+    background-image: url('../img/cloudly_forrest.jpg');
+    background-size: cover;
+    padding: 0%;
+    margin: 0%;
+}
+
+.exit{
+    margin: 5px;
+}
+
+.head-txt{
+    position: absolute;
+    color: rgb(133, 65, 27);
+    top: 10%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%,-80%);
+    font-size: 42px;
+    font-weight: bolder;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.table-me{
+    margin-left:auto; 
+    margin-right:auto;
+    margin-top: 10%;
+    height: auto;
+    width: 80%;
+    text-align: center;
+    color: white;
+    background-color: rgba(77, 77, 77, 0.7);
+    border-collapse: collapse;
+}
+.tableE{
+    padding: 12px;
+}
+.table-head{
+    background-color: rgba(36, 36, 36, 0.95);
+}
+.table-body{
+    border-bottom: 4px solid rgba(255, 255, 255, 0.01);
+}
+.link{
+    color: rgb(44, 44, 44);
+}

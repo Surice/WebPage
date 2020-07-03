@@ -4,7 +4,7 @@ include '../config.php';
 $username = $confuser;
 $password = $confpw;
 
-if (!empty($_POST) && !empty($_POST['password']) && !empty($_POST['username']) && !empty($_POST['recaptchaResponse'])) {
+if(!empty($_POST) && !empty($_POST['password']) && !empty($_POST['username']) && !empty($_POST['recaptchaResponse'])){
     // Build POST request:
     $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
     $recaptcha_secret = $scretToken; //secret Key from Google reCaptcha
@@ -15,30 +15,55 @@ if (!empty($_POST) && !empty($_POST['password']) && !empty($_POST['username']) &
     $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
     $recaptcha = json_decode($recaptcha);
 
-        echo $recaptcha->score;
-    if ($_POST["password"] == $password && $recaptcha->score >= 0.8 && $_POST["username"] == $username) {
+    echo $recaptcha->score;
+    if($_POST["password"] == $password && $recaptcha->score >= 0.8 && $_POST["username"] == $username){
         $_SESSION["loggedIn"] = true;
         $_SESSION["user"] = $_POST["username"];
 
+#put request here lol
+        $data = array('username' => $_POST['username']);
+
+        $payload = json_encode($data);
+
+        $ch = curl_init('https://sebastian-web.de/api/v1/users');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($payload))
+        );
+        
+        $result = curl_exec($ch);
+
+        if($result == false){
+            die("Curl failed: " . curL_error($ch));
+        }
+        curl_close($ch);
+        $out = json_decode($result, true);
+        setcookie("token", $out['token']);
+
+
         header("Location: ./index.php");
-    } else {
-        if ($_POST["password"] != $password || $_POST["username"] != $username) {
+    }else{
+        if($_POST["password"] != $password || $_POST["username"] != $username){
             $response = "Username or Password was wrong";
-        } else if ($recaptcha->score >= 0.8) {
+        }else if($recaptcha->score >= 0.8){
             $response =  "you are not authorized because you seem like a bot";
-        } else {
+        }else{
             $response =  "login Failed";
         }
     }
-} else {
-    if (!empty($_POST)) {
-        if (empty($_POST['username']) && empty($_POST['password'])) {
+}else{
+    if(!empty($_POST)){
+        if (empty($_POST['username']) && empty($_POST['password'])){
             $response = "Username and Password must be set";
-        } else if (empty($_POST['username'])) {
+        }else if(empty($_POST['username'])){
             $response = "Username must be set";
-        } else if (empty($_POST['password'])) {
+        }else if(empty($_POST['password'])){
             $response = "Password must be set";
-        } else {
+        }else{
             $response = "unknown error";
         }
     }

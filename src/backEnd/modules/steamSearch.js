@@ -74,13 +74,12 @@ function reques(numb, tempnumb, list, count){
                                         checkName(id, function(result){
                                             
                                             stor.push(result);
-                                            if(fin >= count){
-                                                return stor;
-                                            }
+                                            fs.writeFileSync(`${__dirname}/steamGames.json`, JSON.stringify(stor));
                                         });
                                     }
                                 }
                             }
+//                            reques(numb, tempnumb, list, count);
                         }else{
                             if(req.readyState == 4){
                                 console.log(`Request Faild \nerr(${req.status}). try to handle`);
@@ -103,7 +102,7 @@ function reques(numb, tempnumb, list, count){
                             }
                         }
                     }
-                    if(state != temp){
+                    if(1==1){
                         reques(numb, tempnumb, list, count);
                     }else{
                         temp == temp + 10;
@@ -122,8 +121,9 @@ function checkName(id, callback){
 
             if(response[id].data && response[id].data.name){
                 const link = `https://store.steampowered.com/app/${id}`
+                console.log("find> "+ response[id].data.name);
 
-                var push = response[id].data.name+ " | "+ link.toString();
+                var push = new Array(response[id].data.name, link.toString());
                 callback(push);
             }else{
                 console.log("data error");
