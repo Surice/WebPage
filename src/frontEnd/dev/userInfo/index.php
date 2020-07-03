@@ -1,7 +1,6 @@
 <?php 
 session_start();
 include '../../config.php';
-$file = 'cache.txt';
 
 if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
     header( "Location: ../login.php");
@@ -19,13 +18,14 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
     </head>
     <body>
         <ul class="navbar-me">
-            <li class="li"><a class="nav-a" href="../index.php">Home</a></li>
-            <li class="li"><a class="nav-a" href="./index.php">Visitors</a></li>
-            <li class="li"><a class="nav-a" href="../ipLog/index.php">Log</a></li>
-            <li class="li"><a class="nav-a" href="../cloud/index.php">Cloud</a></li>
-            <li class="li"><a class="nav-a" href="">None</a></li>
-            <li class="li"><a href="../index.php"><button class="logout btn btn-outline-danger">Back</button></a></li>
-            <li class="li"><code class="logDat">Logged in as: <?php echo $_SESSION["user"] ?></code></li>
+            <li><a class="nav-a" href="../index.php">Home</a></li>
+            <li><a class="nav-a" href="./index.php">Visitors</a></li>
+            <li><a class="nav-a" href="../ipLog/index.php">Log</a></li>
+            <li><a class="nav-a" href="../cloud/index.php">Cloud</a></li>
+            <li><a class="nav-a" href="">None</a></li>
+
+            <li><a class="logout" href="../index.php"><button class="btn btn-outline-danger">Back</button></a></li>
+            <li><code class="logDat">Logged in as: <?php echo $_SESSION["user"] ?></code></li>
         </ul>
 
         <h1 class="head-txt">The recent Visitors of the Website</h1>
@@ -41,6 +41,9 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
                 <th><strong>postcode</strong></th>
                 <th><strong>Time Zone</strong></th>
             </tr>
+            <tbody id="table-bdy">
+
+            </tbody>
         </table>
     </body>
 
@@ -48,45 +51,51 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
         myf();
         async function myf(){
             var token = await getCo();
-            console.log(token);
 
             xml = new XMLHttpRequest();
             xml.open('GET', 'https://sebastian-web.de/api/v1/getUsers');
             xml.setRequestHeader('authorization', token);
             xml.setRequestHeader("Content-Type", "application/json");
             xml.send();
-            xml.onReadyStateChange = () =>{
+            xml.onreadystatechange = function(){
+                if(xml.readyState == 4 && xml.status == 200){
+                    var data = JSON.parse(xml.responseText);
 
+                    createTable(data);
+
+                }else if(xml.readyState == 4){
+                    console.log(xml.status);
+                }
             }
         }
 
 //old code
-        createTable(data, dat, count);
 
-        function createTable(data, dat, count){
-            for (var e in data) {
-                    var output = `<tr><th>${dat[count]}</th>`;
+        function createTable(data){
+            for (var e in data){
+                var output = `<tr><th>${e}</th>`;
 
-                    data[e].forEach(function(i){
-                        output += `<th>${i}</th>`;
-                    });
+                data[e].forEach(function(i){
+                    output += `<th>${i}</th>`;
+                });
 
-                    output += "</tr>";
-                    document.getElementById('table').innerHTML += output;                    
-                    count--;
+                output += "</tr>";
+                document.getElementById('table-bdy').innerHTML = output + document.getElementById('table-bdy').innerHTML;
             }
         }
 
 
         function getCo(){
-            var co = document.cookie.split(";");
-            console.log(co);
+            var co = document.cookie.split(";"),
+                out = "none";
             co.forEach(e=>{
                 if(e.startsWith("token=")){
                     e = e.slice(6);
-                    return e;
+                    
+                    out = e;
                 }
             });
+            return out;
         }
     </script>
 </html>

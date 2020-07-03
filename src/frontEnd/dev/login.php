@@ -102,6 +102,23 @@ if (!empty($_GET) && $_GET['action'] == "logout") {
 </head>
 
 <body>
+    <ul class="navbar-me">
+        <li>
+            <a href="../index.php"><button class="exit btn btn-outline-danger">Back</button></a>
+        </li>
+    </ul>
+
+    <!-- Cookie Consent by https://www.PrivacyPolicies.com -->
+    <script type="text/javascript" src="//www.privacypolicies.com/public/cookie-consent/3.1.0/cookie-consent.js"></script>
+    <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+    cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express","palette":"light","language":"en","website_name":"sebastian-web.de","cookies_policy_url":"https://sebastian-web.de#impressum","change_preferences_selector":""});
+    });
+    </script>
+
+    <noscript>Cookie Consent by <a href="https://www.PrivacyPolicies.com/cookie-consent/" rel="nofollow">PrivacyPolicies.com</a></noscript>
+    <!-- End Cookie Consent -->
+
     <div class="container-lg h-100">
         <div class="row justify-content-center align-items-center h-100">
             <div class="card" style="width: 18rem;">

@@ -5,8 +5,15 @@ body{
     margin: 0%;
 }
 
+.navbar-me{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    list-style: none;
+}
 .exit{
     margin: 5px;
+    text-decoration: none;
 }
 
 .head-txt{

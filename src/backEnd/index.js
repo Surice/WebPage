@@ -18,17 +18,17 @@ exp.use(bodyParser.json());
 
 
 exp.get(`${bURL}/userInfo`, function(req, res){
-    var ip = req.headers['x-real-ip'] || req.connection.remoteAddress;
-    saveUserData(ip);
-
+    var ip = req.headers['x-forwarded-for'];
+    if(ip != "::ffff:127.0.0.1"){
+        saveUserData(ip);
+    }
     res.status(200).end();
 });
 
 
 exp.get(`${bURL}/getUsers`, function(req, res){
     //hard gecodet. fehlt user index
-    console.log(req.headers);
-    if(req.body.token && jwt.verify(req.body.token, config.apiSecret) == config.user){
+    if(req.headers.authorization && jwt.verify(req.headers.authorization, config.apiSecret) == config.user){
         res.status(200).send(userInfo).end();
     }else{
         res.status(401).json({"error": "Token Invalid!"}).end();
@@ -37,8 +37,6 @@ exp.get(`${bURL}/getUsers`, function(req, res){
 
 
 exp.post(`${bURL}/users`, function(req, res){
-    console.log(req.body);
-
     if(req.body.username){
         const user = req.body.username;
 
@@ -68,7 +66,6 @@ exp.listen(port, function(){
 
 async function saveUserData(data){
     var today = new Date();
-    console.log("data: "+ data);
 
     var xml = new XMLHttpRequest();
     xml.open('GET', `https://ipinfo.io/${data}?token=${config.token}`, true);

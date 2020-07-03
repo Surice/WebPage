@@ -4,9 +4,25 @@
         window.onload = function () {
             window.scrollTo({top: 0,});
         }
-        var xml = new XMLHttpRequest();
-        xml.open("GET", "https://sebastian-web.de/api/v1/userInfo");
-        xml.send();
+
+        function anayltic(){
+            if(!getCo()){
+                var xml = new XMLHttpRequest();
+                xml.open("GET", "https://sebastian-web.de/api/v1/userInfo");
+                xml.send();
+            }
+        }
+        async function getCo(){
+            var co = document.cookie.split(";"),
+                out = false;
+
+            await co.forEach(e=>{
+                if(e.startsWith("PHPSESSID=")){
+                    out = true;
+                }
+            });
+            return out;
+        }
     </script>
 
     <script src="./index.js"></script>
@@ -32,6 +48,23 @@
         <a href="#impressum" class="navbar-link">Impressum</a>
     </div>
 
+
+    <!-- Cookie Consent by https://www.PrivacyPolicies.com -->
+    <script type="text/javascript" src="//www.privacypolicies.com/public/cookie-consent/3.1.0/cookie-consent.js"></script>
+    <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+    cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express","palette":"light","language":"en","website_name":"sebastian-web.de","cookies_policy_url":"https://sebastian-web.de#impressum","change_preferences_selector":""});
+    });
+    </script>
+
+    <!-- Analytics -->
+    <script type="text/plain" cookie-consent="tracking">anayltic()</script>
+    <!-- end of Analytics-->
+
+    <noscript>Cookie Consent by <a href="https://www.PrivacyPolicies.com/cookie-consent/" rel="nofollow">PrivacyPolicies.com</a></noscript>
+    <!-- End Cookie Consent -->
+
+    
     <div class="container" data-spy="scroll" data-target="#navbar" data-offset="0">
         <section id="home">
             <div class="welcome-txt">
@@ -85,11 +118,12 @@
         </section>
         <section id="proj">
             <h1 class="proj-head">Projects</h1>
+            
             <table class="proj-table">
                 <tr class="proj-table-tr">
                     <th class="proj-table-th"><a href="./subSites/steamSearch.php"><button class="btn-dum">Steam-Games</button></a></th>
-                    <th class="proj-table-th"><button class="btn-dum">dummy</button></th>
-                    <th class="proj-table-th"><button class="btn-dum">dummy</button></th>
+                    <th class="proj-table-th"><a href="./dev/index.php"><button class="btn-dum">Dev-Portal</button></a></th>
+                    <th class="proj-table-th"><a href="./subSites/undefined"><button class="btn-dum">User-Portal<br>(in progress...)</button></th>
                     <th class="proj-table-th"><button class="btn-dum">dummy</button></th>
                     <th class="proj-table-th"><button class="btn-dum">dummy</button></th>
                 </tr>

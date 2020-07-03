@@ -12,7 +12,11 @@
         <link rel="shortcut icon" type="image/x-icon" href="../img/SU_Logo_2.0_render.ico">
     </head>
     <body>
-        <a href="../index.php"><button class="exit btn btn-outline-danger">Back</button></a>
+        <ul class="navbar-me">
+            <li>
+                <a href="../index.php"><button class="exit btn btn-outline-danger">Back</button></a>
+            </li>
+        </ul>
 
         <h1 class="head-txt">current free games on Steam</h1>
 
