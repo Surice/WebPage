@@ -1,27 +1,20 @@
 <html>
 <head>
+    <?php
+        session_start();
+    ?>
     <script>
         window.onload = function () {
             window.scrollTo({top: 0,});
         }
 
-        function anayltic(){
-            if(!getCo()){
+        async function anayltic(){
+            if(!sessionStorage['exists']){
                 var xml = new XMLHttpRequest();
                 xml.open("GET", "https://sebastian-web.de/api/v1/userInfo");
                 xml.send();
+                sessionStorage['exists'] = true;
             }
-        }
-        async function getCo(){
-            var co = document.cookie.split(";"),
-                out = false;
-
-            await co.forEach(e=>{
-                if(e.startsWith("PHPSESSID=")){
-                    out = true;
-                }
-            });
-            return out;
         }
     </script>
 

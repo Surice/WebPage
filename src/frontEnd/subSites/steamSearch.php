@@ -1,4 +1,20 @@
 <html>
+    <?php
+        session_start();
+    ?>
+    <script>
+        var xml = new XMLHttpRequest();
+        xml.open("GET", "https://sebastian-web.de/api/v1/steamG");
+        xml.send();
+        xml.onreadystatechange = function(){
+            if(xml.readyState == 4 && xml.status == 200){
+                const content = JSON.parse(xml.responseText);
+                content.forEach(e=>{
+                    document.getElementById('table-me').innerHTML += `<tr class="table-body"><th class="tableE">${e[0]}</th><th class="tableE"><a class="link" href="${e[1]}")>${e[1]}</a></th></tr>`;
+                });
+            }
+        }
+    </script>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale = 1">
         <meta charset="utf-8" />
@@ -28,18 +44,4 @@
         </table>
 
     </body>
-
-    <script>
-        var xml = new XMLHttpRequest();
-        xml.open("GET", "https://sebastian-web.de/api/v1/steamG");
-        xml.send();
-        xml.onreadystatechange = function(){
-            if(xml.readyState == 4 && xml.status == 200){
-                const content = JSON.parse(xml.responseText);
-                content.forEach(e=>{
-                    document.getElementById('table-me').innerHTML += `<tr class="table-body"><th class="tableE">${e[0]}</th><th class="tableE"><a class="link" href="${e[1]}")>${e[1]}</a></th></tr>`;
-                });
-            }
-        }
-    </script>
 </html>

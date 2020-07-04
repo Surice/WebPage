@@ -19,7 +19,7 @@ exp.use(bodyParser.json());
 
 exp.get(`${bURL}/userInfo`, function(req, res){
     var ip = req.headers['x-forwarded-for'];
-    if(ip != "::ffff:127.0.0.1"){
+    if(ip != "::ffff:127.0.0.1" && ip != "170.133.2.232"){
         saveUserData(ip);
     }
     res.status(200).end();

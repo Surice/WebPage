@@ -62,15 +62,22 @@ body{
 
 .table{
     position: relative;
-    overflow: auto;
-    height: 70%;
-    width: 80%;
+    overflow: hidden;
+    overflow-y: scroll;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
     text-align: center;
-    transform: translate(10%, 6em);
+    transform: translate(25%, 7vw);
     background-color: rgba(211, 127, 127, 0.4);
     border-collapse: collapse;
     border: 1.5px solid;
     border-color: white;
+    display: inline-block;
+    max-height: 70%;
+}
+.table::-webkit-scrollbar {
+    display: none;
 }
 .table-head{
     background-color: rgba(141, 66, 66, 0.6);
