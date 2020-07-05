@@ -4,18 +4,30 @@ const xml = require("xmlhttprequest").XMLHttpRequest;
 
 const config = JSON.parse(fs.readFileSync(`${__dirname}/../config.json`, "utf-8").toString());
 
-var stor = new Array();
-
 const steamAPI = `http://api.steampowered.com/ISteamApps/GetAppList/v0002/?key=${config.key}&format=json`;
 var ids = new Array(),
     count = 0,
-    state = 0,
     temp = 10,
-    fin = 0;
+    rou = 0,
+    stor = new Object();
+
+
+    var dateRaw = new Date();
+        if(dateRaw.getMinutes() < 10){
+            var min = "0"+dateRaw.getMinutes();
+        }else{var min = dateRaw.getMinutes()};
+        if(dateRaw.getHours() < 10){
+            var hou = "0"+dateRaw.getHours();
+        }else{var hou = dateRaw.getHours()};
+        
+        date = `${hou}:${min} (${dateRaw.getDate()}/${dateRaw.getMonth()+1}/${dateRaw.getFullYear()})`;
+    
+    
+    
+    stor[date] = new Array();
+
 
 initRequest();
-
-
 function initRequest(){
     var initReq = new xml();
 
@@ -39,7 +51,6 @@ function initRequest(){
             list = new Array();
 
             reques(numb, tempnumb, list, count);
-
         }else{
             if(this.readyState == 4){
                 console.log("unexpected init Error: \n"+ this.status);
@@ -52,11 +63,11 @@ function reques(numb, tempnumb, list, count){
                 if(numb > 0){
                     list = ids.splice(0, 1000);
                     numb --;
-                    state++;
+                    rou++;
                                         
                     list = list.join(",");
 
-                    console.log("lap: "+ (numb+1));
+//                    console.log("lap: "+ (numb+1));
 
                     var req = new xml();
                     req.open('GET', `https://store.steampowered.com/api/appdetails?appids=${list}&filters=price_overview`);
@@ -65,21 +76,19 @@ function reques(numb, tempnumb, list, count){
                         if(req.readyState == 4 && req.status == 200){
                             const content = JSON.parse(req.responseText);
 
-                            fin++;
-
                             for(var [id, item] of Object.entries(content)){
                                 if(item.data && item.data.price_overview){
                                     if(item.data.price_overview.discount_percent == 100){
 
                                         checkName(id, function(result){
                                             
-                                            stor.push(result);
+                                            stor[date].push(result);
                                             fs.writeFileSync(`${__dirname}/steamGames.json`, JSON.stringify(stor));
                                         });
                                     }
                                 }
                             }
-//                            reques(numb, tempnumb, list, count);
+                            reques(numb, tempnumb, list, count);
                         }else{
                             if(req.readyState == 4){
                                 console.log(`Request Faild \nerr(${req.status}). try to handle`);
@@ -87,7 +96,7 @@ function reques(numb, tempnumb, list, count){
                                 //may fixed
                                 if(req.status == 500 || req.status == 0){
                                     console.log("retry in 35 seconds");
-                                    setTimeout(reques, 35000,numb, tempnumb, list, count);
+                                    setTimeout(reques, 0,numb, tempnumb, list, count);
                                 }else{
                                     console.log("try again");
 
@@ -96,17 +105,13 @@ function reques(numb, tempnumb, list, count){
                                         ids.unshift(e);
                                     });
                                     numb++;
+                                    rou--;
 
-                                    setTimeout(reques, 300000, numb, tempnumb, list, count);
+                                    setTimeout(reques, 35000, numb, tempnumb, list, count);
                                 }
+
                             }
                         }
-                    }
-                    if(1==1){
-                        reques(numb, tempnumb, list, count);
-                    }else{
-                        temp == temp + 10;
-                        setTimeout(reques, 20000,numb, tempnumb, list, count);
                     }
                 }
 }

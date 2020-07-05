@@ -81,7 +81,7 @@ async function saveUserData(data){
                 var hou = "0"+today.getHours();
             }else{var hou = today.getHours()};
             
-            today = await `${hou}:${min} (${today.getDay()}/${today.getMonth()+1}/${today.getFullYear()})`;
+            today = await `${hou}:${min} (${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()})`;
 
             userInfo[today] = new Array();
 ;
