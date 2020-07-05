@@ -16,6 +16,11 @@ body{
     text-decoration: none;
 }
 
+.lastScan{
+    margin: 5px;
+    text-decoration: underline;
+}
+
 .head-txt{
     position: absolute;
     color: rgb(133, 65, 27);

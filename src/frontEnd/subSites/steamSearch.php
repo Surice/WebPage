@@ -8,7 +8,12 @@
         xml.send();
         xml.onreadystatechange = function(){
             if(xml.readyState == 4 && xml.status == 200){
-                const content = JSON.parse(xml.responseText);
+                var content = JSON.parse(xml.responseText);
+
+                for (e in content){
+                    document.getElementById('lastScan').innerHTML += e.toString();
+                    content = content[e];
+                }
                 content.forEach(e=>{
                     document.getElementById('table-me').innerHTML += `<tr class="table-body"><th class="tableE">${e[0]}</th><th class="tableE"><a class="link" href="${e[1]}")>${e[1]}</a></th></tr>`;
                 });
@@ -33,6 +38,8 @@
                 <a href="../index.php"><button class="exit btn btn-outline-danger">Back</button></a>
             </li>
         </ul>
+
+        <code id="lastScan" class="lastScan">Last Scan: </code>
 
         <h1 class="head-txt">current free games on Steam</h1>
 
