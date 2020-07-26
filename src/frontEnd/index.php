@@ -24,7 +24,8 @@
     <a href="#anchor-hash" class="anchor-scrolls"></a>
     <meta name="viewport" content="width=device-width, initial-scale = 1">
     <meta charset="utf-8" />
-<!-- Import Bootstrap -->
+
+    <!-- Import Bootstrap -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -42,20 +43,20 @@
     </div>
 
 
-    <!-- Cookie Consent by https://www.PrivacyPolicies.com -->
+    <!-- Cookie Banner Scripts -->
     <script type="text/javascript" src="//www.privacypolicies.com/public/cookie-consent/3.1.0/cookie-consent.js"></script>
     <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {
-    cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express","palette":"light","language":"en","website_name":"sebastian-web.de","cookies_policy_url":"https://sebastian-web.de#impressum","change_preferences_selector":""});
+        cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express","palette":"light","language":"en","website_name":"sebastian-web.de","cookies_policy_url":"https://sebastian-web.de#impressum","change_preferences_selector":""});
     });
     </script>
 
     <!-- Analytics -->
     <script type="text/plain" cookie-consent="tracking">anayltic()</script>
-    <!-- end of Analytics-->
+    <!-- end of Analytics -->
 
     <noscript>Cookie Consent by <a href="https://www.PrivacyPolicies.com/cookie-consent/" rel="nofollow">PrivacyPolicies.com</a></noscript>
-    <!-- End Cookie Consent -->
+    <!-- End Cookie Scripts -->
 
     
     <div class="container" data-spy="scroll" data-target="#navbar" data-offset="0">
