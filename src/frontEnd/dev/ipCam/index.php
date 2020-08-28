@@ -1,7 +1,6 @@
 <?php 
 session_start();
 include '../../config.php';
-$file = 'cache.txt';
 
 if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
     header( "Location: ../login.php");
@@ -10,7 +9,6 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
 ?>
 <html>
     <head>
-    
         <title>Visitor Index</title>
         <link rel="shortcut icon" type="image/x-icon" href="../../img/pb.ico">
         <link rel="stylesheet" href="./style.css">
@@ -19,6 +17,6 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
     <body>
         <?php include '../header.php'; ?>
 
-        <h1 class="head-txt">Cloud Service</h1>
+        <h1 class="head-txt">IP Camera</h1>
     </body>
 </html>

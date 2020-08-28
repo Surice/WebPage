@@ -17,34 +17,26 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
         <meta name="viewport" content="width=device-width, initial-scale = 1">
     </head>
     <body>
-        <ul class="navbar-me">
-            <li><a class="nav-a" href="../index.php">Home</a></li>
-            <li><a class="nav-a" href="./index.php">Visitors</a></li>
-            <li><a class="nav-a" href="../ipLog/index.php">Log</a></li>
-            <li><a class="nav-a" href="../cloud/index.php">Cloud</a></li>
-            <li><a class="nav-a" href="">None</a></li>
-
-            <li><a class="logout" href="../index.php"><button class="btn btn-outline-danger">Back</button></a></li>
-            <li><code class="logDat">Logged in as: <?php echo $_SESSION["user"] ?></code></li>
-        </ul>
+        <?php include '../header.php'; ?>
 
         <h1 class="head-txt">The recent Visitors of the Website</h1>
-       
-        <table class="table" id="table">
-            <tr class="table-head">
-                <th><strong>At</strong></th>
-                <th><strong>City</strong></th>
-                <th><strong>state</strong></th>
-                <th><strong>Country</strong></th>
-                <th><strong>coordinates</strong></th>
-                <th><strong>Provider</strong></th>
-                <th><strong>postcode</strong></th>
-                <th><strong>Time Zone</strong></th>
-            </tr>
-            <tbody id="table-bdy">
+        <div class="table-d">
+            <table class="table" id="table">
+                <tr class="table-head">
+                    <th><strong>At</strong></th>
+                    <th><strong>City</strong></th>
+                    <th><strong>state</strong></th>
+                    <th><strong>Country</strong></th>
+                    <th><strong>coordinates</strong></th>
+                    <th><strong>Provider</strong></th>
+                    <th><strong>postcode</strong></th>
+                    <th><strong>Time Zone</strong></th>
+                </tr>
+                <tbody id="table-bdy">
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </body>
 
     <script>
@@ -68,8 +60,6 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
                 }
             }
         }
-
-//old code
 
         function createTable(data){
             for (var e in data){

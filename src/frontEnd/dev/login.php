@@ -119,7 +119,7 @@ if (!empty($_GET) && $_GET['action'] == "logout") {
     <noscript>Cookie Consent by <a href="https://www.PrivacyPolicies.com/cookie-consent/" rel="nofollow">PrivacyPolicies.com</a></noscript>
     <!-- End Cookie Consent -->
 
-    <div class="container-lg h-100">
+    <div class="container-lg h-100 center-div">
         <div class="row justify-content-center align-items-center h-100">
             <div class="card" style="width: 18rem;">
                 <div class="card-header align-items-center">Login</div>
