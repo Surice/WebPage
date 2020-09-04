@@ -51,7 +51,7 @@
             <a href="#home" class="navbar-link">Home</a>
             <a href="#intro" class="navbar-link">Introduction</a>
             <a href="#proj" class="navbar-link">Projects</a> 
-            <a href="#comming" class="navbar-link">Comming soon...</a>
+            <a href="#comming" class="navbar-link">Coming soon...</a>
             <a href="#impressum" class="navbar-link">Impressum</a>
         </div>
 
@@ -112,7 +112,7 @@
                         <a href="./dev/index.php"><button class="btn-dum">Dev-Portal</button></a>
                         <a href="#"><button class="btn-dum">User-Portal<br>(comming soon)</button></a>
                         <a href="./subSites/mcCraftingGuide.php"><button class="btn-dum">MC Crafting Guide<br>(in progress...)</button></a>
-                        <a href="#"><button class="btn-dum">ACC-Helper<br>(in progress...)</button></a>
+                        <a href="./subSites/accAssistant_v1.0.php"><button class="btn-dum">ACC-Helper<br>(in progress...)</button></a>
                 </div>
                 <div class="proj-table">
                     <a href="#"><button class="btn-dum">dummy</button></a>
@@ -124,7 +124,7 @@
             </section>
             <section id="comming">
                 <div class="comming-txt">
-                    <h1>more content will be comming soon...</h1>
+                    <h1>more content will be coming soon...</h1>
                 </div>
             </section>
             <section id="impressum">

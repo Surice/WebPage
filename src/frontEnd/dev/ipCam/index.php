@@ -20,9 +20,8 @@
 
         <h1 class="head-txt">IP Camera</h1>
 
-        <form action="" method="post">
-            <input class="reloadBtn" type="submit" name="someAction" value="Relaod" />
-        </form>
+        <button class="reloadBtn" oncklick="getImage()">Reload</button>
+
         <div class="content">
             <img id="img" class="img">
         </div>
@@ -30,22 +29,35 @@
 </html>
 
 <script>
-    function loadImage(){
-        document.getElementById("img").src = './save.jpg';
-    }
-</script>
-<?php
     getImage();
 
-    if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['someAction']))
-    {
-        getImage();
+    async function getImage(){
+        var token = await getCo();
+
+        xml = new XMLHttpRequest();
+            xml.open('GET', 'http://192.168.178.27:8082/api/v1/getImg');
+            xml.setRequestHeader('authorization', token);
+            xml.setRequestHeader("Content-Type", "application/json");
+            xml.send();
+            xml.onreadystatechange = function(){
+                if(xml.readyState == 4 && xml.status == 200){
+                    console.log("success");
+                }else{
+                    console.log("some went wrong");
+                }
+            }
     }
 
-    function getImage(){
-        $url = "http://192.168.178.25:8080/shot.jpg";
-
-        file_put_contents("save.jpg", file_get_contents($url));
-        echo '<script> loadImage(); </script>';
-    }
-?>
+    function getCo(){
+            var co = document.cookie.split(";"),
+                out = "none";
+            co.forEach(e=>{
+                if(e.startsWith("token=")){
+                    e = e.slice(6);
+                    
+                    out = e;
+                }
+            });
+            return out;
+        }
+</script>
