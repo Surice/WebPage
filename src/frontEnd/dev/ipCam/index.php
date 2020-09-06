@@ -35,17 +35,22 @@
         var token = await getCo();
 
         xml = new XMLHttpRequest();
-            xml.open('GET', 'http://192.168.178.27:8082/api/v1/getImg');
-            xml.setRequestHeader('authorization', token);
-            xml.setRequestHeader("Content-Type", "application/json");
-            xml.send();
-            xml.onreadystatechange = function(){
-                if(xml.readyState == 4 && xml.status == 200){
-                    console.log("success");
-                }else{
-                    console.log("some went wrong");
-                }
+        xml.open('GET', 'https://sebastian-web.de/api/v1/getImg', true);
+        xml.setRequestHeader('authorization', token);
+        xml.setRequestHeader("Content-Type", "application/json");
+        xml.responseType = 'blob';
+        xml.send();
+        xml.onreadystatechange = function(){
+            if(xml.readyState == 4 && xml.status == 200){
+                console.log(xml);
+                var blob = xml.response;
+                var objectURL = URL.createObjectURL(blob);
+
+                document.getElementById('img').src = objectURL;
+            }else{
+                console.log(xml.status);
             }
+        }
     }
 
     function getCo(){

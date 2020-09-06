@@ -81,12 +81,8 @@
             </section>
             <section id="intro">
                 <h1 class="intro-head">Introduction</h1>
-                <span>
-                    <div class="intro-txt">
-                        <p>This is my website for all kinds of coding projects.<br>for more informations have a look at the 'Projects' page</p>
-                    </div>
-                    <br>
-                    
+
+                <div class="social-table-pos">
                     <table class="social-table">
                         <tr class="social-table-head">
                             <td><strong>My Social Media</strong></td>
@@ -102,7 +98,11 @@
                             </td>
                         </tr>
                     </table>
-                </span>
+                </div>
+
+                <div class="intro-txt">
+                    <p>This is my website for all kinds of coding projects.<br>For more informations have a look at the 'Projects' page</p>
+                </div>
             </section>
             <section id="proj">
                 <h1 class="proj-head">Projects</h1>
