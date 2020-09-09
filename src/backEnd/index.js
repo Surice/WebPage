@@ -22,8 +22,7 @@ exp.get(`${bURL}/getImg`, function(req, res){
     if(req.headers.authorization && jwt.verify(req.headers.authorization, config.apiSecret) == config.user){
         request(config.camRequestUrl).pipe(fs.createWriteStream(`${__dirname}/img/save.jpg`));
 
-        res.send("OK");
-        //res.sendFile(`${__dirname}/img/save.jpg`);
+        res.sendFile(`${__dirname}/img/save.jpg`);
     }else{
         res.status(401).json({"error": "Token Invalid!"}).end();
     }

@@ -10,7 +10,7 @@
         <li class="li"><a class="nav-a" id="cloud">Cloud</a></li>
         <li class="li"><a class="nav-a" id="ipcam">IP Cam</a></li>
         <li class="li"><a class="nav-a" href="">None</a></li>
-        <li class="li"><a href="../index.php"><button class="logout btn btn-outline-danger">Back</button></a></li>
+        <li class="li"><a href="./login.php?action=logout"><button class="logout btn btn-outline-danger">Logout</button></a></li>
         <li class="li"><code class="logDat">Logged in as: <?php echo $_SESSION["user"] ?></code></li>
     </ul>
     </body>
