@@ -21,18 +21,20 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
 
         <h1 class="head-txt">The recent Visitors of the Website</h1>
         <div class="table-d">
-            <table class="table" id="table">
-                <tr class="table-head">
-                    <th><strong>At</strong></th>
-                    <th><strong>City</strong></th>
-                    <th><strong>state</strong></th>
-                    <th><strong>Country</strong></th>
-                    <th><strong>coordinates</strong></th>
-                    <th><strong>Provider</strong></th>
-                    <th><strong>postcode</strong></th>
-                    <th><strong>Time Zone</strong></th>
-                </tr>
-                <tbody id="table-bdy">
+            <table role="table" class="table" id="table">
+                <thead role="rowgroup">
+                    <tr role="row" class="table-head">
+                        <th role="columnheader"><strong>At</strong></th>
+                        <th role="columnheader"><strong>City</strong></th>
+                        <th role="columnheader"><strong>state</strong></th>
+                        <th role="columnheader"><strong>Country</strong></th>
+                        <th role="columnheader"><strong>coordinates</strong></th>
+                        <th role="columnheader"><strong>Provider</strong></th>
+                        <th role="columnheader"><strong>postcode</strong></th>
+                        <th role="columnheader"><strong>Time Zone</strong></th>
+                    </tr>
+                </thead>
+                <tbody role="rowgroup" id="table-bdy">
 
                 </tbody>
             </table>
@@ -63,10 +65,10 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
 
         function createTable(data){
             for (var e in data){
-                var output = `<tr><th>${e}</th>`;
+                var output = `<tr role="row"><td role="cell">${e}</td>`;
 
                 data[e].forEach(function(i){
-                    output += `<th>${i}</th>`;
+                    output += `<td role="cell">${i}</td>`;
                 });
 
                 output += "</tr>";
