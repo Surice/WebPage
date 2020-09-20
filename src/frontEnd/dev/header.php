@@ -11,13 +11,13 @@
             <a class="nav-a" id="cloud">Cloud</a>
             <a class="nav-a" id="ipcam">IP Cam</a>
 
-            <a href="./login.php?action=logout"><button class="logout btn btn-outline-danger">Logout</button></a>
+            <a id="logout"><button class="logout btn btn-outline-danger">Logout</button></a>
             <code class="logDat">Logged in as: <?php echo $_SESSION["user"] ?></code>
         </ul>
         <div class="dropdown">
             <button class="dropbtn">Menu ↓</button>
 
-            <a class="unused" href="./login.php?action=logout"><button class="logout btn btn-outline-danger">Logout</button></a>
+            <a id="logoutDrop" class="unused"><button class="logout btn btn-outline-danger">Logout</button></a>
             <code class="logDat">Logged in as: <?php echo $_SESSION["user"] ?></code>
 
             <div class="dropdown-content">
@@ -39,6 +39,9 @@
         path = path.join("/");
 
         document.getElementById('style').href = `${path}/styleHeader.css`;
+
+        document.getElementById('logout').href = `${path}/login.php?action=logout`;
+        document.getElementById('logoutDrop').href = `${path}/login.php?action=logout`;
 
         document.getElementById('home').href = `${path}/index.php`;
         document.getElementById('homeDrop').href = `${path}/index.php`;

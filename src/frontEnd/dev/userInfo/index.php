@@ -10,7 +10,6 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
 
 <html>
     <head>
-    
         <title>Visitor Index</title>
         <link rel="shortcut icon" type="image/x-icon" href="../../img/pb.ico">
         <link rel="stylesheet" href="./style.css">

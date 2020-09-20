@@ -1,32 +1,40 @@
 <?php
 session_start();
 include '../config.php';
-$username = $confuser;
-$password = $confpw;
+include './database.php';
 
-if(!empty($_POST) && !empty($_POST['password']) && !empty($_POST['username']) && !empty($_POST['recaptchaResponse'])){
+if(!empty($_POST) && !empty($_POST['password']) && !empty($_POST['email']) && !empty($_POST['recaptchaResponse'])){
 
+/* START Recaptcha request */
     // Build POST request:
     $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
     $recaptcha_secret = $scretToken; //secret Key from Google reCaptcha
     $recaptcha_response = $_POST['recaptchaResponse'];
     $response = "";
-
     // Make and decode POST request:
     $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
     $recaptcha = json_decode($recaptcha);
+/* END Recaptcha request */
 
     echo $recaptcha->score;
-    if($_POST["password"] == $password && $recaptcha->score >= 0.8 && $_POST["username"] == $username){
+
+    $stmt = $db->prepare('SELECT * FROM dev_user WHERE email = ?');
+    $stmt -> execute(array($_POST["email"]));
+
+    $user = $stmt->fetch();
+//    print_r(password_hash($_POST["password"], PASSWORD_DEFAULT));
+
+
+    //TRUE if email and password is correct
+    if(password_verify($_POST["password"], $user['password']) && $recaptcha->score >= 0.8){
         $_SESSION["loggedIn"] = true;
-        $_SESSION["user"] = $_POST["username"];
+        $_SESSION["user"] = $user['username'];
 
-#put request here lol
-        $data = array('username' => $_POST['username']);
+        $payloadData = array('username' => $user['username']);
 
-        $payload = json_encode($data);
+        $payload = json_encode($payloadData);
 
-        $ch = curl_init('https://sebastian-web.de/api/v1/users');
+        $ch = curl_init('192.168.178.31:8082/api/v1/getToken');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLINFO_HEADER_OUT, true);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -36,20 +44,21 @@ if(!empty($_POST) && !empty($_POST['password']) && !empty($_POST['username']) &&
             'Content-Length: ' . strlen($payload))
         );
         
-        $result = curl_exec($ch);
+      $result = curl_exec($ch);
 
-        if($result == false){
+        if($result == false && !isset($result)){
             die("Curl failed: " . curL_error($ch));
         }
         curl_close($ch);
+
         $out = json_decode($result, true);
         setcookie("token", $out['token']);
 
 
         header("Location: ./index.php");
     }else{
-        if($_POST["password"] != $password || $_POST["username"] != $username){
-            $response = "Username or Password was wrong";
+        if($_POST["password"] != $password || $_POST["email"] != $email){
+            $response = "email or Password was wrong";
         }else if($recaptcha->score >= 0.8){
             $response =  "you are not authorized because you seem like a bot";
         }else{
@@ -58,10 +67,10 @@ if(!empty($_POST) && !empty($_POST['password']) && !empty($_POST['username']) &&
     }
 }else{
     if(!empty($_POST)){
-        if (empty($_POST['username']) && empty($_POST['password'])){
-            $response = "Username and Password must be set";
-        }else if(empty($_POST['username'])){
-            $response = "Username must be set";
+        if (empty($_POST['email']) && empty($_POST['password'])){
+            $response = "email and Password must be set";
+        }else if(empty($_POST['email'])){
+            $response = "email must be set";
         }else if(empty($_POST['password'])){
             $response = "Password must be set";
         }else{
@@ -127,8 +136,8 @@ if (!empty($_GET) && $_GET['action'] == "logout") {
                 <div class="card-body">
                     <form method="post">
                         <div class="form-group">
-                            <label for="username">Username</label>
-                            <input id="username" type="text" name="username" class="form-control">
+                            <label for="email">email</label>
+                            <input id="email" type="text" name="email" class="form-control">
                             <br>
                             <label for="password">Password</label>
                             <input id="password" type="password" name="password" class="form-control">

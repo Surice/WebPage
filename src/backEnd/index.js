@@ -40,7 +40,7 @@ exp.post(`${bURL}/userInfo`, function(req, res){
 
 exp.get(`${bURL}/getUsers`, function(req, res){
     //hard gecodet. fehlt user index
-    if(req.headers.authorization && jwt.verify(req.headers.authorization, config.apiSecret) == config.user){
+    if(req.headers.authorization && jwt.verify(req.headers.authorization, config.apiSecret)){
         res.status(200).send(userInfo).end();
     }else{
         res.status(401).json({"error": "Token Invalid!"}).end();
@@ -48,7 +48,7 @@ exp.get(`${bURL}/getUsers`, function(req, res){
 });
 
 
-exp.post(`${bURL}/users`, function(req, res){
+exp.post(`${bURL}/getToken`, function(req, res){
     if(req.body.username){
         const user = req.body.username;
 
