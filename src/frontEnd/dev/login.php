@@ -4,8 +4,8 @@ include '../config.php';
 $username = $confuser;
 $password = $confpw;
 
-if(!empty($_POST) && !empty($_POST['password']) && !empty($_POST['username']) /*&& !empty($_POST['recaptchaResponse'])*/){
-/*
+if(!empty($_POST) && !empty($_POST['password']) && !empty($_POST['username']) && !empty($_POST['recaptchaResponse'])){
+
     // Build POST request:
     $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
     $recaptcha_secret = $scretToken; //secret Key from Google reCaptcha
@@ -15,9 +15,9 @@ if(!empty($_POST) && !empty($_POST['password']) && !empty($_POST['username']) /*
     // Make and decode POST request:
     $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
     $recaptcha = json_decode($recaptcha);
-*/
-//    echo $recaptcha->score;
-    if($_POST["password"] == $password &&/* $recaptcha->score >= 0.8 &&*/ $_POST["username"] == $username){
+
+    echo $recaptcha->score;
+    if($_POST["password"] == $password && $recaptcha->score >= 0.8 && $_POST["username"] == $username){
         $_SESSION["loggedIn"] = true;
         $_SESSION["user"] = $_POST["username"];
 
