@@ -9,6 +9,8 @@ const jwt = require('jsonwebtoken');
 const { dir } = require('console');
 const request = require('request');
 
+const auth = require(`${__dirname}/modules/authentication.js`);
+
 
 const config = JSON.parse(fs.readFileSync(`${__dirname}/config.json`, "utf-8").toString());
 var userInfo = JSON.parse(fs.readFileSync(`${__dirname}/userInfo.json`, 'utf-8').toString());
@@ -38,12 +40,9 @@ exp.post(`${bURL}/userInfo`, function(req, res){
 });
 
 
-exp.get(`${bURL}/getUsers`, function(req, res){
-    //hard gecodet. fehlt user index
-    if(req.headers.authorization && jwt.verify(req.headers.authorization, config.apiSecret)){
+exp.get(`${bURL}/getUsers`, auth, function(req, res){
+    if(req.payload.role == "Developer") {
         res.status(200).send(userInfo).end();
-    }else{
-        res.status(401).json({"error": "Token Invalid!"}).end();
     }
 });
 
@@ -51,8 +50,9 @@ exp.get(`${bURL}/getUsers`, function(req, res){
 exp.post(`${bURL}/getToken`, function(req, res){
     if(req.body.username){
         const user = req.body.username;
+        const role = req.body.role;
 
-        var token = jwt.sign(user, config.apiSecret);
+        var token = jwt.sign({username: user, role: role}, config.apiSecret);
         res.status(200).json({ "token": token }).end();
     }
 });
