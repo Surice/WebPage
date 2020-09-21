@@ -28,8 +28,6 @@
                 <a class="nav-a" id="ipcamDrop">IP Cam</a>
             </div>
         </div>
-
-
     </div>
 
     </body>

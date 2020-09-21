@@ -108,15 +108,15 @@
                 <h1 class="proj-head">Projects</h1>
                 
                 <div class="proj-table">
-                        <a href="./subSites/steamSearch.php"><button class="btn-dum">Steam-Games</button></a>
-                        <a href="./dev/index.php"><button class="btn-dum">Dev-Portal</button></a>
-                        <a href="./userPortal/index.php"><button class="btn-dum">User-Portal<br>(comming soon)</button></a>
-                        <a href="./subSites/mcCraftingGuide.php"><button class="btn-dum">MC Crafting Guide<br>(in progress...)</button></a>
-                        <a href="./subSites/accAssistant_v1.0.php"><button class="btn-dum">ACC-Helper<br>(in progress...)</button></a>
+                    <a href="./subSites/steamSearch.php"><button class="btn-dum">Steam-Games</button></a>
+                    <a href="./dev/index.php"><button class="btn-dum">Dev-Portal</button></a>
+                    <a href="./userPortal/index.php"><button class="btn-dum">User-Portal<br>(in progress...)</button></a>
+                    <a href="#"><button class="btn-dum">dummy</button></a>
+                    <a href="#"><button class="btn-dum">dummy</button></a>
                 </div>
                 <div class="proj-table">
-                    <a href="#"><button class="btn-dum">dummy</button></a>
-                    <a href="#"><button class="btn-dum">dummy</button></a>
+                    <a href="./subSites/mcCraftingGuide.php"><button class="btn-dum">MC Crafting Guide<br>(in progress...)</button></a>
+                    <a href="./subSites/accAssistant_v1.0.php"><button class="btn-dum">ACC-Helper<br>(in progress...)</button></a>
                     <a href="#"><button class="btn-dum">dummy</button></a>
                     <a href="#"><button class="btn-dum">dummy</button></a>
                     <a href="#"><button class="btn-dum">dummy</button></a>

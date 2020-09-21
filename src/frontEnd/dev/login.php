@@ -1,7 +1,7 @@
 <?php
 session_start();
 include '../config.php';
-include './database.php';
+include '../database.php';
 
 $role = "Developer";
 
@@ -138,7 +138,7 @@ if (!empty($_GET) && $_GET['action'] == "logout") {
                 <div class="card-body">
                     <form method="post">
                         <div class="form-group">
-                            <label for="email">email</label>
+                            <label for="email">Email</label>
                             <input id="email" type="text" name="email" class="form-control">
                             <br>
                             <label for="password">Password</label>
@@ -149,7 +149,7 @@ if (!empty($_GET) && $_GET['action'] == "logout") {
                                 if(!empty($response)){
                             ?>
                             <div class="row">
-                                <div class="alert alert-danger p-1" style="display: inline-block" role="alert"><?php echo $response ?></div>
+                                <div class="alert alert-danger p-1" style="display: inline-block; margin-top: 8px;" role="alert"><?php echo $response ?></div>
                             </div>
                             <?php
                                 }

@@ -5,7 +5,7 @@ include '../database.php';
 
 $role = "user";
 
-if(!empty($_POST) && !empty($_POST['password']) && !empty($_POST['email']) && !empty($_POST['recaptchaResponse'])){
+if(!empty($_POST) && !empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['password']) && !empty($_POST['repPassword']) && !empty($_POST['email']) && !empty($_POST['recaptchaResponse'])){
 
 /* START Recaptcha request */
     // Build POST request:
@@ -21,53 +21,69 @@ if(!empty($_POST) && !empty($_POST['password']) && !empty($_POST['email']) && !e
     echo $recaptcha->score;
 //    print_r(password_hash($_POST["password"], PASSWORD_DEFAULT));
 
-    $stmt = $db->prepare('SELECT * FROM user_accounts WHERE email = ?');
-    $stmt -> execute(array($_POST["email"]));
+    if($_POST['password'] == $_POST['repPassword']){
+        $stmt = $db->prepare('SELECT email FROM user_accounts WHERE email = ?');
+        $stmt -> execute(array($_POST["email"]));
 
-    $user = $stmt->fetch();
-
-
-    //TRUE if email and password is correct
-    if(password_verify($_POST["password"], $user['password']) && $recaptcha->score >= 0.8){
-        $_SESSION["loggedIn"] = true;
-        $_SESSION["user"] = "{$user['firstname']} {$user['lastname']}";
+        $searchedUser = $stmt->fetch();
 
 
-        $payloadData = array('username' => $user['email'], 'role' => $role);
+        //TRUE if email and password is correct
+        if(!$searchedUser && $recaptcha->score >= 0.8){
+            $userData = array('email' => $_POST["email"], 'password' => password_hash($_POST["password"], PASSWORD_DEFAULT), 'firstname' => $_POST["firstname"], 'lastname' => $_POST["lastname"]);
 
-        $payload = json_encode($payloadData);
-
-        $ch = curl_init('192.168.178.31:8082/api/v1/getToken');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLINFO_HEADER_OUT, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json',
-            'Content-Length: ' . strlen($payload))
-        );
-
-      $result = curl_exec($ch);
-
-        if($result == false && !isset($result)){
-            die("Curl failed: " . curL_error($ch));
-        }
-        curl_close($ch);
-
-        $out = json_decode($result, true);
-        setcookie("token", $out['token']);
+            $stmt = $db->prepare('INSERT INTO user_accounts (email, password, firstname, lastname) VALUES (:email, :password, :firstname, :lastname)');
+            $createdUser = $stmt->execute($userData);
 
 
-        header("Location: ./index.php");
-    }else{
-        if($_POST["password"] != $password || $_POST["email"] != $email){
-            $response = "email or Password was wrong";
-        }else if($recaptcha->score >= 0.8){
-            $response =  "you are not authorized because you seem like a bot";
+
+            if($createdUser){
+                $_SESSION["loggedIn"] = true;
+                $_SESSION["user"] = "{$user['firstname']} {$user['lastname']}";
+
+                $payloadData = array('username' => $_POST['email'], 'role' => $role);
+
+                $payload = json_encode($payloadData);
+
+                $ch = curl_init('192.168.178.31:8082/api/v1/getToken');
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                    'Content-Type: application/json',
+                    'Content-Length: ' . strlen($payload))
+                );
+
+                $result = curl_exec($ch);
+
+                if($result == false && !isset($result)){
+                    die("Curl failed: " . curL_error($ch));
+                }
+                curl_close($ch);
+
+                $out = json_decode($result, true);
+                setcookie("token", $out['token']);
+
+
+                header("Location: ./index.php");
+            }else{
+                $response = "cannot register";
+            }
+
         }else{
-            $response =  "login Failed";
+            if($user){
+                $response = "email already registered";
+            }else if($recaptcha->score >= 0.8){
+                $response =  "you are not authorized because you seem like a bot";
+            }else{
+                $response =  "login Failed";
+            }
         }
+    }else{
+        $response = "repeated password doesn´t fit";
     }
+
 }else{
     if(!empty($_POST)){
         if (empty($_POST['email']) && empty($_POST['password'])){
@@ -96,9 +112,9 @@ if (!empty($_GET) && $_GET['action'] == "logout") {
 <html>
 
 <head>
-    <title>Login User Portal</title>
+    <title>Register User Portal</title>
     <link rel="shortcut icon" type="image/x-icon" href="../img/SU_Logo_2.0_render.ico">
-    <link rel="stylesheet" href="./styleLogin.css">
+    <link rel="stylesheet" href="./styleRegister.css">
     <meta name="viewport" content="width=device-width, initial-scale = 1">
 
     <script src="https://www.google.com/recaptcha/api.js?render=<?php echo $siteKey ?>"></script>
@@ -135,22 +151,30 @@ if (!empty($_GET) && $_GET['action'] == "logout") {
     <div class="container-lg h-100 center-div">
         <div class="row justify-content-center align-items-center h-100">
             <div class="card" style="width: 18rem;">
-                <div class="subLab card-header align-items-center">
-                    <p>Login</p>
-                    <a href="./register.php"><button class="btn-me btn btn-primary mb-3">Sign Up</button></a>
+                <div class="subLabHead card-header align-items-center">
+                    <a href="./login.php"><button class="btn-me btn btn-primary mb-3">Sign In</button></a>
+                    <p>Register</p>
                 </div>
                 <div class="card-body">
                     <form method="post">
                         <div class="form-group">
+                            <label for="firstname">Firstname</label>
+                            <input id="firstname" type="text" name="firstname" class="form-control">
+                            <br>
+                            <label for="lastname">Lastname</label>
+                            <input id="lastname" type="text" name="lastname" class="form-control">
+                            <br>
                             <label for="email">Email</label>
                             <input id="email" type="text" name="email" class="form-control">
                             <br>
                             <label for="password">Password</label>
                             <input id="password" type="password" name="password" class="form-control">
                             <br>
+                            <label for="repPassword">repeat Password</label>
+                            <input id="repPassword" type="password" name="repPassword" class="form-control">
+                            <br>
                             <div class="subLab">
                                 <button type="submit" class="btn-me btn btn-primary mb-3">Submit!</button>
-                                <a href="#" class="labelSignIn">Sign In without User</a>
                             </div>
 
                             <?php

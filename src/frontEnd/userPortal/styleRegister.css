@@ -18,14 +18,16 @@ body{
     display: flex;
     flex-flow: row;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-start;
 }
-.subLab p{
+.subLabHead{
+     display: flex;
+     flex-flow: row;
+     align-items: center;
+     justify-content: space-evenly;
+ }
+.subLabHead p{
     margin: 0px !important;
-}
-.labelSignIn{
-    font-size: 14px;
-    color: rgb(52, 52, 224);
 }
 .btn-me{
     margin: 0px !important;
