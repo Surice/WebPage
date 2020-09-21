@@ -10,6 +10,7 @@
             <a class="nav-a" id="iplog">Log</a>
             <a class="nav-a" id="cloud">Cloud</a>
             <a class="nav-a" id="ipcam">IP Cam</a>
+            <a class="nav-a" id="userma">User Manager</a>
 
             <a id="logout"><button class="logout btn btn-outline-danger">Logout</button></a>
             <code class="logDat">Logged in as: <?php echo $_SESSION["user"] ?></code>
@@ -26,6 +27,7 @@
                 <a class="nav-a" id="iplogDrop">Log</a>
                 <a class="nav-a" id="cloudDrop">Cloud</a>
                 <a class="nav-a" id="ipcamDrop">IP Cam</a>
+                <a class="nav-a" id="usermaDrop">User Manager</a>
             </div>
         </div>
     </div>
@@ -51,5 +53,7 @@
         document.getElementById('cloudDrop').href = `${path}/cloud/index.php`;
         document.getElementById('ipcam').href = `${path}/ipCam/index.php`;
         document.getElementById('ipcamDrop').href = `${path}/ipCam/index.php`;
+        document.getElementById('userma').href = `${path}/userManagement/index.php`;
+        document.getElementById('usermaDrop').href = `${path}/userManagement/index.php`;
     </script>
 </html>

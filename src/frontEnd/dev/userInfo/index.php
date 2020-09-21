@@ -74,8 +74,6 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
                 document.getElementById('table-bdy').innerHTML = output + document.getElementById('table-bdy').innerHTML;
             }
         }
-
-
         function getCo(){
             var co = document.cookie.split(";"),
                 out = "none";

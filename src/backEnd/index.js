@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 const express = require('express');
 const exp = express();
 const bodyParser = require('body-parser');
@@ -8,6 +7,8 @@ const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 const jwt = require('jsonwebtoken');
 const { dir } = require('console');
 const request = require('request');
+
+const db = require(`${__dirname}/modules/database`);
 
 const auth = require(`${__dirname}/modules/authentication.js`);
 
@@ -45,6 +46,29 @@ exp.get(`${bURL}/getUsers`, auth, function(req, res){
         res.status(200).send(userInfo).end();
     }
 });
+
+exp.get(`${bURL}/getUserAccount`, auth, function (req, res) {
+    if(req.payload.role == "Developer"){
+        let sql = 'SELECT * FROM user_accounts';
+        db.query(sql, function (err, data, next) {
+            if(err) throw err;
+
+            res.status(200).json( data );
+        })
+    }
+});
+
+exp.post(`${bURL}/delUserAccount`, auth, function (req, res) {
+    if(req.payload.role == "Developer"){
+        let sql = 'DELETE FROM user_accounts WHERE id = ?'
+        let value = req.body.id;
+        db.query(sql, value, function (err, data, next) {
+            if(err) throw err;
+
+            res.status(200).json({state: "Success"});
+        })
+    }
+})
 
 
 exp.post(`${bURL}/getToken`, function(req, res){
