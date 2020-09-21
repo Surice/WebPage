@@ -4,7 +4,7 @@
     </head>
     <body>
     <div class="navbar-me">
-        <ul class="nav-content">
+        <div class="nav-content">
             <a class="nav-a" id="home">Home</a>
             <a class="nav-a" id="visits">Visitors</a>
             <a class="nav-a" id="iplog">Log</a>
@@ -13,7 +13,7 @@
 
             <a id="logout"><button class="logout btn btn-outline-danger">Logout</button></a>
             <code class="logDat">Logged in as: <?php echo $_SESSION["user"] ?></code>
-        </ul>
+        </div>
         <div class="dropdown">
             <button class="dropbtn">Menu ↓</button>
 

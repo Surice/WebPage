@@ -39,7 +39,7 @@ if(!empty($_POST) && !empty($_POST['firstname']) && !empty($_POST['lastname']) &
 
             if($createdUser){
                 $_SESSION["loggedIn"] = true;
-                $_SESSION["user"] = "{$user['firstname']} {$user['lastname']}";
+                $_SESSION["user"] = "{$_POST['firstname']} {$_POST['lastname']}";
 
                 $payloadData = array('username' => $_POST['email'], 'role' => $role);
 

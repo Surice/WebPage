@@ -3,25 +3,26 @@
         <link rel="stylesheet" id="style">
     </head>
     <body>
-    <ul class="navbar-me">
-        <a class="nav-a" id="home">Home</a>
-        <a class="nav-a" id="todo">To-Do Liste</a>
+    <div class="navbar-me">
+        <ul class="nav-content">
+            <a class="nav-elememts" id="home">Home</a>
+            <a class="nav-elememts" id="todo">To-Do List</a>
 
-        <li class="li"><a href="./login.php?action=logout"><button class="logout btn btn-outline-danger">Logout</button></a></li>
-        <li class="li"><code class="logDat">Logged in as: <?php echo $_SESSION["user"] ?></code></li>
-    </ul>
-    <div class="dropdown">
-        <button class="dropbtn">Menu ↓</button>
+            <a id="logout"><button class="logout btn btn-outline-danger">Logout</button></a>
+            <code class="logDat">Logged in as: <?php echo $_SESSION["user"] ?></code>
+        </ul>
+        <div class="dropdown">
+            <button class="dropbtn">Menu ↓</button>
 
-        <a id="logoutDrop" class="unused"><button class="logout btn btn-outline-danger">Logout</button></a>
-        <code class="logDat">Logged in as: <?php echo $_SESSION["user"] ?></code>
+            <a id="logoutDrop" class="unused"><button class="logout btn btn-outline-danger">Logout</button></a>
+            <code class="logDat">Logged in as: <?php echo $_SESSION["user"] ?></code>
 
-        <div class="dropdown-content">
-            <a class="nav-a" id="homeDrop">Home</a>
-            <a class="nav-a" id="todoDrop">Visitors</a>
+            <div class="dropdown-content">
+                <a class="nav-elememts" id="homeDrop">Home</a>
+                <a class="nav-elememts" id="todoDrop">To-Do List</a>
+            </div>
         </div>
     </div>
-
     </body>
 
     <script>

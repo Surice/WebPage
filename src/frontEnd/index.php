@@ -191,7 +191,7 @@
                         befindet.
                         Der folgende Link stellt eine Liste der Datenschutzbeauftragten sowie deren Kontaktdaten bereit: <a
                             href="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html"
-                            target="_blank">https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html</a>.
+                            target="_blank">Link</a>.
                     </p>
 
                     <p><strong>Recht auf Datenübertragbarkeit</strong></p>
