@@ -7,6 +7,7 @@
         <ul class="nav-content">
             <a class="nav-elememts" id="home">Home</a>
             <a class="nav-elememts" id="todo">To-Do List</a>
+            <a class="nav-elememts" id="set">Settings</a>
 
             <a id="logout"><button class="logout btn btn-outline-danger">Logout</button></a>
             <code class="logDat">Logged in as: <?php echo $_SESSION["user"] ?></code>
@@ -20,6 +21,7 @@
             <div class="dropdown-content">
                 <a class="nav-elememts" id="homeDrop">Home</a>
                 <a class="nav-elememts" id="todoDrop">To-Do List</a>
+                <a class="nav-elememts" id="setDrop">Settings</a>
             </div>
         </div>
     </div>
@@ -39,5 +41,7 @@
         document.getElementById('homeDrop').href = `${path}/index.php`;
         document.getElementById('todo').href = `${path}/todo/index.php`;
         document.getElementById('todoDrop').href = `${path}/todo/index.php`;
+        document.getElementById('set').href = `${path}/settings/index.php`;
+        document.getElementById('setDrop').href = `${path}/settings/index.php`;
     </script>
 </html>
