@@ -80,24 +80,20 @@
                 </div>
             </section>
             <section id="intro">
-                <h1 class="intro-head">Introduction</h1>
+                <center><h1 class="intro-head">Introduction</h1></center>
 
-                <div class="social-table-pos">
-                    <table class="social-table">
-                        <tr class="social-table-head">
-                            <td><strong>My Social Media</strong></td>
-                        </tr>
+                <div class="social-table-front">
+                    <div class="social-table">
+                        <center><strong class="social-table-head">My Social Media</strong></center>
                         <br>
-                        <tr>
-                            <td>
-                                <a href="https://www.discord.com/users/279230092167872512" target="_blank" class="fab fa-discord fa-3x"></a>
-                                <a href="https://www.instagram.com/thesurice" target="_blank" class="fab fa-instagram fa-3x"></a>
-                                <a href="https://open.spotify.com/user/surice99?si=bOENDn2yTjqoLYGaEq_X4g" target="_blank" class="fab fa-spotify fa-3x"></a>
-                                <a href="https://www.twitch.tv/surice_gaming" target="_blank" class="fab fa-twitch fa-3x"></a>
-                                <a href="https://github.com/Surice" target="_blank" class="fab fa-github fa-3x"></a>
-                            </td>
-                        </tr>
-                    </table>
+                        <div class="social-table-content">
+                            <a href="https://www.discord.com/users/279230092167872512" target="_blank" class="fab fa-discord fa-3x"></a>
+                            <a href="https://www.instagram.com/thesurice" target="_blank" class="fab fa-instagram fa-3x"></a>
+                            <a href="https://open.spotify.com/user/surice99?si=bOENDn2yTjqoLYGaEq_X4g" target="_blank" class="fab fa-spotify fa-3x"></a>
+                            <a href="https://www.twitch.tv/surice_gaming" target="_blank" class="fab fa-twitch fa-3x"></a>
+                            <a href="https://github.com/Surice" target="_blank" class="fab fa-github fa-3x"></a>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="intro-txt">
