@@ -22,17 +22,48 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
 
         <div class="screen" id="profile">
             <h1 class="head-txt">Profile Informations</h1>
+
             <div class="content">
-                <div class="profInfoTable">
+                <div class="tables">
                     <div>
                         <label for="mail">E-Mail:</label>
-                        <input >
+                        <br>
+                        <input type="text" name="mail">
+                    </div>
+                    <div>
+                        <label for="firstN">Firstname:</label>
+                        <br>
+                        <input type="text" name="firstN">
+                    </div>
+                    <div>
+                        <label for="lastN">Lastname:</label>
+                        <br>
+                        <input type="text" name="lastN">
                     </div>
                 </div>
             </div>
         </div>
         <div class="screen" id="pswrd">
             <h1 class="head-txt">Change Password</h1>
+            <div class="content">
+                <div class="tables">
+                    <label for="cPswrd">Current Password:</label>
+                    <br>
+                    <input type="password" name="cPswrd">
+                </div>
+                <div>
+                    <div>
+                        <label for="nPswrd">New Password:</label>
+                        <br>
+                        <input type="password" name="nPswrd">
+                    </div>
+                    <div>
+                        <label for="rNPwswrd">Repeat New Password:</label>
+                        <br>
+                        <input type="password" name="rNPwswrd">
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="screen" id="delAcc">
             <h1 class="head-txt">Delete Account</h1>
