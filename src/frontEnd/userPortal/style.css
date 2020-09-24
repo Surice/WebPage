@@ -7,11 +7,18 @@ body{
     background-position: center;
 }
 
+.content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+}
+
 .head-txt{
-    text-align: center; 
-    top: 100em;
-    transform: translate(0,80%);
+    text-align: center;
     font-size: 55px;
     font-family: 'H', 'Trebuchet MS', Helvetica;
+    text-shadow: 2px 2px 3px white, 4px 4px 6px rgba(0,0,0,0.15);
     font-weight: 500;
+    margin-top: 10vh;
 }

@@ -19,6 +19,8 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
     <body>
         <?php include './header.php'; ?>
 
-        <b><h1 class="head-txt">Welcome <?php echo $_SESSION["user"] ?>!</h1></b>
+        <div class="content">
+            <h1 class="head-txt">Welcome <?php echo $_SESSION["user"] ?>!</h1>
+        </div>
     </body>
 </html>
