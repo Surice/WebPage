@@ -25,44 +25,48 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
 
             <div class="content">
                 <div class="tables">
-                    <div>
+                    <div class="valueDiv">
                         <label for="mail">E-Mail:</label>
                         <br>
                         <input type="text" name="mail">
                     </div>
-                    <div>
+                    <div class="valueDiv">
                         <label for="firstN">Firstname:</label>
                         <br>
                         <input type="text" name="firstN">
                     </div>
-                    <div>
+                    <div class="valueDiv">
                         <label for="lastN">Lastname:</label>
                         <br>
                         <input type="text" name="lastN">
                     </div>
                 </div>
+                <button>Change Settings</button>
             </div>
         </div>
         <div class="screen" id="pswrd">
             <h1 class="head-txt">Change Password</h1>
             <div class="content">
                 <div class="tables">
-                    <label for="cPswrd">Current Password:</label>
-                    <br>
-                    <input type="password" name="cPswrd">
-                </div>
-                <div>
-                    <div>
-                        <label for="nPswrd">New Password:</label>
+                    <div class="valueDiv">
+                        <label for="cPswrd">Current Password:</label>
                         <br>
-                        <input type="password" name="nPswrd">
+                        <input type="password" name="cPswrd">
                     </div>
-                    <div>
-                        <label for="rNPwswrd">Repeat New Password:</label>
-                        <br>
-                        <input type="password" name="rNPwswrd">
+                    <div class="nPswrdDiv">
+                        <div class="valueDiv">
+                            <label for="nPswrd">New Password:</label>
+                            <br>
+                            <input type="password" name="nPswrd">
+                        </div>
+                        <div class="valueDiv">
+                            <label for="rNPwswrd">Repeat New Password:</label>
+                            <br>
+                            <input type="password" name="rNPwswrd">
+                        </div>
                     </div>
                 </div>
+                <button>Change Password</button>
             </div>
         </div>
         <div class="screen" id="delAcc">
@@ -71,7 +75,7 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
     </body>
 
     <script>
-        var alt = undefined;
+        var alt = 'profile';
         document.getElementById(window.location.hash.slice(1, window.location.hash.length)).style.display = 'block';
 
         window.addEventListener('hashchange', function(){

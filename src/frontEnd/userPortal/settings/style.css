@@ -25,16 +25,28 @@ body{
 }
 
 .content{
-    display: flex;
-    flex-flow: row;
-    justify-content: flex-start;
-    align-items: center;
+    display: inline-block;
     margin-left: 20vw;
 }
 
 .tables{
-    height: 80vh;
+    height: 75vh;
     display: flex;
     flex-flow: column;
     justify-content: space-evenly;
+}
+.tables .valueDiv{
+    background-color: rgba(193, 193, 193, 0.6);
+    border: 1.5px solid rgb(116, 116, 116);
+    border-radius: 4px;
+    padding: 8px;
+}
+.tables input{
+    background-color: rgb(217, 217, 217);
+    border: 1px solid black;
+    border-radius: 3.5px;
+}
+
+.nPswrdDiv div{
+    margin-bottom: 6vh;
 }
