@@ -47,14 +47,14 @@ exp.get(`${bURL}/getUsers`, auth, function(req, res){
     }
 });
 
-exp.get(`${bURL}/getUserAccount`, auth, function (req, res) {
+exp.get(`${bURL}/getUserAccounts`, auth, function (req, res) {
     if(req.payload.role == "Developer"){
         let sql = 'SELECT * FROM user_accounts';
         db.query(sql, function (err, data, next) {
             if(err) throw err;
 
             res.status(200).json( data );
-        })
+        });
     }
 });
 
@@ -66,19 +66,43 @@ exp.post(`${bURL}/delUserAccount`, auth, function (req, res) {
             if(err) throw err;
 
             res.status(200).json({state: "Success"});
-        })
+        });
     }
-})
+});
 
 
 exp.post(`${bURL}/getToken`, function(req, res){
     if(req.body.username){
-        const user = req.body.username;
-        const role = req.body.role;
+        const id = req.body.userId,
+            user = req.body.username,
+            role = req.body.role;
 
-        var token = jwt.sign({username: user, role: role}, config.apiSecret);
+        var token = jwt.sign({userId: id, username: user, role: role}, config.apiSecret);
         res.status(200).json({ "token": token }).end();
     }
+});
+
+exp.get(`${bURL}/getUserAccount`, auth, function (req, res) {
+        let sql = 'SELECT email, firstname, lastname FROM user_accounts WHERE id = ?';
+        const value = req.payload.userId;
+        db.query(sql, value, function (err, data, next) {
+            if(err) throw err;
+
+            res.status(200).json( data );
+        });
+});
+
+exp.post(`${bURL}/saveUserAccountChanges`, auth, function (req, res) {
+    let sql = 'UPDATE user_accounts SET email = ?, firstname = ?, lastname = ? WHERE id = ?';
+
+    const userValues = req.body.values;
+    const values = [userValues.email, userValues.firstname, userValues.lastname, req.payload.userId];
+
+    db.query(sql, values, function (err, data, next) {
+        if(err) throw err;
+
+        res.status(200).send('success');
+    });
 });
 
 
@@ -89,11 +113,12 @@ exp.get(`${bURL}/steamG`, function(req, res){
 });
 
 
+
+
 exp.get(`${bURL}/test`, function(req, res){
     res.status(200);
     res.send("OK").end();
 });
-
 
 exp.listen(port, function(){
     console.log(`listen on port ${port}`);

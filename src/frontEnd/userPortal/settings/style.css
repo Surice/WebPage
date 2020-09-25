@@ -27,16 +27,22 @@ body{
 .content{
     display: inline-block;
     margin-left: 20vw;
+    background-color: rgba(147, 147, 147, 0.9);
+    border: 1px solid rgb(120,120,120);
+    border-radius: 6px;
+    padding: 10px;
 }
 
 .tables{
-    height: 75vh;
     display: flex;
     flex-flow: column;
     justify-content: space-evenly;
+    height: 75vh;
+    width: 70vw;
 }
 .tables .valueDiv{
-    background-color: rgba(193, 193, 193, 0.6);
+    display: inline-block;
+    background-color: rgb(64, 64, 64);
     border: 1.5px solid rgb(116, 116, 116);
     border-radius: 4px;
     padding: 8px;

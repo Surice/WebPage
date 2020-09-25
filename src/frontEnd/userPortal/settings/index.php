@@ -15,6 +15,7 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
         <link rel="shortcut icon" type="image/x-icon" href="../../img/pb.ico">
         <link rel="stylesheet" href="./style.css">
         <meta name="viewport" content="width=device-width, initial-scale = 1">
+        <script src="./index.js"></script>
     </head>
     <body>
         <?php include '../header.php'; ?>
@@ -28,20 +29,20 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
                     <div class="valueDiv">
                         <label for="mail">E-Mail:</label>
                         <br>
-                        <input type="text" name="mail">
+                        <input type="text" name="mail" id="mail">
                     </div>
                     <div class="valueDiv">
                         <label for="firstN">Firstname:</label>
                         <br>
-                        <input type="text" name="firstN">
+                        <input type="text" name="firstN" id="firstN">
                     </div>
                     <div class="valueDiv">
                         <label for="lastN">Lastname:</label>
                         <br>
-                        <input type="text" name="lastN">
+                        <input type="text" name="lastN" id="lastN">
                     </div>
                 </div>
-                <button>Change Settings</button>
+                <button onclick="saveSettings()">Change Settings</button>
             </div>
         </div>
         <div class="screen" id="pswrd">
@@ -75,6 +76,8 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
     </body>
 
     <script>
+        getValues();
+
         var alt = 'profile';
         document.getElementById(window.location.hash.slice(1, window.location.hash.length)).style.display = 'block';
 

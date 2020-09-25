@@ -81,7 +81,7 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
             console.log(userId);
 
             xml = new XMLHttpRequest();
-            xml.open('POST', 'https://sebastian-web.de/api/v1/deleteUserAccount');
+            xml.open('POST', 'https://sebastian-web.de/api/v1/deleteUserAccounts');
             xml.setRequestHeader('authorization', token);
             xml.setRequestHeader("Content-Type", "application/json");
             xml.send({"id": userId});
