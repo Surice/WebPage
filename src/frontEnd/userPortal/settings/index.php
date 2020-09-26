@@ -52,22 +52,22 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
                     <div class="valueDiv">
                         <label for="cPswrd">Current Password:</label>
                         <br>
-                        <input type="password" name="cPswrd">
+                        <input type="password" name="cPswrd" id="cPswrd">
                     </div>
                     <div class="nPswrdDiv">
                         <div class="valueDiv">
                             <label for="nPswrd">New Password:</label>
                             <br>
-                            <input type="password" name="nPswrd">
+                            <input type="password" name="nPswrd" id="nPswrd">
                         </div>
                         <div class="valueDiv">
                             <label for="rNPwswrd">Repeat New Password:</label>
                             <br>
-                            <input type="password" name="rNPwswrd">
+                            <input type="password" name="rNPwswrd" id="rNPwswrd">
                         </div>
                     </div>
                 </div>
-                <button>Change Password</button>
+                <button onclick="changePassword();">Change Password</button>
             </div>
         </div>
         <div class="screen" id="delAcc">

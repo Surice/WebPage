@@ -83,7 +83,7 @@ exp.post(`${bURL}/getToken`, function(req, res){
 });
 
 exp.get(`${bURL}/getUserAccount`, auth, function (req, res) {
-        let sql = 'SELECT email, firstname, lastname FROM user_accounts WHERE id = ?';
+        let sql = 'SELECT * FROM user_accounts WHERE id = ?';
         const value = req.payload.userId;
         db.query(sql, value, function (err, data, next) {
             if(err) throw err;
