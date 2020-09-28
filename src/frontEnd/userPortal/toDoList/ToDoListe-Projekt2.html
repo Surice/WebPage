@@ -1,0 +1,182 @@
+<html>
+    <html>
+    <head>
+        <div class="header-div">
+            <div>
+                <lable class= "Headline" >Organizer</lable>
+            </div>
+            <div class="placeholder"></div>
+            <ul class= "nav-links">
+                <nav>
+                    <li><a href="ToDoListe-ToDoList.html" class="font">To Do List</a></li>
+                    <li><a href="ToDoListe-Projekt1.html" class="font">Project 1</a></li>
+                    <li><a href="" class="choosen-font">Project 2</a></li>
+                    <li><a href="ToDoListe-Projekt3.html" class="font">Project 3</a></li>
+                    <li><a href="ToDoListe-Projekt4.html" class="font">Project 4</a></li>
+                </nav>
+            </ul>
+                <a href="#"><button class="settings-btn">Settings</button></a>
+                <button onclick="addNewItem(); updatelist()" class="addBtn">New Item</button>
+        </div>    
+    </head>
+    <body>
+        <div class="list-div">
+            <table id="list" class= "ToDoListe"></table>
+        </div>
+    </body>
+</html>
+<script>
+
+    let finishListItems2 = getlistItemFromLocalStorage();
+
+    updatelist();
+
+    function getlistItemFromLocalStorage(){
+        let items = localStorage.getItem('listItems2');
+
+            if (items == null || items == '') {
+                items = [];   
+            }else {
+                items = items.split(','); 
+            }
+
+            return items;
+    }
+    function addNewItem(){
+        let item = prompt('Nächster Punkt?')
+        if (item != null) {
+            finishListItems2.push(item);
+            localStorage.setItem('listItems2', finishListItems2);
+            } 
+    }
+
+    function updatelist() {
+            document.getElementById('list').innerHTML = '';
+            
+            for (let index = 0; index < finishListItems2.length; index += 1){
+                document.getElementById('list').innerHTML += '<li>' + finishListItems2[index] +
+                '<button onclick="removeItem('+ index +'); updatelist();" class="can">X</button></li>';
+
+            }
+        } 
+    function removeItem(itemIndex) {
+        finishListItems2.splice(itemIndex, 1);
+        localStorage.setItem('listItems2', finishListItems2,);
+
+    }
+</script>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        background-image: url(street-381227_1920.jpg);
+        background-size: cover;        
+        background-position: center;
+    }
+    .headline{
+        font-weight: 800;
+        font-size: 32px;
+        font-family: Verdana ;
+        color: white;
+        
+    }
+    .header-div{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 22px 7%;
+        background-color: rgb(49, 49, 49);
+    }
+    .nav-links{
+        list-style: none;
+    }
+    .nav-links li {
+        display: inline-block;
+        padding: 0px 20px;
+    }
+    .nav-links li a {
+        transition: all 0.3s ease 0s;
+    }
+    .nav-links li a:hover {
+        color: grey;
+    }
+    .settings-btn{
+        background-color: whitesmoke;
+        color: black;
+        font-size: 16px;
+        font-family: verdana;
+        text-decoration: none;
+        border: none;
+        border-radius: 25px;
+        padding: 5px;
+        margin-left: 45px;
+    }
+    .addBtn{
+        background-color: rgba(124, 240, 255, 1);
+        color: black;
+        font-size: 16px;
+        font-family: verdana;
+        border: none;
+        border-radius: 25px;
+        padding: 5px;
+        width: 8%;
+        margin-left: 10%;
+    }
+    .addBtn:hover{
+        background-color: rgba(124,240,255, 0.6);
+    }
+    .list-div{
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+        margin-top: 75px;
+
+    }
+    .ToDoListe{
+        width: 50%;
+    }
+    .list-div li{
+        font-size: 18px;
+        font-family: verdana;
+        list-style: none;
+        margin-top: 25px;
+        padding: 10px; 
+        background-color: grey;
+        border-color: darkgrey;
+        border-radius: 10px;
+        text-align: start;
+        
+    } 
+    .can{
+        float: right;
+        width: 23px;
+        height: 23px;
+        border-radius: 5px;
+        background-color: rgba(255, 49, 49, 0.603);
+    }
+    .can:hover{
+        background-color: darkred;
+    }
+    .placeholder{
+        width: 23%;
+    }
+    .font{
+        color: white;
+        font-size: 16px;
+        font-family: verdana;
+        text-decoration: none;
+    }
+    .choosen-font{
+        color: darkgrey;
+        font-size: 16px;
+        font-family: verdana;
+        text-decoration: none;
+    }
+</style>
+    <body>
+        
+    </body>
+</html>
