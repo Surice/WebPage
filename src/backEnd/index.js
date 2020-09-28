@@ -7,6 +7,7 @@ const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 const jwt = require('jsonwebtoken');
 const { dir } = require('console');
 const request = require('request');
+const path = require('path');
 
 const db = require(`${__dirname}/modules/database`);
 
@@ -21,13 +22,15 @@ const bURL = '/api/v1';
 
 exp.use(bodyParser.json());
 
-exp.get(`${bURL}/getImg`, function(req, res){
-    if(req.headers.authorization && jwt.verify(req.headers.authorization, config.apiSecret) == config.user){
-        request(config.camRequestUrl).pipe(fs.createWriteStream(`${__dirname}/img/save.jpg`));
+exp.get(`${bURL}/getImg.jpg`, auth, function(req, res){
+    if(req.payload.role == "Developer"){
+        const stream = fs.createWriteStream(`${__dirname}/img/save.jpg`);
+        var reqStream = request(config.camRequestUrl).pipe(stream);
 
-        res.sendFile(`${__dirname}/img/save.jpg`);
-    }else{
-        res.status(401).json({"error": "Token Invalid!"}).end();
+        reqStream.on('finish', function () {
+            const url = path.join(__dirname, "/img");
+            res.sendFile('/save.jpg', {root: url});
+        });
     }
 });
 
