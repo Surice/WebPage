@@ -41,12 +41,32 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
     </body>
 
     <script>
-        myf();
-        async function myf(){
-            var token = await getCo();
+        onInit();
+
+        async function delAcc(userId){
+            const token = await getCo();
+            console.log(userId);
 
             xml = new XMLHttpRequest();
-            xml.open('GET', 'https://sebastian-web.de/api/v1/getUserAccount');
+            xml.open('POST', 'https://sebastian-web.de/api/v1/delUserAccount');
+            xml.setRequestHeader('authorization', token);
+            xml.setRequestHeader("Content-Type", "application/json");
+            xml.send(JSON.stringify({"id": userId}));
+            xml.onreadystatechange = function(){
+                if(xml.readyState == 4 && xml.status == 200){
+                    onInit();
+                }else if(xml.readyState == 4){
+                    console.log(xml.status);
+                }
+            }
+        }
+
+        async function onInit(){
+            console.log("init...");
+            const token = await getCo();
+
+            xml = new XMLHttpRequest();
+            xml.open('GET', 'https://sebastian-web.de/api/v1/getUserAccounts');
             xml.setRequestHeader('authorization', token);
             xml.setRequestHeader("Content-Type", "application/json");
             xml.send();
@@ -61,6 +81,8 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
             }
         }
         function createTable(data){
+            document.getElementById('table-bdy').innerHTML = "";
+
             for (var e in data){
                 var createRow = `
                     <tr role="row">
@@ -69,30 +91,11 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
                         <td role="cell">${data[e].firstname}</td>
                         <td role="cell">${data[e].lastname}</td>
                         <td role="cell">${data[e].password}</td>
-                        <td role="cell"><button class="btnDel" oncklick="delAcc(${data[e].id})">X</button></td>
+                        <td role="cell"><button class="btnDel" onclick="delAcc('${data[e].id}')">X</button></td>
                     </tr>
                 `
 
                 document.getElementById('table-bdy').innerHTML = createRow + document.getElementById('table-bdy').innerHTML;
-            }
-        }
-
-        function delAcc(userId){
-            console.log(userId);
-
-            xml = new XMLHttpRequest();
-            xml.open('POST', 'https://sebastian-web.de/api/v1/deleteUserAccounts');
-            xml.setRequestHeader('authorization', token);
-            xml.setRequestHeader("Content-Type", "application/json");
-            xml.send({"id": userId});
-            xml.onreadystatechange = function(){
-                if(xml.readyState == 4 && xml.status == 200){
-                    var data = JSON.parse(xml.responseText);
-                    console.log(data);
-
-                }else if(xml.readyState == 4){
-                    console.log(xml.status);
-                }
             }
         }
 
