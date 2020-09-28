@@ -8,11 +8,11 @@
             </div>
             <div class="placeholder"></div>
             <ul class= "nav-links">
-                <li><a href="" class="choosen-font">To Do List</a></li>
-                <li><a href="ToDoListe-Projekt1.html" class="font">Project 1</a></li>
-                <li><a href="ToDoListe-Projekt2.html" class="font">Project 2</a></li>
-                <li><a href="ToDoListe-Projekt3.html" class="font">Project 3</a></li>
-                <li><a href="ToDoListe-Projekt4.html" class="font">Project 4</a></li>
+                    <li><button class="choosen-font">To Do List</button></li>
+                    <li><button class="font">Project 1</button></li>
+                    <li><button class="font">Project 2</button></li>
+                    <li><button class="font">Project 3</button></li>
+                    <li><button class="font">Project 4</button></li>
             </ul>
                 <a href="#"><button class="settings-btn">Settings</button></a>
                 <button onclick="addNewItem(); updatelist()" class="addBtn">New Item</button>
@@ -24,14 +24,14 @@
         <table id="list" class= "ToDoListe"></table>
         </div>
     </body>
-</html>
+
 <script>
 
     let finishListItems = getlistItemFromLocalStorage();
 
     updatelist();
 
-    function getlistItemFromLocalStorage(){
+    function getToDoListItemFromLocalStorage(){
         let items = localStorage.getItem('listItems');
 
             if (items == null || items == '') {
@@ -42,7 +42,7 @@
 
             return items;
     }
-    function addNewItem(){
+    function addNewItemToDoList(){
         let item = prompt('Nächster Punkt?')
         if (item != null) {
                finishListItems.push(item);
@@ -50,7 +50,7 @@
             } 
     }
 
-    function updatelist() {
+    function updateToDoList() {
              document.getElementById('list').innerHTML = '';
              
             for (let index = 0; index < finishListItems.length; index += 1){
@@ -73,7 +73,7 @@
         padding: 0;
     }
     body{
-        background-image: url(street-381227_1920.jpg);
+        background-image: url(../../../frontEnd/img/street-381227_1920.jpg);
         background-size: cover;
         background-position: center;
     }
@@ -179,3 +179,5 @@
         text-decoration: none;
     }
 </style>
+
+</html>
