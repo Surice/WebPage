@@ -1,12 +1,12 @@
 <?php
 session_start();
 include '../../config.php';
-/*
+
 if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
     header( "Location: ../login.php");
     die;
 }
-*/
+
 ?>
 
 <html>

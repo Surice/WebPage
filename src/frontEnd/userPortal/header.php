@@ -41,7 +41,7 @@
         document.getElementById('homeDrop').href = `${path}/index.php`;
         document.getElementById('todo').href = `${path}/todo/index.php`;
         document.getElementById('todoDrop').href = `${path}/todo/index.php`;
-        document.getElementById('set').href = `${path}/settings/index.php`;
-        document.getElementById('setDrop').href = `${path}/settings/index.php`;
+        document.getElementById('set').href = `${path}/settings/index.php#profile`;
+        document.getElementById('setDrop').href = `${path}/settings/index.php#profile`;
     </script>
 </html>

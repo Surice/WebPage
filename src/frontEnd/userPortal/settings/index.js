@@ -80,37 +80,3 @@ function checkChanges(item1, item2) {
     return res;
 }
 
-async function changePassword(){
-    const token = await getCo();
-
-    xml = new XMLHttpRequest();
-    xml.open('GET', 'https://sebastian-web.de/api/v1/getUserAccount');
-    xml.setRequestHeader('authorization', token);
-    xml.setRequestHeader("Content-Type", "application/json");
-    xml.send();
-    xml.onreadystatechange = function() {
-        if (xml.readyState == 4 && xml.status == 200) {
-            const data = JSON.parse(xml.responseText)[0];
-            const values = {
-                oldPswrd: document.getElementById('cPswrd').value,
-                newPswrd: document.getElementById('nPswrd').value,
-                repeatedPswrd: document.getElementById('rNPwswrd').value
-            };
-
-            if(values.oldPswrd != data.password){
-                console.log(data.password);
-                throw 'password Wrong';
-                return;
-            }
-            if(values.newPswrd == ''){
-                throw 'new password must be set';
-                return;
-            }
-            if(values.newPswrd != values.repeatedPswrd){
-                throw 'repeated password doesnt match';
-                return;
-            }
-
-        }
-    }
-}

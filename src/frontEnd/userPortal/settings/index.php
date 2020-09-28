@@ -1,12 +1,65 @@
 <?php 
 session_start();
 include '../../config.php';
-/*
+include '../../database.php';
+
 if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
     header( "Location: ../login.php");
     die;
 }
+
+if(!empty($_POST) && !empty($_POST['cPswrd']) && !empty($_POST['nPswrd']) && !empty($_POST['rNPwswrd'])){
+    $oldPswrd = $_POST['cPswrd'];
+    $newPswrd = $_POST['nPswrd'];
+    $repPswrd = $_POST['rNPwswrd'];
+    $token = $_COOKIE['token'];
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => "https://sebastian-web.de/api/v1/getUserAccount",
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_HTTPHEADER => array("authorization: $token"),
+    ));
+    $user = curl_exec($curl);
+    $userJson = json_decode($user)[0];
+    curl_close($curl);
+
+    if(password_verify($oldPswrd, $userJson->password)){
+        if($newPswrd == $repPswrd){
+            echo "success";
+            $userData = array('password' => password_hash($newPswrd, PASSWORD_DEFAULT), 'userId' => $userJson->id);
+
+            $stmt = $db->prepare('UPDATE `user_accounts` SET `password`=:password WHERE id=:userId');
+            $updatedUser = $stmt->execute($userData);
+        }else{
+//            echo "rep wrong";
+        }
+    }else{
+//        echo "password wrong";
+    }
+}else{
+//    echo "cannot get data";
+
+/*
+     if(!empty($_POST)){
+         if (empty($_POST['email']) && empty($_POST['password'])){
+             $response = "email and Password must be set";
+         }else if(empty($_POST['email'])){
+             $response = "email must be set";
+         }else if(empty($_POST['password'])){
+             $response = "Password must be set";
+         }else{
+             $response = "unknown error";
+         }
+     }
 */
+ }
+
 ?>
 
 <html>
@@ -48,26 +101,28 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
         <div class="screen" id="pswrd">
             <h1 class="head-txt">Change Password</h1>
             <div class="content">
-                <div class="tables">
-                    <div class="valueDiv">
-                        <label for="cPswrd">Current Password:</label>
-                        <br>
-                        <input type="password" name="cPswrd" id="cPswrd">
-                    </div>
-                    <div class="nPswrdDiv">
+                <form method="post" action="index.php#pswrd">
+                    <div class="tables">
                         <div class="valueDiv">
-                            <label for="nPswrd">New Password:</label>
+                            <label for="cPswrd">Current Password:</label>
                             <br>
-                            <input type="password" name="nPswrd" id="nPswrd">
+                            <input type="password" name="cPswrd" id="cPswrd">
                         </div>
-                        <div class="valueDiv">
-                            <label for="rNPwswrd">Repeat New Password:</label>
-                            <br>
-                            <input type="password" name="rNPwswrd" id="rNPwswrd">
+                        <div class="nPswrdDiv">
+                            <div class="valueDiv">
+                                <label for="nPswrd">New Password:</label>
+                                <br>
+                                <input type="password" name="nPswrd" id="nPswrd">
+                            </div>
+                            <div class="valueDiv">
+                                <label for="rNPwswrd">Repeat New Password:</label>
+                                <br>
+                                <input type="password" name="rNPwswrd" id="rNPwswrd">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <button onclick="changePassword();">Change Password</button>
+                    <button type="submit">Change Password</button>
+                </form>
             </div>
         </div>
         <div class="screen" id="delAcc">
