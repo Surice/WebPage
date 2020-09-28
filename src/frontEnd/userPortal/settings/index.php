@@ -131,9 +131,10 @@ if(!empty($_POST) && !empty($_POST['cPswrd']) && !empty($_POST['nPswrd']) && !em
     </body>
 
     <script>
-        getValues();
+       getValues();
 
         var alt = 'profile';
+
         document.getElementById(window.location.hash.slice(1, window.location.hash.length)).style.display = 'block';
 
         window.addEventListener('hashchange', function(){

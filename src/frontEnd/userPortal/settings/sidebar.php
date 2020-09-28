@@ -11,8 +11,6 @@
     </body>
 
     <script>
-        window.location.hash = '#profile';
-
         window.addEventListener('hashchange', function(){
             const alt = document.getElementsByClassName('active')[0];
             alt.className = alt.className.replace('active', ' ');
