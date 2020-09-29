@@ -1,7 +1,8 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title>Organizer</title>
+        <title>ToDoList</title>
+        <link rel="stylesheet" href="styleToDoList.css">
         <div class="header-div">
             <div>
                 <lable class= "Headline" >Organizer</lable>
@@ -15,169 +16,47 @@
                     <li><button class="font">Project 4</button></li>
             </ul>
                 <a href="#"><button class="settings-btn">Settings</button></a>
-                <button onclick="addNewItem(); updatelist()" class="addBtn">New Item</button>
+                <button onclick="addNewItem()" class="addBtn">New Item</button>
 
         </div>    
     </head>
     <body>
         <div class="list-div">
-        <table id="list" class= "ToDoListe"></table>
+        <ul id="list" class= "ToDoListe"></ul>
         </div>
     </body>
 
 <script>
+    var list = ["Point1","Point2"];
 
-    let finishListItems = getlistItemFromLocalStorage();
+    table_constructor(list);
 
-    updatelist();
 
-    function getToDoListItemFromLocalStorage(){
-        let items = localStorage.getItem('listItems');
+    function addNewItem(){
+        
+        let item = prompt("Next ToDo's");
 
-            if (items == null || items == '') {
-                items = [];   
-            }else {
-                items = items.split(','); 
-            }
+        list.push(item);
+        if(item == null){
+            list.pop(item) 
+        }
 
-            return items;
-    }
-    function addNewItemToDoList(){
-        let item = prompt('Nächster Punkt?')
-        if (item != null) {
-               finishListItems.push(item);
-               localStorage.setItem('listItems', finishListItems);
-            } 
+        table_constructor(list);
     }
 
-    function updateToDoList() {
-             document.getElementById('list').innerHTML = '';
-             
-            for (let index = 0; index < finishListItems.length; index += 1){
-                 document.getElementById('list').innerHTML += '<li>' + finishListItems[index] +
-                 '<button onclick="removeItem('+ index +'); updatelist();" class="can">X</button></li>';
+    function table_constructor(list){
+        document.getElementById("list").innerHTML = "";
 
-            }
-         } 
-    function removeItem(itemIndex) {
-        finishListItems.splice(itemIndex, 1);
-        localStorage.setItem('listItems', finishListItems,);
+        list.forEach((e,i)=> {
+            document.getElementById("list").innerHTML += `<li>${e} <button onclick="removeItem(${i})" class="can">X</button></li>`;
+        });
+    }
+    function removeItem(index){
 
+        list.splice(index, 1)
+
+        table_constructor(list)
     }
 </script>
-
-<style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-    body{
-        background-image: url(../../../frontEnd/img/street-381227_1920.jpg);
-        background-size: cover;
-        background-position: center;
-    }
-    .headline{
-        font-weight: 800;
-        font-size: 32px;
-        font-family: Verdana ;
-        color: white;
-        
-    }
-    .header-div{
-        width: 100%;
-        display: flex;
-        align-items: center;
-        padding: 22px 7%;
-        background-color: rgb(49, 49, 49);
-    }
-    .nav-links{
-        list-style: none;
-    }
-    .nav-links li {
-        display: inline-block;
-        padding: 0px 20px;
-    }
-    .nav-links li a {
-        transition: all 0.3s ease 0s;
-    }
-    .nav-links li a:hover {
-        color: grey;
-    }
-    .settings-btn{
-        background-color: whitesmoke;
-        color: black;
-        font-size: 16px;
-        font-family: verdana;
-        text-decoration: none;
-        border: none;
-        border-radius: 25px;
-        padding: 5px;
-        margin-left: 45px;
-    }
-    .settings-btn:hover{
-        background-color: lightgray;
-    }
-    .addBtn{
-        background-color: rgba(124, 240, 255, 1);
-        color: black;
-        font-size: 16px;
-        font-family: verdana;
-        border: none;
-        border-radius: 25px;
-        padding: 5px;
-        width: 8%;
-        margin-left: 10%;
-    }
-    .addBtn:hover{
-        background-color: rgba(124,240,255, 0.6);
-    }
-    .list-div{
-        display: flex;
-        flex-flow: row;
-        justify-content: center;
-        margin-top: 75px;
-    }
-    .ToDoListe{
-        width: 50%;
-    }
-    .list-div li{
-        font-size: 18px;
-        font-family: verdana;
-        list-style: none;
-        margin-top: 25px;
-        padding: 10px; 
-        background-color: grey;
-        border-color: darkgrey;
-        border-radius: 10px;
-        text-align: start;
-        
-    } 
-    .can{
-        float: right;
-        width: 23px;
-        height: 23px;
-        border-radius: 5px;
-        background-color: rgba(255, 49, 49, 0.603);
-    }
-    .can:hover{
-        background-color: darkred;
-    }
-    .placeholder{
-        width: 23%;
-    }
-    .font{
-        color: white;
-        font-size: 16px;
-        font-family: verdana;
-        text-decoration: none;
-    }
-    .choosen-font{
-        color: darkgrey;
-        font-size: 16px;
-        font-family: verdana;
-        text-decoration: none;
-    }
-</style>
 
 </html>
