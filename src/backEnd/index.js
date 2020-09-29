@@ -22,17 +22,6 @@ const bURL = '/api/v1';
 
 exp.use(bodyParser.json());
 
-exp.get(`${bURL}/getImg.jpg`, auth, function(req, res){
-    if(req.payload.role == "Developer"){
-        const stream = fs.createWriteStream(`${__dirname}/img/save.jpg`);
-        var reqStream = request(config.camRequestUrl).pipe(stream);
-
-        reqStream.on('finish', function () {
-            const url = path.join(__dirname, "/img");
-            res.sendFile('/save.jpg', {root: url});
-        });
-    }
-});
 
 
 exp.post(`${bURL}/userInfo`, function(req, res){
@@ -44,10 +33,33 @@ exp.post(`${bURL}/userInfo`, function(req, res){
     res.status(200).send("OK").end();
 });
 
+exp.post(`${bURL}/getToken`, function(req, res){
+    if(req.body.username){
+        const id = req.body.userId,
+            user = req.body.username,
+            role = req.body.role;
+
+        var token = jwt.sign({userId: id, username: user, role: role}, config.apiSecret);
+        res.status(200).json({ "token": token }).end();
+    }
+});
+
 
 exp.get(`${bURL}/getUsers`, auth, function(req, res){
     if(req.payload.role == "Developer") {
         res.status(200).send(userInfo).end();
+    }
+});
+
+exp.get(`${bURL}/getImg.jpg`, auth, function(req, res){
+    if(req.payload.role == "Developer"){
+        const stream = fs.createWriteStream(`${__dirname}/img/save.jpg`);
+        var reqStream = request(config.camRequestUrl).pipe(stream);
+
+        reqStream.on('finish', function () {
+            const url = path.join(__dirname, "/img");
+            res.sendFile('/save.jpg', {root: url});
+        });
     }
 });
 
@@ -62,6 +74,17 @@ exp.get(`${bURL}/getUserAccounts`, auth, function (req, res) {
     }
 });
 
+
+exp.get(`${bURL}/getUserAccount`, auth, function (req, res) {
+    let sql = 'SELECT * FROM user_accounts WHERE id = ?';
+    const value = req.payload.userId;
+    db.query(sql, value, function (err, data, next) {
+        if(err) throw err;
+
+        res.status(200).json( data );
+    });
+});
+
 exp.post(`${bURL}/delUserAccount`, auth, function (req, res) {
     if(req.payload.role == "Developer"){
         let sql = 'DELETE FROM user_accounts WHERE id = ?'
@@ -72,28 +95,6 @@ exp.post(`${bURL}/delUserAccount`, auth, function (req, res) {
             res.status(200).json({state: "Success"});
         });
     }
-});
-
-
-exp.post(`${bURL}/getToken`, function(req, res){
-    if(req.body.username){
-        const id = req.body.userId,
-            user = req.body.username,
-            role = req.body.role;
-
-        var token = jwt.sign({userId: id, username: user, role: role}, config.apiSecret);
-        res.status(200).json({ "token": token }).end();
-    }
-});
-
-exp.get(`${bURL}/getUserAccount`, auth, function (req, res) {
-        let sql = 'SELECT * FROM user_accounts WHERE id = ?';
-        const value = req.payload.userId;
-        db.query(sql, value, function (err, data, next) {
-            if(err) throw err;
-
-            res.status(200).json( data );
-        });
 });
 
 exp.post(`${bURL}/saveUserAccountChanges`, auth, function (req, res) {
@@ -109,6 +110,57 @@ exp.post(`${bURL}/saveUserAccountChanges`, auth, function (req, res) {
     });
 });
 
+exp.post(`${bURL}/createUserList`, auth, function (req, res) {
+    const listName = req.body.name;
+
+    let sql = 'INSERT INTO userList(`name`, `ownerId`) VALUES(?)';
+    const values = new Array(listName, req.payload.userId);
+
+    db.query(sql, [values], function (err, data, next) {
+        if(err) throw err;
+
+        res.status(200).send('success');
+    });
+});
+
+exp.post(`${bURL}/addElementToUserList`, auth, function (req, res) {
+    let sql = 'SELECT id FROM userList WHERE name = ?';
+    const value = req.body.name;
+    db.query(sql, value, function (err, data, next) {
+        const item = req.body.item;
+
+        let sql = 'INSERT INTO userListItems(`item`, `listId`) VALUES(?)';
+        const values = new Array(item, data[0].id);
+
+        db.query(sql, [values], function (err, data, next) {
+            if (err) throw err;
+
+            res.status(200).send('success');
+        });
+    });
+});
+
+exp.get(`${bURL}/getUserList`, auth, function (req, res) {
+    let sql = 'SELECT id FROM userList WHERE name = ?';
+    const value = req.body.name;
+
+    db.query(sql, value, function (err, data, next) {
+        let sql = 'SELECT item FROM userListItems WHERE listId = ?'
+        const value = data[0].id;
+
+        db.query(sql, value, function (err, data, next) {
+            if (err) throw err;
+            const list = new Array();
+            data.forEach(e => {
+               list.push(e.item);
+            });
+
+            res.status(200).json( list );
+        });
+    });
+});
+
+
 
 exp.get(`${bURL}/steamG`, function(req, res){
     const response = fs.readFileSync(`${__dirname}/modules/steamGames.json`);
@@ -121,6 +173,8 @@ exp.get(`${bURL}/test`, function(req, res){
     res.status(200);
     res.send("OK").end();
 });
+
+
 
 
 

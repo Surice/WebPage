@@ -7,7 +7,6 @@ module.exports = function (req, res, next) {
     try{
         const token = req.headers.authorization || req.query.authorization;
         const decodedToken = jwt.verify(token, config.apiSecret);
-        console.log(token);
 
         if(decodedToken){
             req.payload = decodedToken;
