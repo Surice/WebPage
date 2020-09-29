@@ -5,7 +5,7 @@ const config = JSON.parse(fs.readFileSync(`${__dirname}/../config.json`, "utf-8"
 
 module.exports = function (req, res, next) {
     try{
-        const token = req.headers.authorization;
+        const token = req.headers.authorization || req.query.authorization;
         const decodedToken = jwt.verify(token, config.apiSecret);
 
         if(decodedToken){

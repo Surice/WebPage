@@ -20,7 +20,7 @@
 
         <h1 class="head-txt">IP Camera</h1>
 
-        <button class="reloadBtn" oncklick="getImage()">Reload</button>
+        <button class="reloadBtn" onclick="getImage()">Reload</button>
 
         <div class="content">
             <img id="img" class="img">
@@ -32,25 +32,9 @@
     getImage();
 
     async function getImage(){
-        var token = await getCo();
+        const token = await getCo();
 
-        xml = new XMLHttpRequest();
-        xml.open('GET', 'https://sebastian-web.de/api/v1/getImg', true);
-        xml.setRequestHeader('authorization', token);
-        xml.setRequestHeader("Content-Type", "application/json");
-        xml.responseType = 'blob';
-        xml.send();
-        xml.onreadystatechange = function(){
-            if(xml.readyState == 4 && xml.status == 200){
-                console.log(xml);
-                var blob = xml.response;
-                var objectURL = URL.createObjectURL(blob);
-
-                document.getElementById('img').src = objectURL;
-            }else{
-                console.log(xml.status);
-            }
-        }
+         document.getElementById('img').src = `https://sebastian-web.de/api/v1/getImg.jpg?authorization=${token}`;
     }
 
     function getCo(){
