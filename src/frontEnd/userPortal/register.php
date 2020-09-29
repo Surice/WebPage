@@ -67,15 +67,17 @@ if(!empty($_POST) && !empty($_POST['firstname']) && !empty($_POST['lastname']) &
 
                 $postData = json_encode(array('name' => 'toDoList'));
 
-                $curl = curl_init();
-                curl_setopt_array($curl, array(
-                  CURLOPT_URL => "https://sebastian-web.de/api/v1/createUserList?authorization={$out['token']}",
-                  CURLOPT_RETURNTRANSFER => true,
-                  CURLOPT_FOLLOWLOCATION => true,
-                  CURLOPT_CUSTOMREQUEST => "POST",
-                  CURLOPT_POSTFIELDS => $postData
-                ));
-                $res = curl_exec($curl);
+                $curl = curl_init("https://sebastian-web.de/api/v1/createUserList?authorization={$out['token']}");
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl, CURLINFO_HEADER_OUT, true);
+                curl_setopt($curl, CURLOPT_POST, true);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $postData);
+                curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+                    'Content-Type: application/json',
+                    'Content-Length: ' . strlen($postData))
+                );
+
+                curl_exec($curl);
                 curl_close($curl);
 
 
