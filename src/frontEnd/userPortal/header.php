@@ -39,8 +39,8 @@
 
         document.getElementById('home').href = `${path}/index.php`;
         document.getElementById('homeDrop').href = `${path}/index.php`;
-        document.getElementById('todo').href = `${path}/todo/index.php`;
-        document.getElementById('todoDrop').href = `${path}/todo/index.php`;
+        document.getElementById('todo').href = `${path}/toDoList/index.php`;
+        document.getElementById('todoDrop').href = `${path}/toDoList/index.php`;
         document.getElementById('set').href = `${path}/settings/index.php#profile`;
         document.getElementById('setDrop').href = `${path}/settings/index.php#profile`;
     </script>

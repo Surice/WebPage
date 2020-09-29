@@ -4,7 +4,7 @@
     padding: 0;
 }
 body{
-    background-image: url(../../../frontEnd/img/street-381227_1920.jpg);
+    background-image: url(../../img/street-381227_1920.jpg);
     background-size: cover;
     background-position: center;
 }
@@ -24,6 +24,7 @@ body{
 }
 .nav-links{
     list-style: none;
+    min-width: 30vw;
 }
 .nav-links li {
     display: inline-block;

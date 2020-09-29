@@ -65,6 +65,19 @@ if(!empty($_POST) && !empty($_POST['firstname']) && !empty($_POST['lastname']) &
                 $out = json_decode($result, true);
                 setcookie("token", $out['token']);
 
+                $postData = json_encode(array('name' => 'toDoList'));
+
+                $curl = curl_init();
+                curl_setopt_array($curl, array(
+                  CURLOPT_URL => "https://sebastian-web.de/api/v1/createUserList?authorization={$out['token']}",
+                  CURLOPT_RETURNTRANSFER => true,
+                  CURLOPT_FOLLOWLOCATION => true,
+                  CURLOPT_CUSTOMREQUEST => "POST",
+                  CURLOPT_POSTFIELDS => $postData
+                ));
+                $res = curl_exec($curl);
+                curl_close($curl);
+
 
                 header("Location: ./index.php");
             }else{

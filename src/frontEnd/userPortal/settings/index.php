@@ -95,13 +95,13 @@ if(!empty($_POST) && !empty($_POST['cPswrd']) && !empty($_POST['nPswrd']) && !em
                         <input type="text" name="lastN" id="lastN">
                     </div>
                 </div>
-                <button onclick="saveSettings()">Change Settings</button>
+                <button class="btn-submit" onclick="saveSettings()">Change Settings</button>
             </div>
         </div>
         <div class="screen" id="pswrd">
             <h1 class="head-txt">Change Password</h1>
             <div class="content">
-                <form method="post" action="index.php#pswrd">
+                <form method="post" action="index.php#pswrd" class="content-form">
                     <div class="tables">
                         <div class="valueDiv">
                             <label for="cPswrd">Current Password:</label>
@@ -121,7 +121,7 @@ if(!empty($_POST) && !empty($_POST['cPswrd']) && !empty($_POST['nPswrd']) && !em
                             </div>
                         </div>
                     </div>
-                    <button type="submit">Change Password</button>
+                    <button class="btn-submit" type="submit">Change Password</button>
                 </form>
             </div>
         </div>
@@ -131,9 +131,9 @@ if(!empty($_POST) && !empty($_POST['cPswrd']) && !empty($_POST['nPswrd']) && !em
     </body>
 
     <script>
-       getValues();
+        getValues();
 
-        var alt = 'profile';
+        alt = window.location.hash.slice(1, window.location.hash.length);
 
         document.getElementById(window.location.hash.slice(1, window.location.hash.length)).style.display = 'block';
 

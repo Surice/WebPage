@@ -111,6 +111,7 @@ exp.post(`${bURL}/saveUserAccountChanges`, auth, function (req, res) {
 });
 
 exp.post(`${bURL}/createUserList`, auth, function (req, res) {
+    console.log(req.payload);
     const listName = req.body.name;
 
     let sql = 'INSERT INTO userList(`name`, `ownerId`) VALUES(?)';

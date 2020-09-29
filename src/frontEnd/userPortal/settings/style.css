@@ -27,24 +27,26 @@ body{
 .content{
     display: inline-block;
     margin-left: 20vw;
-    background-color: rgba(147, 147, 147, 0.9);
+    background-color: rgba(217, 217, 217, 0.5);
     border: 1px solid rgb(120,120,120);
     border-radius: 6px;
-    padding: 10px;
+    padding: 1.2%;
+}
+
+.content-form{
+    margin: 0px;
 }
 
 .tables{
     display: flex;
     flex-flow: column;
-    justify-content: space-evenly;
+    justify-content: space-around;
     height: 75vh;
     width: 70vw;
+    padding-bottom: 20vh;
 }
 .tables .valueDiv{
     display: inline-block;
-    background-color: rgb(64, 64, 64);
-    border: 1.5px solid rgb(116, 116, 116);
-    border-radius: 4px;
     padding: 8px;
 }
 .tables input{
@@ -53,6 +55,15 @@ body{
     border-radius: 3.5px;
 }
 
+.nPswrdDiv{
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+}
 .nPswrdDiv div{
     margin-bottom: 6vh;
+}
+
+.btn-submit{
+    border-radius: 2px;
 }
