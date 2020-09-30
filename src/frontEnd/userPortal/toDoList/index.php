@@ -1,10 +1,10 @@
 <?php
-session_start();
+    session_start();
 
-if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
-    header( "Location: ../login.php");
-    die;
-}
+    if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
+        header( "Location: ../login.php");
+        die;
+    }
 ?>
 
 <html>
@@ -25,7 +25,6 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
             </ul>
             <button onclick="newList()" class="settings-btn">New List</button>
             <button onclick="addNewItem()" class="addBtn">New Item</button>
-
         </div>
 
 
@@ -41,34 +40,56 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
 
     loadList(listName);
 
-    async function loadList(listName) {
+    async function addNewItem(){
+        const token = await getCo();
+        let item = prompt("Next ToDo's");
+
+        var xml = new XMLHttpRequest();
+        xml.open('POST', "https://sebastian-web.de/api/v1/addElementToUserList");
+        xml.setRequestHeader('authorization', token);
+        xml.setRequestHeader("Content-Type", "application/json");
+        xml.send(JSON.stringify({ "name": listName,"item": item }));
+        xml.onreadystatechange = function () {
+            if (xml.readyState == 4 && xml.status == 200) {
+                loadList(listName);
+            }
+        }
+    }
+    async function removeItem(item){
         const token = await getCo();
 
         var xml = new XMLHttpRequest();
-        xml.open('GET', "https://sebastian-web.de/api/v1/getUserList");
+        xml.open('POST', "https://sebastian-web.de/api/v1/removeElementFromUserList");
         xml.setRequestHeader('authorization', token);
         xml.setRequestHeader("Content-Type", "application/json");
-        xml.send(JSON.stringify({"name": listName}));
+        xml.send(JSON.stringify({ "name": listName,"item": item }));
         xml.onreadystatechange = function () {
             if (xml.readyState == 4 && xml.status == 200) {
-                const data = JSON.parse(xml.responseText)[0];
-
-                table_constructor(data);
+                loadList(listName);
             }
         }
     }
 
-    function addNewItem(){
-        
-        let item = prompt("Next ToDo's");
+    async function loadList(listName) {
+        console.log("loading..");
+        const token = await getCo();
+        const dataPacket = {
+            "name": listName
+        };
 
-        list.push(item);
+        var xml = new XMLHttpRequest();
+        xml.open('POST', "https://sebastian-web.de/api/v1/getUserList");
+        xml.setRequestHeader('authorization', token);
+        xml.setRequestHeader("Content-Type", "application/json");
+        xml.send(JSON.stringify({ dataPacket }));
 
-        if(item == null || item == "") {
-            list.pop(item);
+        xml.onreadystatechange = function () {
+            if (xml.readyState == 4 && xml.status == 200) {
+                const data = JSON.parse(xml.responseText);
+
+                table_constructor(data);
+            }
         }
-
-        table_constructor(list);
     }
 
     function newList() {
@@ -81,15 +102,10 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
         document.getElementById("list").innerHTML = "";
 
         list.forEach((e,i)=> {
-            document.getElementById("list").innerHTML += `<li>${e} <button onclick="removeItem(${i})" class="can">X</button></li>`;
+            document.getElementById("list").innerHTML += `<li>${e} <button onclick="removeItem('${e}')" class="can">X</button></li>`;
         });
     }
-    function removeItem(index){
 
-        list.splice(index, 1)
-
-        table_constructor(list)
-    }
 
     function changeList(name) {
         listName = name;
