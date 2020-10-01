@@ -32,7 +32,7 @@
             <ul class= "nav-links" id="toDoNav">
                 <li><button onclick="changeList('toDoList')" class="font">To Do List</button></li>
             </ul>
-            <button onclick="newList()" class="settings-btn">New List</button>
+            <button onclick="addNewList()" class="settings-btn">New List</button>
             <button onclick="addNewItem()" class="addBtn">New Item</button>
         </div>
 
@@ -52,6 +52,7 @@
     async function addNewItem(){
         const token = await getCo();
         let item = prompt("Next ToDo's");
+        if(!item) return;
 
         var xml = new XMLHttpRequest();
         xml.open('POST', "https://sebastian-web.de/api/v1/addElementToUserList");
@@ -79,6 +80,28 @@
         }
     }
 
+
+    function addNewList() {
+        let listName = prompt("List Name");
+
+        document.getElementById('toDoNav').innerHTML += `<li><button onclick="changeList('${listName}')" class="font">${listName}</button></li>`;
+    }
+
+
+    function changeList(name) {
+        listName = name;
+
+        window.document.title = listName;
+    }
+
+    function table_constructor(list){
+        document.getElementById("list").innerHTML = "";
+
+        list.forEach((e,i)=> {
+            document.getElementById("list").innerHTML += `<li>${e} <button onclick="removeItem('${e}')" class="can">X</button></li>`;
+        });
+    }
+
     async function loadList(listName) {
         console.log("loading..");
         const token = await getCo();
@@ -99,27 +122,6 @@
                 table_constructor(data);
             }
         }
-    }
-
-    function newList() {
-        let listName = prompt("List Name");
-
-        document.getElementById('toDoNav').innerHTML += `<li><button onclick="changeList('${listName}')" class="font">${listName}</button></li>`;
-    }
-
-    function table_constructor(list){
-        document.getElementById("list").innerHTML = "";
-
-        list.forEach((e,i)=> {
-            document.getElementById("list").innerHTML += `<li>${e} <button onclick="removeItem('${e}')" class="can">X</button></li>`;
-        });
-    }
-
-
-    function changeList(name) {
-        listName = name;
-
-        window.document.title = listName;
     }
 
     function getCo(){

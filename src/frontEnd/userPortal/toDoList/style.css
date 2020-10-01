@@ -25,6 +25,7 @@ body{
 .nav-links{
     list-style: none;
     min-width: 30vw;
+    margin: 0px;
 }
 .nav-links li {
     display: inline-block;
@@ -91,9 +92,14 @@ body{
     height: 23px;
     border-radius: 5px;
     background-color: rgba(255, 49, 49, 0.603);
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
 }
 .can:hover{
     background-color: darkred;
+    color: white;
 }
 .placeholder{
     width: 23%;
