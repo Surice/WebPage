@@ -97,7 +97,7 @@ if (!empty($_GET) && $_GET['action'] == "logout") {
 
 <head>
     <title>Login User Portal</title>
-    <link rel="shortcut icon" type="image/x-icon" href="../img/SU_Logo_2.0_render.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="../img/Surice_logo_ti.ico">
     <link rel="stylesheet" href="./styleLogin.css">
     <meta name="viewport" content="width=device-width, initial-scale = 1">
 

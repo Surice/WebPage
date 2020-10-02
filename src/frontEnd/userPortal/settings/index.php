@@ -65,7 +65,7 @@ if(!empty($_POST) && !empty($_POST['cPswrd']) && !empty($_POST['nPswrd']) && !em
 <html>
     <head>
         <title>User Portal Settings</title>
-        <link rel="shortcut icon" type="image/x-icon" href="../../img/pb.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="../../img/Surice_logo_ti.ico">
         <link rel="stylesheet" href="./style.css">
         <meta name="viewport" content="width=device-width, initial-scale = 1">
         <script src="./index.js"></script>

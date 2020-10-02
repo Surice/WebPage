@@ -12,7 +12,7 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
 <html>
     <head>
         <title>User Portal</title>
-        <link rel="shortcut icon" type="image/x-icon" href="../img/SU_Logo_2.0_render.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="../img/Surice_logo_ti.ico">
         <link rel="stylesheet" href="./style.css">
         <meta name="viewport" content="width=device-width, initial-scale = 1">
     </head>

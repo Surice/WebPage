@@ -43,7 +43,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
         <title>Sebastian-Web</title>
-        <link rel="shortcut icon" type="image/x-icon" href='./img/SU_Logo_2.0_render.ico'>
+        <link rel="shortcut icon" type="image/x-icon" href='./img/Surice_logo_ti.ico'>
     </head>
 
     <body>

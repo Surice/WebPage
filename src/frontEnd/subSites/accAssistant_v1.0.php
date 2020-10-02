@@ -4,6 +4,7 @@
     ?>
     <header>
         <title>ACC Assistant</title>
+        <link rel="shortcut icon" type="image/x-icon" href="../img/Surice_logo_ti.ico">
         <meta name="viewport" content="width=device-width, initial-scale = 1">
         <meta charset="utf-8">
 
