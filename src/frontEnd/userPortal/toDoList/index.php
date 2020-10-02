@@ -30,7 +30,6 @@
             </div>
             <div class="placeholder"></div>
             <ul class= "nav-links" id="toDoNav">
-                <li><button onclick="changeList('toDoList')" class="font">To Do List</button></li>
             </ul>
             <button onclick="addNewList()" class="settings-btn">New List</button>
             <button onclick="addNewItem()" class="addBtn">New Item</button>
@@ -47,6 +46,7 @@
     var listName = 'toDoList';
     window.document.title = listName;
 
+    loadLists();
     loadList(listName);
 
     async function addNewItem(){
@@ -81,10 +81,22 @@
     }
 
 
-    function addNewList() {
-        let listName = prompt("List Name");
+    async function addNewList() {
+        const token = await getCo();
+        let newListName = prompt("List Name");
+        if(!newListName) return;
 
-        document.getElementById('toDoNav').innerHTML += `<li><button onclick="changeList('${listName}')" class="font">${listName}</button></li>`;
+        var xml = new XMLHttpRequest();
+        xml.open('POST', "https://sebastian-web.de/api/v1/createUserList");
+        xml.setRequestHeader('authorization', token);
+        xml.setRequestHeader("Content-Type", "application/json");
+        xml.send(JSON.stringify({ "name": newListName }));
+
+        xml.onreadystatechange = function () {
+            if (xml.readyState == 4 && xml.status == 200) {
+                loadLists();
+            }
+        }
     }
 
 
@@ -92,6 +104,8 @@
         listName = name;
 
         window.document.title = listName;
+
+        loadList(listName);
     }
 
     function table_constructor(list){
@@ -99,6 +113,14 @@
 
         list.forEach((e,i)=> {
             document.getElementById("list").innerHTML += `<li>${e} <button onclick="removeItem('${e}')" class="can">X</button></li>`;
+        });
+    }
+
+    function navLinkConsturctor(lists){
+        document.getElementById('toDoNav').innerHTML = "";
+
+        lists.forEach( e =>{
+            document.getElementById('toDoNav').innerHTML += `<li><button onclick="changeList('${e}')" class="font">${e}</button></li>`;
         });
     }
 
@@ -123,6 +145,25 @@
             }
         }
     }
+
+    async function loadLists(){
+        const token = await getCo();
+
+        var xml = new XMLHttpRequest();
+        xml.open('GET', "https://sebastian-web.de/api/v1/getUserLists");
+        xml.setRequestHeader('authorization', token);
+        xml.setRequestHeader("Content-Type", "application/json");
+        xml.send();
+
+        xml.onreadystatechange = function () {
+            if (xml.readyState == 4 && xml.status == 200) {
+                const data = JSON.parse(xml.responseText);
+
+                navLinkConsturctor(data);
+            }
+        }
+    }
+
 
     function getCo(){
         var co = document.cookie.split(";"),

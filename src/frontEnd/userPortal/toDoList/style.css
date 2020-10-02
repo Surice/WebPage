@@ -112,7 +112,7 @@ body{
     border: none;
     background-color: rgb(49, 49, 49);
 }
-.choosen-font{
+.active{
     color: darkgrey;
     font-size: 16px;
     font-family: verdana;

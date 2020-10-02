@@ -115,16 +115,27 @@ exp.post(`${bURL}/createUserList`, auth, function (req, res) {
     const value = req.payload.username;
 
     db.query(sql, value, function (err, data, next) {
-        console.log(data);
-        const listName = req.body.name;
+        const listName = req.body.name,
+            ownerId = data[0].id;
 
-        let sql = 'INSERT INTO userList(`name`, `ownerId`) VALUES(?)';
-        const values = new Array(listName, data[0].id);
+        let sql = 'SELECT * FROM userList WHERE name = ? AND ownerId = ?';
+        const values = new Array(listName, ownerId);
+
+        db.query(sql, values, function (err, data, next) {
+            if(err) throw err;
+
+            if(data.length != 0){
+                res.status(400).json({error: "list already exist"});
+                return;
+            }
+        });
+
+        sql = 'INSERT INTO userList(`name`, `ownerId`) VALUES(?)';
 
         db.query(sql, [values], function (err, data, next) {
             if (err) throw err;
 
-            res.status(200).send('success');
+            res.status(200).send();
         });
     });
 });
@@ -173,6 +184,26 @@ exp.post(`${bURL}/removeElementFromUserList`, auth, function (req, res) {
     });
 });
 
+exp.get(`${bURL}/getUserLists`, auth, function (req, res) {
+    let sql = 'SELECT id FROM user_accounts WHERE email = ?';
+    const value = req.payload.username;
+
+    db.query(sql, value, function (err, data, next) {
+        let sql = 'SELECT name FROM userList WHERE ownerId = ?';
+        const value = data[0].id;
+
+        db.query(sql, value, function (err, data, next) {
+            if (err) throw err;
+
+            var lists = new Array();
+            data.forEach(e=>{
+               lists.push(e.name);
+            });
+
+            res.status(200).json( lists );
+        });
+    });
+});
 
 exp.post(`${bURL}/getUserList`, auth, function (req, res) {
     let sql = 'SELECT id FROM user_accounts WHERE email = ?';
@@ -187,7 +218,7 @@ exp.post(`${bURL}/getUserList`, auth, function (req, res) {
 
             db.query(sql, value, function (err, data, next) {
                 if (err) throw err;
-                const list = new Array();
+                var list = new Array();
                 data.forEach(e => {
                    list.push(e.item);
                 });
