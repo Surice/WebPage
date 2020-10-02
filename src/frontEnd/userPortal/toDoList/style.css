@@ -6,7 +6,7 @@
 body{
     background-image: url(../../img/street-381227_1920.jpg);
     background-size: cover;
-    background-position: center;
+    background-position: center bottom;
 }
 .headline{
     font-weight: 800;
