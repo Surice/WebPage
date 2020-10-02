@@ -4,10 +4,10 @@
     </head>
     <body>
     <div class="navbar-me">
-        <ul class="nav-content">
-            <a class="nav-elememts" id="home">Home</a>
-            <a class="nav-elememts" id="todo">To-Do List</a>
-            <a class="nav-elememts" id="set">Settings</a>
+        <ul class="nav-con">
+            <a class="nav-el" id="home">Home</a>
+            <a class="nav-el" id="todo">To-Do List</a>
+            <a class="nav-el" id="set">Settings</a>
 
             <a id="logout"><button class="logout btn btn-outline-danger">Logout</button></a>
             <code class="logDat">Logged in as: <?php echo $_SESSION["user"] ?></code>
@@ -19,9 +19,9 @@
             <code class="logDat">Logged in as: <?php echo $_SESSION["user"] ?></code>
 
             <div class="dropdown-content">
-                <a class="nav-elememts" id="homeDrop">Home</a>
-                <a class="nav-elememts" id="todoDrop">To-Do List</a>
-                <a class="nav-elememts" id="setDrop">Settings</a>
+                <a class="nav-el" id="homeDrop">Home</a>
+                <a class="nav-el" id="todoDrop">To-Do List</a>
+                <a class="nav-el" id="setDrop">Settings</a>
             </div>
         </div>
     </div>

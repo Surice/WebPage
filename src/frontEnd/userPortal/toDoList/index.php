@@ -17,6 +17,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
         <!-- End Bootstrap Import -->
 
+        <meta name="viewport" content="width=device-width, initial-scale = 1">
         <meta charset="utf-8"/>
         <link rel="shortcut icon" type="image/x-icon" href="../../img/Surice_logo_ti.ico">
         <link rel="stylesheet" href="style.css">
@@ -24,27 +25,30 @@
     </head>
     <body>
         <?php include '../header.php'; ?>
-
+        <div class="placeBar"></div>
         <div class="header-div">
-            <div>
-                <lable class= "Headline" >Organizer</lable>
+            <label class= "Headline">Organizer</label>
+
+<!--            <div class="placeholder"></div> -->
+            <div class="listChooser">
+                <div class="vertBar"></div>
+                <ul class= "nav-links" id="nav-links"></ul>
+                <div class="vertBar"></div>
             </div>
-            <div class="placeholder"></div>
-            <ul class= "nav-links" id="toDoNav">
-            </ul>
-            <button onclick="addNewList()" class="settings-btn">New List</button>
-            <button onclick="addNewItem()" class="addBtn">New Item</button>
+            <div class="btnControl">
+                <button onclick="addNewList()" class="newListBtn">New List</button>
+                <button onclick="addNewItem()" class="addItemBtn">New Item</button>
+            </div>
         </div>
 
-
         <div class="list-div">
-            <ul id="list" class= "ToDoListe"></ul>
+            <ul id="list" class= "list"></ul>
         </div>
     </body>
 </html>
 
 <script>
-    var listName = 'toDoList';
+    var listName = 'ToDoList';
     window.document.title = listName;
 
     loadLists();

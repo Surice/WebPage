@@ -65,7 +65,7 @@ if(!empty($_POST) && !empty($_POST['firstname']) && !empty($_POST['lastname']) &
                 $out = json_decode($result, true);
                 setcookie("token", $out['token']);
 
-                $postData = json_encode(array('name' => 'toDoList'));
+                $postData = json_encode(array('name' => 'ToDoList'));
 
                 $curl = curl_init("https://sebastian-web.de/api/v1/createUserList?authorization={$out['token']}");
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);

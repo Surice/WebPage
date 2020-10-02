@@ -34,7 +34,7 @@
     async function getImage(){
         const token = await getCo();
 
-         document.getElementById('img').src = `https://sebastian-web.de/api/v1/getImg.jpg?authorization=${token}`;
+         document.getElementById('img').src = `https://sebastian-web.de/api/v1/getImg.jpg?authorization=${token}&t=${Date.now()}`;
     }
 
     function getCo(){

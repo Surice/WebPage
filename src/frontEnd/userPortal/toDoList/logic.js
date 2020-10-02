@@ -62,15 +62,15 @@ function table_constructor(list){
     document.getElementById("list").innerHTML = "";
 
     list.forEach((e,i)=> {
-        document.getElementById("list").innerHTML += `<li>${e} <button onclick="removeItem('${e}')" class="can">X</button></li>`;
+        document.getElementById("list").innerHTML += `<li><p class="liElement">${e}</p> <button onclick="removeItem('${e}')" class="can">X</button></li>`;
     });
 }
 
 function navLinkConsturctor(lists){
-    document.getElementById('toDoNav').innerHTML = "";
+    document.getElementById('nav-links').innerHTML = "";
 
     lists.forEach( e =>{
-        document.getElementById('toDoNav').innerHTML += `<li><button onclick="changeList('${e}')" id="${e}" class="font">${e}</button></li>`;
+        document.getElementById('nav-links').innerHTML += `<li><a onclick="changeList('${e}')" id="${e}" class="listsItem">${e}</a></li>`;
     });
 }
 
