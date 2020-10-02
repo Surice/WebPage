@@ -50,6 +50,10 @@ async function addNewList() {
 
 
 function changeList(name) {
+    if(name === true){
+        name = document.getElementById('nav-links-sel').value;
+    }
+
     listName = name;
 
     window.document.title = listName;
@@ -68,9 +72,11 @@ function table_constructor(list){
 
 function navLinkConsturctor(lists){
     document.getElementById('nav-links').innerHTML = "";
+    document.getElementById('nav-links-sel').innerText = "";
 
     lists.forEach( e =>{
         document.getElementById('nav-links').innerHTML += `<li><a onclick="changeList('${e}')" id="${e}" class="listsItem">${e}</a></li>`;
+        document.getElementById('nav-links-sel').innerHTML += `<option><a value="${e}" class="selItem">${e}</a></option>`;
     });
 }
 

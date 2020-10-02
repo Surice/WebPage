@@ -33,8 +33,10 @@
             <div class="listChooser">
                 <div class="vertBar"></div>
                 <ul class= "nav-links" id="nav-links"></ul>
+                <select class="nav-links-sel" id="nav-links-sel" onchange="changeList(true)"></select>
                 <div class="vertBar"></div>
             </div>
+
             <div class="btnControl">
                 <button onclick="addNewList()" class="newListBtn">New List</button>
                 <button onclick="addNewItem()" class="addItemBtn">New Item</button>

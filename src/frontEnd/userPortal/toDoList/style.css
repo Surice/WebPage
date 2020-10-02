@@ -8,6 +8,23 @@ button, a {
     transition: all 0.3s ease 0s;
 }
 
+@media only screen and (min-width: 821px){
+    .nav-links{
+        display: block;
+    }
+    .nav-links-sel{
+        display: none;
+    }
+}
+@media only screen and (max-width: 820px){
+    .nav-links{
+        display: none;
+    }
+    .nav-links-sel{
+        display: block;
+    }
+}
+
 
 .headline{
     color: white;
@@ -42,6 +59,13 @@ button, a {
     display: inline-block;
     padding: 0px 20px;
 }
+
+.nav-links-sel{
+    margin: 2vw;
+    background-color: rgb(239, 225, 219);
+    border-color: rgb(255, 255, 255);
+}
+
 
 .listsItem{
     color: rgb(57, 57, 57);
@@ -150,7 +174,7 @@ button, a {
 }
 .vertBar{
     border-left: 3px solid black;
-    height: 5vh;
+    height: 70px;
 }
 .placeholder{
     width: 15vw;
