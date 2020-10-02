@@ -42,6 +42,32 @@ if(!empty($_POST) && !empty($_POST['cPswrd']) && !empty($_POST['nPswrd']) && !em
     }else{
 //        echo "password wrong";
     }
+}
+else if(!empty($_POST) && !empty($_POST['email']) && !empty($_POST['pswrd'])){
+    $email = $_POST['email'];
+    $pswrd = $_POST['pswrd'];
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => "https://sebastian-web.de/api/v1/getUserAccount",
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_HTTPHEADER => array("authorization: $token"),
+    ));
+    $user = curl_exec($curl);
+    $userJson = json_decode($user)[0];
+    curl_close($curl);
+
+    if(password_verify($Pswrd, $userJson->password)){
+        $userData = array('userId' => $userJson->id);
+
+        $stmt = $db->prepare('DELETE FROM `user_accounts` WHERE `id` = :userId');
+        $deletedUser = $stmt->execute($userData);
+    }
 }else{
 //    echo "cannot get data";
 
@@ -127,6 +153,23 @@ if(!empty($_POST) && !empty($_POST['cPswrd']) && !empty($_POST['nPswrd']) && !em
         </div>
         <div class="screen" id="delAcc">
             <h1 class="head-txt">Delete Account</h1>
+            <div class="content">
+                <form method="post" action="../login.php?action=logout" class="content-form">
+                    <div class="tables">
+                        <div class="valueDiv">
+                            <label for="email">Confirm with E-Mail:</label>
+                            <br>
+                            <input type="text" name="email" id="email">
+                        </div>
+                        <div class="valueDiv">
+                            <label for="pswrd">Confirm with Password:</label>
+                            <br>
+                            <input type="password" name="pswrd" id="pswrd">
+                        </div>
+                    </div>
+                    <button class="btn-submit" type="submit">Delete Account permanently</button>
+                </form>
+            </div>
         </div>
     </body>
 

@@ -76,12 +76,17 @@ exp.get(`${bURL}/getUserAccounts`, auth, function (req, res) {
 
 
 exp.get(`${bURL}/getUserAccount`, auth, function (req, res) {
-    let sql = 'SELECT * FROM user_accounts WHERE id = ?';
-    const value = req.payload.userId;
-    db.query(sql, value, function (err, data, next) {
-        if(err) throw err;
+    let sql = 'SELECT id FROM user_accounts WHERE email = ?';
+    const value = req.payload.username;
 
-        res.status(200).json( data );
+    db.query(sql, value, function (err, data, next) {
+        let sql = 'SELECT * FROM user_accounts WHERE id = ?';
+        const value = data[0].id;
+        db.query(sql, value, function (err, data, next) {
+            if (err) throw err;
+
+            res.status(200).json(data);
+        });
     });
 });
 
