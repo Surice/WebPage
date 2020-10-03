@@ -151,6 +151,16 @@ else if(!empty($_POST) && !empty($_POST['email']) && !empty($_POST['pswrd'])){
                 </form>
             </div>
         </div>
+        <div class="screen" id="orgaSet">
+            <h1 class="head-txt">Organizer Settings</h1>
+            <div class="content">
+                <form method="post" action="./index.php#orga" class="content-form">
+                    <div class="tables">
+
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="screen" id="delAcc">
             <h1 class="head-txt">Delete Account</h1>
             <div class="content">

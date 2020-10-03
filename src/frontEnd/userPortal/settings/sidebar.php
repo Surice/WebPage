@@ -6,6 +6,7 @@
         <div id="sideDiv" class="sidebar">
             <a class="values" href="#profile">Profile Informations</a>
             <a class="values" href="#pswrd">Change Password</a>
+            <a class="values" href="#orgaSet">Organizer Settings</a>
             <a class="values" href="#delAcc">Delete Account</a>
         </div>
     </body>
