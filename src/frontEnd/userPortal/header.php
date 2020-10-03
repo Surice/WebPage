@@ -6,7 +6,7 @@
     <div class="navbar-me">
         <ul class="nav-con">
             <a class="nav-el" id="home">Home</a>
-            <a class="nav-el" id="todo">To-Do List</a>
+            <a class="nav-el" id="orga">Organizer</a>
             <a class="nav-el" id="set">Settings</a>
 
             <a id="logout"><button class="logout btn btn-outline-danger">Logout</button></a>
@@ -20,7 +20,7 @@
 
             <div class="dropdown-content">
                 <a class="nav-el" id="homeDrop">Home</a>
-                <a class="nav-el" id="todoDrop">To-Do List</a>
+                <a class="nav-el" id="orgaDrop">Organizer</a>
                 <a class="nav-el" id="setDrop">Settings</a>
             </div>
         </div>
@@ -39,8 +39,8 @@
 
         document.getElementById('home').href = `${path}/index.php`;
         document.getElementById('homeDrop').href = `${path}/index.php`;
-        document.getElementById('todo').href = `${path}/toDoList/index.php`;
-        document.getElementById('todoDrop').href = `${path}/toDoList/index.php`;
+        document.getElementById('orga').href = `${path}/organizer/index.php`;
+        document.getElementById('orgaDrop').href = `${path}/organizer/index.php`;
         document.getElementById('set').href = `${path}/settings/index.php#profile`;
         document.getElementById('setDrop').href = `${path}/settings/index.php#profile`;
     </script>
