@@ -16,7 +16,7 @@
             <button class="dropbtn">Menu ↓</button>
 
             <a id="logoutDrop" class="unused"><button class="logout btn btn-outline-danger">Logout</button></a>
-            <code class="logDat">Logged in as: <?php echo $_SESSION["user"] ?></code>
+            <code class="logDat">Logged in as: <?php if(isset($_SESSION["user"])){ echo ($_SESSION["user"]); }else{ echo "--none--";} ?></code>
 
             <div class="dropdown-content">
                 <a class="nav-el" id="homeDrop">Home</a>
