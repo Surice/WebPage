@@ -1,5 +1,4 @@
 <?php
-/*
 session_start();
 include '../../config.php';
 include '../../database.php';
@@ -84,9 +83,8 @@ else if(!empty($_POST) && !empty($_POST['email']) && !empty($_POST['pswrd'])){
              $response = "unknown error";
          }
      }
-
- }
 */
+ }
 ?>
 
 <html>

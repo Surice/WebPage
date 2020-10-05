@@ -10,7 +10,7 @@
             <a class="nav-el" id="set">Settings</a>
 
             <a id="logout"><button class="logout btn btn-outline-danger">Logout</button></a>
-            <code class="logDat">Logged in as: <?php echo $_SESSION["user"] ?></code>
+            <code class="logDat">Logged in as: <?php if(isset($_SESSION["user"])){ echo ($_SESSION["user"]); }else{ echo "--none--";} ?></code>
         </ul>
         <div class="dropdown">
             <button class="dropbtn">Menu ↓</button>
