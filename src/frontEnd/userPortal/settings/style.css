@@ -6,6 +6,9 @@ body{
     background-attachment: fixed;
     background-position: center bottom;
 }
+body::-webkit-scrollbar {
+    display: none;
+}
 
 .head-txt{
     display: flex;

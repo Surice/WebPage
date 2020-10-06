@@ -152,7 +152,7 @@ else if(!empty($_POST) && !empty($_POST['email']) && !empty($_POST['pswrd'])){
         </div>
         <div class="screen" id="orgaSet">
             <h1 class="head-txt">Organizer Settings</h1>
-            <div class="content">
+            <div class="content">   
                 <form method="post" action="./index.php#orga" class="content-form">
                     <div class="tables">
 
