@@ -24,7 +24,7 @@ body::-webkit-scrollbar {
 }
 
 .screen{
-    /* display: none;   */
+    display: none;  
 }
 
 .headline{
@@ -52,13 +52,6 @@ body::-webkit-scrollbar {
     flex-flow: row;
     justify-content: space-between;
 }
-
-/* .lists li div{
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    justify-content: space-around;
-} */
 
 .btn{
     display: flex;
