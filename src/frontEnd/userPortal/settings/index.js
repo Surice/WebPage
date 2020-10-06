@@ -11,7 +11,7 @@ function getCo(){
     return out;
 }
 
-async function getValues(){
+async function getProfileValues(){
     const token = await getCo();
 
     xml = new XMLHttpRequest();
@@ -111,6 +111,74 @@ async function changePassword(){
                 return;
             }
 
+        }
+    }
+}
+
+async function getAllLists(){
+    const token = await getCo();
+
+    var xml = new XMLHttpRequest();
+    xml.open('GET', "https://sebastian-web.de/api/v1/getUserLists");
+    xml.setRequestHeader('authorization', token);
+    xml.setRequestHeader("Content-Type", "application/json");
+    xml.send();
+
+    xml.onreadystatechange = async function() {
+        if (xml.readyState == 4 && xml.status == 200) {
+            const data = JSON.parse(xml.responseText);
+
+            document.getElementById('lists').innerHTML = "";
+
+            data.forEach(e => {
+                document.getElementById('lists').innerHTML += `
+                        <li class="list">
+                            ${e}
+                            <div class="btn">
+                                <button class="btn-rename" onclick="changeListName('${e}')">...</button>
+                                <select class="btn-color" onchange="" style="display: none">
+                                    <option style="background-color: rgb(0,0,255)">Blue</option>
+                                    <option style="background-color: rgb(0,255,0)">Green</option>
+                                    <option style="background-color: rgb(255,0,0)">Red</option>
+                                    <option style="background-color: rgb(240,120,0)">Orange</option>
+                                </select>
+                                <button class="btn-delete" onclick="delList('${e}')">X</button>
+                            </div>
+                        </li>
+                    `;
+            });
+        }
+    }
+}
+async function changeListName(listName){
+    const token = await getCo();
+
+    const newName = prompt(`${listName} umbenennen zu:`);
+
+    var xml = new XMLHttpRequest();
+    xml.open('POST', "https://sebastian-web.de/api/v1/updateUserListName");
+    xml.setRequestHeader('authorization', token);
+    xml.setRequestHeader("Content-Type", "application/json");
+    xml.send(JSON.stringify({name: newName, oldName: listName}));
+
+    xml.onreadystatechange = async function() {
+        if (xml.readyState == 4 && xml.status == 200) {
+            location.reload();
+        }
+    }
+}
+async function delList(listName) {
+    const token = await getCo();
+
+    var xml = new XMLHttpRequest();
+    xml.open('POST', "https://sebastian-web.de/api/v1/deleteUserList");
+    xml.setRequestHeader('authorization', token);
+    xml.setRequestHeader("Content-Type", "application/json");
+    xml.send(JSON.stringify({name: listName}));
+
+    xml.onreadystatechange = async function() {
+        if (xml.readyState == 4 && xml.status == 200) {
+            location.reload();
         }
     }
 }

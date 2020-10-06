@@ -234,6 +234,38 @@ exp.post(`${bURL}/getUserList`, auth, function (req, res) {
     });
 });
 
+exp.post(`${bURL}/deleteUserList`, auth, function (req, res) {
+    let sql = 'SELECT id FROM user_accounts WHERE email = ?';
+    const value = req.payload.username;
+
+    db.query(sql, value, function (err, data, next) {
+        let sql = 'DELETE FROM userList WHERE ownerId = ? AND name = ?';
+        const values = new Array(data[0].id, req.body.name);
+
+        db.query(sql, values, function (err, data, next) {
+            if(err) throw err;
+
+            res.status(200).json({state: "Success"});
+        });
+    });
+});
+
+exp.post(`${bURL}/updateUserListName`, auth, function (req, res) {
+    let sql = 'SELECT id FROM user_accounts WHERE email = ?';
+    const value = req.payload.username;
+
+    db.query(sql, value, function (err, data, next) {
+        let sql = 'UPDATE userList SET name = ? WHERE ownerId = ? AND name = ?';
+        const values = new Array(req.body.name, data[0].id, req.body.oldName);
+
+        db.query(sql, values, function (err, data, next) {
+            if(err) throw err;
+
+            res.status(200).json({state: "Success"});
+        });
+    });
+});
+
 
 
 exp.get(`${bURL}/steamG`, function(req, res){

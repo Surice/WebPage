@@ -1,5 +1,4 @@
 <?php
-/*
 session_start();
 include '../../config.php';
 include '../../database.php';
@@ -88,9 +87,8 @@ else if(!empty($_POST) && !empty($_POST['email']) && !empty($_POST['pswrd'])){
              $response = "unknown error";
          }
      }
-
- }
  */
+ }
 ?>
 
 <html>
@@ -158,36 +156,13 @@ else if(!empty($_POST) && !empty($_POST['email']) && !empty($_POST['pswrd'])){
         </div>
         <div class="screen" id="orgaSet">
             <h1 class="head-txt">Organizer Settings</h1>
-            <div class="content">   
-                <form method="post" action="./index.php#orga" class="content-form">
-                    <div class="tables">
-                        <label class="headline">List-Manager</label>
-                        <div class="lists-div">
-                            <ul class="lists">
-                                <li>ToDoList<div class="btn">
-                                    <button class="btn-rename">...</button>
-                                    <select class="btn-color">
-                                        <option>Blue</option>
-                                        <option>Green</option>
-                                        <option>Red</option>
-                                        <option>Orange</option>
-                                    </select>
-                                    <button class="btn-delete">X</button>
-                                </div></li>
-                                <li class="list">Schule<div class="btn">
-                                    <button class="btn-rename">...</button>
-                                    <select class="btn-color">
-                                        <option>Blue</option>
-                                        <option>Green</option>
-                                        <option>Red</option>
-                                        <option>Orange</option>
-                                    </select>
-                                    <button class="btn-delete">X</button>
-                                </div></li>
-                            </ul>
-                        </div>
+            <div class="content">
+                <div class="tables">
+                    <label class="headline">List-Manager</label>
+                    <div class="lists-div">
+                        <ul class="lists" id="lists"></ul>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
         <div class="screen" id="delAcc">
@@ -215,20 +190,17 @@ else if(!empty($_POST) && !empty($_POST['email']) && !empty($_POST['pswrd'])){
     <script>
         window.onload = function () {
             window.scrollTo({top: 0,});
+
+            getProfileValues();
+            getAllLists();
         }
         alt = window.location.hash.slice(1, window.location.hash.length);
-        if(alt && alt == "profile"){
-            getValues();
-        }
 
         document.getElementById(window.location.hash.slice(1, window.location.hash.length)).style.display = 'block';
 
         window.addEventListener('hashchange', function(){
             if(alt){
                 document.getElementById(alt).style.display = 'none';
-            }
-            if(alt && alt == "profile"){
-                getValues();
             }
 
             document.getElementById(window.location.hash.slice(1, window.location.hash.length)).style.display = 'block';
