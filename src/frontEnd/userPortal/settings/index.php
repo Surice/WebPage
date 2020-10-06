@@ -46,7 +46,8 @@ if(!empty($_POST) && !empty($_POST['cPswrd']) && !empty($_POST['nPswrd']) && !em
 }
 else if(!empty($_POST) && !empty($_POST['email']) && !empty($_POST['pswrd'])){
     $email = $_POST['email'];
-    $pswrd = $_POST['pswrd'];
+    $pass = $_POST['pswrd'];
+    $token = $_COOKIE['token'];
 
     $curl = curl_init();
 
@@ -63,11 +64,14 @@ else if(!empty($_POST) && !empty($_POST['email']) && !empty($_POST['pswrd'])){
     $userJson = json_decode($user)[0];
     curl_close($curl);
 
-    if(password_verify($Pswrd, $userJson->password)){
+    if(password_verify($pass, $userJson->password)){
         $userData = array('userId' => $userJson->id);
-
+        print_r($userData);
         $stmt = $db->prepare('DELETE FROM `user_accounts` WHERE `id` = :userId');
         $deletedUser = $stmt->execute($userData);
+
+        header( "Location: ../login.php?action=logout");
+        die;
     }
 }else{
 //    echo "cannot get data";
@@ -154,7 +158,7 @@ else if(!empty($_POST) && !empty($_POST['email']) && !empty($_POST['pswrd'])){
         </div>
         <div class="screen" id="orgaSet">
             <h1 class="head-txt">Organizer Settings</h1>
-            <div class="content">   
+            <div class="content">
                 <form method="post" action="./index.php#orga" class="content-form">
                     <div class="tables">
 
@@ -165,7 +169,7 @@ else if(!empty($_POST) && !empty($_POST['email']) && !empty($_POST['pswrd'])){
         <div class="screen" id="delAcc">
             <h1 class="head-txt">Delete Account</h1>
             <div class="content">
-                <form method="post" action="../login.php?action=logout" class="content-form">
+                <form method="post" action="./index.php#delAcc" class="content-form">
                     <div class="tables">
                         <div class="valueDiv">
                             <label for="email">Confirm with E-Mail:</label>
@@ -185,15 +189,22 @@ else if(!empty($_POST) && !empty($_POST['email']) && !empty($_POST['pswrd'])){
     </body>
 
     <script>
-        getValues();
-
+        window.onload = function () {
+            window.scrollTo({top: 0,});
+        }
         alt = window.location.hash.slice(1, window.location.hash.length);
+        if(alt && alt == "profile"){
+            getValues();
+        }
 
         document.getElementById(window.location.hash.slice(1, window.location.hash.length)).style.display = 'block';
 
         window.addEventListener('hashchange', function(){
             if(alt){
                 document.getElementById(alt).style.display = 'none';
+            }
+            if(alt && alt == "profile"){
+                getValues();
             }
 
             document.getElementById(window.location.hash.slice(1, window.location.hash.length)).style.display = 'block';
