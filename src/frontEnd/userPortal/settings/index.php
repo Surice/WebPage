@@ -187,6 +187,9 @@ else if(!empty($_POST) && !empty($_POST['email']) && !empty($_POST['pswrd'])){
     </body>
 
     <script>
+        window.onload = function () {
+            window.scrollTo({top: 0,});
+        }
         alt = window.location.hash.slice(1, window.location.hash.length);
         if(alt && alt == "profile"){
             getValues();
