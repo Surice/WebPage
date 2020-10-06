@@ -17,7 +17,7 @@
 
 
 .navbar-me{
-    position: fixed;
+    position: relative;
     width: 100vw;
     background-color: rgb(49, 49, 49);
     overflow: hidden;
