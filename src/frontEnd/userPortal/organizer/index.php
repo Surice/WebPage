@@ -57,9 +57,5 @@
 </html>
 
 <script>
-    var listName = 'ToDoList';
-    window.document.title = listName;
-
     loadLists();
-    loadList(listName);
 </script>

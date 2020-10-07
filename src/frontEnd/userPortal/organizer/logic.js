@@ -115,6 +115,7 @@ async function loadLists(){
             const data = JSON.parse(xml.responseText);
 
             await navLinkConsturctor(data);
+            await changeList(data[0]);
             setHighlighting(listName);
         }
     }

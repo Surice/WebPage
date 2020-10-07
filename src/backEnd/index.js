@@ -217,6 +217,7 @@ exp.post(`${bURL}/getUserList`, auth, function (req, res) {
     db.query(sql, value, function (err, data, next) {
         let sql = 'SELECT id FROM userList WHERE ownerId = ? AND name = ?';
         const values = new Array(data[0].id, req.body.dataPacket.name);
+
         db.query(sql, values, function (err, data, next) {
             let sql = 'SELECT item FROM userListItems WHERE listId = ?'
             const value = data[0].id;

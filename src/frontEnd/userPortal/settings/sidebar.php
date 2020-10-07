@@ -9,6 +9,10 @@
             <a class="values" href="#orgaSet">Organizer Settings</a>
             <a class="values" href="#delAcc">Delete Account</a>
         </div>
+
+        <div class="arrow">
+            <i class="fas fa-angle-double-right"></i>
+        </div>
     </body>
 
     <script>
