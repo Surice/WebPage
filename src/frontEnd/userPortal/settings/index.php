@@ -159,8 +159,11 @@
             <h1 class="head-txt">Organizer Settings</h1>
             <div class="content">
                 <div class="tables">
-                    <label class="headline">List-Manager</label>
-                    <div class="lists-div">
+                    <div class="headline-div">
+                        <label class="headline">List-Manager</label>
+                        <button class="btn-newList">Add New List</button>
+                    </div>
+                        <div class="lists-div">
                         <ul class="lists" id="lists"></ul>
                     </div>
                 </div>
