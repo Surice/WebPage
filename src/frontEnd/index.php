@@ -19,21 +19,37 @@
         }
 
         async function anayltic(){
-            if(!sessionStorage['exists']){
-                var cont = {content: navigator}
+            if(!await getCo()){
+                var cont = {content: navigator},
+                    date = new Date();
+                date.setTime(date.getTime()+(900*1000));
                 console.log(cont);
+
                 var xml = new XMLHttpRequest();
                 xml.open("POST", "https://sebastian-web.de/api/v1/userInfo");
                 xml.send(cont);
-                sessionStorage['exists'] = true;
+                document.cookie = `exists=true; expires=${date.toString()}`;
+            }else{
+                console.log("idk");
             }
+        }
+
+        function getCo(){
+            var co = document.cookie.split(";"),
+                out = false;
+            co.forEach(e=>{
+                if(e.startsWith("exists=")){
+                    out = true;
+                }
+            });
+            return out;
         }
     </script>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale = 1">
         <meta charset="utf-8" />
         <link rel="stylesheet" type="text/css" href="./style.css">
-        <script src="./index.js"></script>
+        <!-- <script src="./index.js"></script> -->
 
         <link rel="stylesheet" href="./fontawesome/css/all.min.css">
 <!--        <a href="#anchor-hash" class="anchor-scrolls"></a> -->
