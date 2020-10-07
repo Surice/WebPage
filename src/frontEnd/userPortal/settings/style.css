@@ -31,7 +31,8 @@ body::-webkit-scrollbar {
     display: flex;
     flex-flow: row;
     justify-content: space-between;
-    width: 50%;
+    align-items: center;
+    width: 60%;
 }
 
 .headline{
@@ -44,7 +45,7 @@ body::-webkit-scrollbar {
     display: flex;
     flex-flow: row ;
     align-items: center;
-    width: 50%;
+    width: 60%;
 }
 
 .lists{

@@ -161,7 +161,7 @@
                 <div class="tables">
                     <div class="headline-div">
                         <label class="headline">List-Manager</label>
-                        <button class="btn-newList">Add New List</button>
+                        <button class="btn-newList" onclick="newList()">Add New List</button>
                     </div>
                         <div class="lists-div">
                         <ul class="lists" id="lists"></ul>

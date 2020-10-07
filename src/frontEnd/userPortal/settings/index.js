@@ -167,6 +167,24 @@ async function changeListName(listName){
         }
     }
 }
+async function newList() {
+    const token = await getCo();
+
+    let newListName = prompt("List Name");
+    if(!newListName) return;
+
+    var xml = new XMLHttpRequest();
+    xml.open('POST', "https://sebastian-web.de/api/v1/createUserList");
+    xml.setRequestHeader('authorization', token);
+    xml.setRequestHeader("Content-Type", "application/json");
+    xml.send(JSON.stringify({ "name": newListName }));
+
+    xml.onreadystatechange = function () {
+        if (xml.readyState == 4 && xml.status == 200) {
+            getAllLists();
+        }
+    }
+}
 async function delList(listName) {
     const token = await getCo();
 
