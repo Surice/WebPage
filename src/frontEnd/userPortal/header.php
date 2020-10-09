@@ -4,20 +4,24 @@
     </head>
     <body>
     <div class="navbar-me" id="navbar-me">
-        <ul class="nav-con">
-            <a class="nav-el" id="home">Home</a>
-            <a class="nav-el" id="orga">Organizer</a>
-            <a class="nav-el" id="set">Settings</a>
-
-            <a id="logout"><button class="logout btn btn-outline-danger">Logout</button></a>
-            <code class="logDat">Logged in as: <?php if(isset($_SESSION["user"])){ echo ($_SESSION["user"]); }else{ echo "--none--";} ?></code>
-        </ul>
+        <div class="nav-con">
+            <div class="nav-elementGroup">
+                <a class="nav-el" id="home">Home</a>
+                <a class="nav-el" id="orga">Organizer</a>
+                <a class="nav-el" id="set">Settings</a>
+            </div>
+            <div class="nav-control">
+                <code class="logDat">Logged in as: <?php if(isset($_SESSION["user"])){ echo ($_SESSION["user"]); }else{ echo "--none--";} ?></code>
+                <a id="logout"><button class="logout btn btn-outline-danger">Logout</button></a>
+            </div>
+        </div>
         <div class="dropdown">
             <button class="dropbtn">Menu ↓</button>
 
-            <a id="logoutDrop" class="unused"><button class="logout btn btn-outline-danger">Logout</button></a>
-            <code class="logDat">Logged in as: <?php if(isset($_SESSION["user"])){ echo ($_SESSION["user"]); }else{ echo "--none--";} ?></code>
-
+            <div class="nav-control">
+                <code class="logDat">Logged in as: <?php if(isset($_SESSION["user"])){ echo ($_SESSION["user"]); }else{ echo "--none--";} ?></code>
+                <a id="logoutDrop"><button class="logout btn btn-outline-danger">Logout</button></a>
+            </div>
             <div class="dropdown-content">
                 <a class="nav-el" id="homeDrop">Home</a>
                 <a class="nav-el" id="orgaDrop">Organizer</a>
