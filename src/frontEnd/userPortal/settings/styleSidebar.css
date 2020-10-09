@@ -7,12 +7,12 @@ body{
         display: none;
     }
     .arrow{
-        display: block;
+        display: flex;
     }
 }
 @media only screen and (min-width: 1001px){
     .sidebar{
-        display: block;
+        display: block !important;
     }
     .arrow{
         display: none;
@@ -25,7 +25,7 @@ body{
     padding: 0;
     width: 200px;
     background-color: rgb(206, 68, 32);
-    height: 100vh;
+    height: 94.6vh;
     overflow: auto;
 }
 
@@ -41,4 +41,21 @@ body{
 
 .sidebar a:hover:NOT(.active){
     background-color: rgb(163, 58, 33);
+}
+
+.arrow{
+    position: fixed;
+    height: 100vh;
+    flex-flow: column;
+    justify-content: center;
+}
+.btnArrow{
+    background: none;
+    border: none;
+    outline: none;
+}
+.sideArrow{
+    color: rgb(206,68,32);
+    margin-left: 2vw;
+    font-size: 2.5em;
 }

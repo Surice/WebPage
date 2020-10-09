@@ -3,7 +3,7 @@
         <link rel="stylesheet" id="style">
     </head>
     <body>
-    <div class="navbar-me">
+    <div class="navbar-me" id="navbar-me">
         <ul class="nav-con">
             <a class="nav-el" id="home">Home</a>
             <a class="nav-el" id="orga">Organizer</a>

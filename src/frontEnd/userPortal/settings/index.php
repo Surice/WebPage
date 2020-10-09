@@ -197,15 +197,13 @@
 
             getProfileValues();
             getAllLists();
-        }
-        alt = window.location.hash.slice(1, window.location.hash.length);
 
-        document.getElementById(window.location.hash.slice(1, window.location.hash.length)).style.display = 'block';
+            alt = window.location.hash.slice(1, window.location.hash.length);
+            document.getElementById(window.location.hash.slice(1, window.location.hash.length)).style.display = 'block';
+        }
 
         window.addEventListener('hashchange', function(){
-            if(alt){
-                document.getElementById(alt).style.display = 'none';
-            }
+            if(alt) document.getElementById(alt).style.display = 'none';
 
             document.getElementById(window.location.hash.slice(1, window.location.hash.length)).style.display = 'block';
             alt = window.location.hash.slice(1, window.location.hash.length);

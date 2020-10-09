@@ -154,6 +154,7 @@ async function changeListName(listName){
     const token = await getCo();
 
     const newName = prompt(`${listName} umbenennen zu:`);
+    if(!newName) return;
 
     var xml = new XMLHttpRequest();
     xml.open('POST', "https://sebastian-web.de/api/v1/updateUserListName");

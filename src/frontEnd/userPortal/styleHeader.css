@@ -17,7 +17,6 @@
 
 
 .navbar-me{
-    position: relative;
     width: 100vw;
     background-color: rgb(49, 49, 49);
     overflow: hidden;
@@ -44,11 +43,10 @@
     color: rgba(141, 134, 134, 0.7);
     padding: 3px;
     margin: 10px;
-    display: inline-block;
     border-radius: 10px;
     border: 1px solid;
     border-color: rgba(148, 92, 92, 1);
-    background-color: rgba(148, 92, 92, 0);
+    background: none;
 }
 .logout{
     float: right;

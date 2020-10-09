@@ -1,6 +1,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="./styleSidebar.css">
+        <script src="https://kit.fontawesome.com/732a3ed8e9.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <div id="sideDiv" class="sidebar">
@@ -11,11 +12,13 @@
         </div>
 
         <div class="arrow">
-            <i class="fas fa-angle-double-right"></i>
+            <button class="btnArrow" onclick="displaySidebar()"><i class="fas fa-angle-right SideArrow"></i></button>
         </div>
     </body>
 
     <script>
+        var visible = false;
+
         setHighlighting();
 
         window.addEventListener('hashchange', function(){
@@ -23,7 +26,14 @@
             alt.className = alt.className.replace('active', ' ');
 
             setHighlighting();
-        })
+        });
+
+        document.addEventListener("click", function(){
+            if(visible && window.innerWidth <= 1000){
+                document.getElementById('sideDiv').style.display = "none";
+                visible = false;
+            }
+        });
 
         function setHighlighting(){
             const all = document.getElementsByClassName('values');
@@ -33,6 +43,11 @@
                     all[i].className = all[i].className +' active';
                 }
             }
+        }
+
+        function displaySidebar(){
+            document.getElementById('sideDiv').style.display = "block";
+            setTimeout(function(){ visible = true; }, 20);
         }
     </script>
 </html>
