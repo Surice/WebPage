@@ -92,7 +92,7 @@
 .dropbtn:hover{
     background-color: rgb(38,38,38);
 }
-.dropbtn:hover + .unused + .logDat + .dropdown-content{
+.dropbtn:hover + .nav-control + .dropdown-content{
     display: flex;
 }
 .dropdown-content:hover{
