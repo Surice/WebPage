@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 const jwt = require('jsonwebtoken');
+const { dir } = require('console');
 
 
 const config = JSON.parse(fs.readFileSync(`${__dirname}/config.json`, "utf-8").toString());
@@ -17,12 +18,12 @@ const bURL = '/api/v1';
 exp.use(bodyParser.json());
 
 
-exp.get(`${bURL}/userInfo`, function(req, res){
+exp.post(`${bURL}/userInfo`, function(req, res){
     var ip = req.headers['x-forwarded-for'];
-    if(ip != "::ffff:127.0.0.1" && ip != "170.133.2.232"){
-        saveUserData(ip);
+    if(ip != "::ffff:127.0.0.1" /*&& ip != "170.133.2.232"*/){
+        saveUserData(ip, req.body);
     }
-    res.status(200).end();
+    res.status(200).send("OK").end();
 });
 
 
@@ -55,7 +56,7 @@ exp.get(`${bURL}/steamG`, function(req, res){
 
 exp.get(`${bURL}/test`, function(req, res){
     res.status(200);
-    res.send("Succsess").end();
+    res.send("OK").end();
 });
 
 
@@ -64,11 +65,11 @@ exp.listen(port, function(){
 });
 
 
-async function saveUserData(data){
+async function saveUserData(ip, user){
     var today = new Date();
 
     var xml = new XMLHttpRequest();
-    xml.open('GET', `https://ipinfo.io/${data}?token=${config.token}`, true);
+    xml.open('GET', `https://ipinfo.io/${ip}?token=${config.token}`, true);
     xml.send();
     xml.onreadystatechange = async function(){
         if(xml.readyState == 4 && xml.status == 200){
@@ -88,6 +89,9 @@ async function saveUserData(data){
             for (i in data){
                 userInfo[today].push(data[i]);
             }
+
+            let checkDevice = require(`${__dirname}/modules/checkDevice.js`);
+            await checkDevice(user);
 
             var ip = userInfo[today].splice(0,1);
             var domain = userInfo[today].splice(0,1);
