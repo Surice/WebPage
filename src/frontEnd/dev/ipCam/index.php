@@ -20,9 +20,8 @@
 
         <h1 class="head-txt">IP Camera</h1>
 
-        <form action="" method="post">
-            <input class="reloadBtn" type="submit" name="someAction" value="Relaod" />
-        </form>
+        <button class="reloadBtn" onclick="getImage()">Reload</button>
+
         <div class="content">
             <img id="img" class="img">
         </div>
@@ -30,22 +29,24 @@
 </html>
 
 <script>
-    function loadImage(){
-        document.getElementById("img").src = './save.jpg';
-    }
-</script>
-<?php
     getImage();
 
-    if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['someAction']))
-    {
-        getImage();
+    async function getImage(){
+        const token = await getCo();
+
+        document.getElementById('img').src = `https://sebastian-web.de/api/v1/getImg.jpg?authorization=${token}&t=${Date.now()}`;
     }
 
-    function getImage(){
-        $url = "http://192.168.178.25:8080/shot.jpg";
-
-        file_put_contents("save.jpg", file_get_contents($url));
-        echo '<script> loadImage(); </script>';
-    }
-?>
+    function getCo(){
+            var co = document.cookie.split(";"),
+                out = "none";
+            co.forEach(e=>{
+                if(e.startsWith("token=")){
+                    e = e.slice(6);
+                    
+                    out = e;
+                }
+            });
+            return out;
+        }
+</script>

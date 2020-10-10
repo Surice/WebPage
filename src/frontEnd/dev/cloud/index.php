@@ -1,7 +1,6 @@
 <?php 
 session_start();
 include '../../config.php';
-$file = 'cache.txt';
 
 if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
     header( "Location: ../login.php");

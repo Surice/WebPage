@@ -19,21 +19,37 @@
         }
 
         async function anayltic(){
-            if(!sessionStorage['exists']){
-                var cont = {content: navigator}
+            if(!await getCo()){
+                var cont = {content: navigator},
+                    date = new Date();
+                date.setTime(date.getTime()+(900*1000));
                 console.log(cont);
+
                 var xml = new XMLHttpRequest();
                 xml.open("POST", "https://sebastian-web.de/api/v1/userInfo");
                 xml.send(cont);
-                sessionStorage['exists'] = true;
+                document.cookie = `exists=true; expires=${date.toString()}`;
+            }else{
+                console.log("idk");
             }
+        }
+
+        function getCo(){
+            var co = document.cookie.split(";"),
+                out = false;
+            co.forEach(e=>{
+                if(e.startsWith("exists=")){
+                    out = true;
+                }
+            });
+            return out;
         }
     </script>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale = 1">
         <meta charset="utf-8" />
         <link rel="stylesheet" type="text/css" href="./style.css">
-        <script src="./index.js"></script>
+        <!-- <script src="./index.js"></script> -->
 
 <<<<<<< HEAD
     <script src="./index.js"></script>
@@ -56,7 +72,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
         <title>Sebastian-Web</title>
-        <link rel="shortcut icon" type="image/x-icon" href='./img/SU_Logo_2.0_render.ico'>
+        <link rel="shortcut icon" type="image/x-icon" href='./img/Surice_logo_ti.ico'>
     </head>
 
     <body>
@@ -64,7 +80,7 @@
             <a href="#home" class="navbar-link">Home</a>
             <a href="#intro" class="navbar-link">Introduction</a>
             <a href="#proj" class="navbar-link">Projects</a> 
-            <a href="#comming" class="navbar-link">Comming soon...</a>
+            <a href="#comming" class="navbar-link">Coming soon...</a>
             <a href="#impressum" class="navbar-link">Impressum</a>
         </div>
 
@@ -110,43 +126,39 @@
                 </div>
             </section>
             <section id="intro">
-                <h1 class="intro-head">Introduction</h1>
-                <span>
-                    <div class="intro-txt">
-                        <p>This is my website for all kinds of coding projects.<br>for more informations have a look at the 'Projects' page</p>
-                    </div>
-                    <br>
-                    
-                    <table class="social-table">
-                        <tr class="social-table-head">
-                            <td><strong>My Social Media</strong></td>
-                        </tr>
+                <center><h1 class="intro-head">Introduction</h1></center>
+
+                <div class="social-table-front">
+                    <div class="social-table">
+                        <center><strong class="social-table-head">My Social Media</strong></center>
                         <br>
-                        <tr>
-                            <td>
-                                <a href="https://www.discord.com/users/279230092167872512" target="_blank" class="fab fa-discord fa-3x"></a>
-                                <a href="https://www.instagram.com/thesurice" target="_blank" class="fab fa-instagram fa-3x"></a>
-                                <a href="https://open.spotify.com/user/surice99?si=bOENDn2yTjqoLYGaEq_X4g" target="_blank" class="fab fa-spotify fa-3x"></a>
-                                <a href="https://www.twitch.tv/surice_gaming" target="_blank" class="fab fa-twitch fa-3x"></a>
-                                <a href="https://github.com/Surice" target="_blank" class="fab fa-github fa-3x"></a>
-                            </td>
-                        </tr>
-                    </table>
-                </span>
+                        <div class="social-table-content">
+                            <a href="https://www.discord.com/users/279230092167872512" target="_blank" class="fab fa-discord fa-3x"></a>
+                            <a href="https://www.instagram.com/thesurice" target="_blank" class="fab fa-instagram fa-3x"></a>
+                            <a href="https://open.spotify.com/user/surice99?si=bOENDn2yTjqoLYGaEq_X4g" target="_blank" class="fab fa-spotify fa-3x"></a>
+                            <a href="https://www.twitch.tv/surice_gaming" target="_blank" class="fab fa-twitch fa-3x"></a>
+                            <a href="https://github.com/Surice" target="_blank" class="fab fa-github fa-3x"></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="intro-txt">
+                    <p>This is my website for all kinds of coding projects.<br>For more informations have a look at the 'Projects' page</p>
+                </div>
             </section>
             <section id="proj">
                 <h1 class="proj-head">Projects</h1>
                 
                 <div class="proj-table">
-                        <a href="./subSites/steamSearch.php"><button class="btn-dum">Steam-Games</button></a>
-                        <a href="./dev/index.php"><button class="btn-dum">Dev-Portal</button></a>
-                        <a href="#"><button class="btn-dum">User-Portal<br>(comming soon)</button></a>
-                        <a href="./subSites/mcCraftingGuide.php"><button class="btn-dum">MC Crafting Guide<br>(in progress...)</button></a>
-                        <a href="#"><button class="btn-dum">ACC-Helper<br>(in progress...)</button></a>
+                    <a href="./subSites/steamSearch.php"><button class="btn-dum">Steam-Games</button></a>
+                    <a href="./dev/index.php"><button class="btn-dum">Dev-Portal</button></a>
+                    <a href="./userPortal/index.php"><button class="btn-dum">User-Portal<br>(in progress...)</button></a>
+                    <a href="#"><button class="btn-dum">dummy</button></a>
+                    <a href="#"><button class="btn-dum">dummy</button></a>
                 </div>
                 <div class="proj-table">
-                    <a href="#"><button class="btn-dum">dummy</button></a>
-                    <a href="#"><button class="btn-dum">dummy</button></a>
+                    <a href="./subSites/mcCraftingGuide.php"><button class="btn-dum">MC Crafting Guide<br>(in progress...)</button></a>
+                    <a href="./subSites/accAssistant_v1.0.php"><button class="btn-dum">ACC-Helper<br>(in progress...)</button></a>
                     <a href="#"><button class="btn-dum">dummy</button></a>
                     <a href="#"><button class="btn-dum">dummy</button></a>
                     <a href="#"><button class="btn-dum">dummy</button></a>
@@ -154,7 +166,7 @@
             </section>
             <section id="comming">
                 <div class="comming-txt">
-                    <h1>more content will be comming soon...</h1>
+                    <h1>more content will be coming soon...</h1>
                 </div>
             </section>
             <section id="impressum">
@@ -221,7 +233,7 @@
                         befindet.
                         Der folgende Link stellt eine Liste der Datenschutzbeauftragten sowie deren Kontaktdaten bereit: <a
                             href="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html"
-                            target="_blank">https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html</a>.
+                            target="_blank">Link</a>.
                     </p>
 
                     <p><strong>Recht auf Datenübertragbarkeit</strong></p>

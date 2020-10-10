@@ -5,3 +5,6 @@
 /src/backEnd/config.json
 
 /src/proxy/node_modules
+
+.git
+.idea

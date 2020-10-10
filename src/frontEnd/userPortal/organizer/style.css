@@ -1,0 +1,205 @@
+body{
+    background-image: url(../../img/street-381227_1920.jpg);
+    background-size: cover;
+    background-position: center bottom;
+}
+
+button, a {
+    transition: all 0.3s ease 0s;
+    outline: none;
+}
+
+@media only screen and (min-width: 821px){
+    .nav-links{
+        display: block;
+    }
+    .select-wrapper{
+        display: none;
+    }
+}
+@media only screen and (max-width: 820px){
+    .nav-links{
+        display: none;
+    }
+    .select-wrapper{
+        display: block;
+    }
+}
+
+
+.headline{
+    color: white;
+    font-size: 2rem;
+    font-weight: 800;
+    font-family: Verdana;
+    margin: 1.8vw;
+}
+
+.header-div{
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    justify-content: space-between;
+    background-color: rgb(213, 179, 142);
+}
+
+.listChooser{
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    min-width: 30vw;
+}
+
+.nav-links{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+.nav-links li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav-links-sel{
+    cursor: pointer;
+    margin: 2vw;
+    padding: 5px;
+    padding-right: 30px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    outline: none;
+    background-color: rgb(220, 193, 174);
+    box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.3);
+    border-radius: 3px;
+}
+.nav-links-sel::-ms-expand{
+    display: none;
+}
+.nav-links-sel:focus::-ms-value {
+    background-color: transparent;
+}
+.select-wrapper{
+    position: relative;
+}
+.select-wrapper::before{
+    content: "▼";
+    font-size: 20px;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    color: #fff;
+    pointer-events: none;
+}
+
+.listsItem{
+    color: rgb(57, 57, 57);
+    font-size: 16px;
+    font-weight: 350;
+    font-family: verdana;
+    text-decoration: none;
+    border: none;
+    background: none;
+    transition: all 0.3s ease 0s;
+}
+.listsItem:hover{
+    cursor: pointer;
+}
+
+
+.btnControl{
+    display: flex;
+    min-width: 10vw;
+    margin-left: 2vw;
+    margin-right: 2vw;
+}
+
+.newListBtn{
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    font-family: verdana;
+    text-decoration: none;
+    border: none;
+    border-radius: 25px;
+    padding: 5px;
+    margin-right: 2vw;
+    width: 6em;
+}
+.newListBtn:hover{
+    background-color: rgb(227, 227, 227);
+}
+.addItemBtn{
+    background-color: rgb(124, 240, 255);
+    color: black;
+    font-size: 16px;
+    font-family: verdana;
+    border: none;
+    border-radius: 25px;
+    padding: 5px;
+    margin-left: 2vw;
+    width: 8em;
+}
+.addItemBtn:hover{
+    background-color: rgba(124,240,255, 0.6);
+}
+
+
+.list-div{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    margin-top: 8vh;
+}
+.list{
+    padding: 0px;
+    min-width: 50vw;
+    max-width: 90vw;
+    list-style: none;
+}
+.list li{
+    background-color: rgb(128,128,128);
+    border-color: rgb(161, 161, 161);
+    border-radius: 10px;
+    margin-top: 25px;
+    padding: 10px;
+}
+.liElement{
+    display: inline-block;
+    font-family: verdana;
+    font-size: 1.1rem;
+    max-width: 98%;
+    margin: 0px;
+}
+.can{
+    float: right;
+    width: 23px;
+    height: 23px;
+    border-radius: 5px;
+    background-color: rgba(255, 49, 49, 0.603);
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+}
+.can:hover{
+    background-color: darkred;
+    color: white;
+}
+
+
+.active{
+    color: white !important;
+}
+
+.placeBar{
+    width: 100vw;
+    height: 1vh;
+    background-color: rgb(116, 98, 74);
+}
+.vertBar{
+    border-left: 3px solid black;
+    height: 70px;
+}

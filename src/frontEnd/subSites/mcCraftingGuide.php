@@ -4,7 +4,7 @@
     ?>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale = 1">
-        <meta charset="utf-8" />
+        <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href='./mcCraftingGuideS.css'>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -13,7 +13,7 @@
 
 
         <title>Minecraft-crafting Guide</title>
-        <link rel="shortcut icon" type="image/x-icon" href="../img/SU_Logo_2.0_render.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="../img/Surice_logo_ti.ico">
     </head>
     <body>
         <ul class="navbar-me">

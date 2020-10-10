@@ -1,9 +1,10 @@
 <?php
+session_set_cookie_params(86400 * 30,"/");
 session_start();
 include '../config.php';
 include '../database.php';
 
-$role = "Developer";
+$role = "user";
 
 if(!empty($_POST) && !empty($_POST['password']) && !empty($_POST['email']) && !empty($_POST['recaptchaResponse'])){
 
@@ -19,20 +20,21 @@ if(!empty($_POST) && !empty($_POST['password']) && !empty($_POST['email']) && !e
 /* END Recaptcha request */
 
     echo $recaptcha->score;
+//    print_r(password_hash($_POST["password"], PASSWORD_DEFAULT));
 
-    $stmt = $db->prepare('SELECT * FROM dev_user WHERE email = ?');
+    $stmt = $db->prepare('SELECT * FROM user_accounts WHERE email = ?');
     $stmt -> execute(array($_POST["email"]));
 
     $user = $stmt->fetch();
-//    print_r(password_hash($_POST["password"], PASSWORD_DEFAULT));
 
 
     //TRUE if email and password is correct
     if(password_verify($_POST["password"], $user['password']) && $recaptcha->score >= 0.8){
         $_SESSION["loggedIn"] = true;
-        $_SESSION["user"] = $user['username'];
+        $_SESSION["user"] = "{$user['firstname']} {$user['lastname']}";
 
-        $payloadData = array('userId' => $user['id'], 'username' => $user['username'], 'role' => $role);
+
+        $payloadData = array('userId' => $user['id'], 'username' => $user['email'], 'role' => $role);
 
         $payload = json_encode($payloadData);
 
@@ -45,7 +47,7 @@ if(!empty($_POST) && !empty($_POST['password']) && !empty($_POST['email']) && !e
             'Content-Type: application/json',
             'Content-Length: ' . strlen($payload))
         );
-        
+
       $result = curl_exec($ch);
 
         if($result == false && !isset($result)){
@@ -95,8 +97,8 @@ if (!empty($_GET) && $_GET['action'] == "logout") {
 <html>
 
 <head>
-    <title>Login</title>
-    <link rel="shortcut icon" type="image/x-icon" href="../img/pb.ico">
+    <title>Login User Portal</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../img/Surice_logo_ti.ico">
     <link rel="stylesheet" href="./styleLogin.css">
     <meta name="viewport" content="width=device-width, initial-scale = 1">
 
@@ -134,7 +136,10 @@ if (!empty($_GET) && $_GET['action'] == "logout") {
     <div class="container-lg h-100 center-div">
         <div class="row justify-content-center align-items-center h-100">
             <div class="card" style="width: 18rem;">
-                <div class="card-header align-items-center">Login</div>
+                <div class="subLab card-header align-items-center">
+                    <p>Login</p>
+                    <a href="./register.php"><button class="btn-me btn btn-primary mb-3">Sign Up</button></a>
+                </div>
                 <div class="card-body">
                     <form method="post">
                         <div class="form-group">
@@ -144,7 +149,11 @@ if (!empty($_GET) && $_GET['action'] == "logout") {
                             <label for="password">Password</label>
                             <input id="password" type="password" name="password" class="form-control">
                             <br>
-                            <button type="submit" class="btn btn-primary mb-3">Submit!</button>
+                            <div class="subLab">
+                                <button type="submit" class="btn-me btn btn-primary mb-3">Submit!</button>
+                                <a href="#" class="labelSignIn">Sign In without User</a>
+                            </div>
+
                             <?php
                                 if(!empty($response)){
                             ?>

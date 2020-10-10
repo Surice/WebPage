@@ -1,0 +1,34 @@
+body{
+    background: url('../img/road.jpg') no-repeat center fixed;
+    background-size: cover;
+    overflow: hidden;
+}
+.navbar-me{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    list-style: none;
+}
+.exit{
+    margin: 5px;
+    text-decoration: none;
+}
+
+.subLab{
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+.subLabHead{
+     display: flex;
+     flex-flow: row;
+     align-items: center;
+     justify-content: space-evenly;
+ }
+.subLabHead p{
+    margin: 0px !important;
+}
+.btn-me{
+    margin: 0px !important;
+}

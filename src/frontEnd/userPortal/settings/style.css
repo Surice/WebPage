@@ -1,0 +1,145 @@
+body{
+    background-color: rgb(18, 63, 118);
+    background-image: url("../../img/landscape-dark.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center bottom;
+}
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.head-txt{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    margin-top: 2vh;
+
+    color: rgb(211, 177, 177);
+    font-size: 42px;
+    font-weight: bolder;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.screen{
+    display: none;  
+}
+
+.headline-div{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+}
+
+.headline{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    font-size: 32px;
+}
+
+.lists-div{
+    display: flex;
+    flex-flow: row ;
+    align-items: center;
+    width: 60%;
+}
+
+.lists{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 28px;
+    margin-top: 35px;
+    width: 100%;
+}
+
+.lists li{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+.btn{
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.btn-newList{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 450;
+    border: none;
+    border-radius: 15px;
+    width: 20%;
+    height: 36px;
+    background-color: lightslategrey;
+}
+
+.btn-rename{
+    border: none;
+    border-radius: 15px;
+    width: 28px;
+    height: 28px;
+}
+
+.btn-delete{
+    border: none;
+    border-radius: 15px;
+    width: 28px;
+    height: 28px;
+}
+
+.btn-color{
+    border: none;
+    border-radius: 15px;
+    width: 28px;
+    height: 28px;
+}
+
+.content{
+    display: inline-block;
+    margin-left: 20vw;
+    background-color: rgba(217, 217, 217, 0.5);
+    border: 1px solid rgb(120,120,120);
+    border-radius: 6px;
+    padding: 1.2%;
+}
+
+.content-form{
+    margin: 0px;
+}
+
+.tables{
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    height: 75vh;
+    width: 70vw;
+    padding-bottom: 20vh;
+}
+.tables .valueDiv{
+    display: inline-block;
+    padding: 8px;
+}
+.tables input{
+    background-color: rgb(217, 217, 217);
+    border: 1px solid black;
+    border-radius: 3.5px;
+}
+
+.nPswrdDiv{
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+}
+.nPswrdDiv div{
+    margin-bottom: 6vh;
+}
+
+.btn-submit{
+    border-radius: 2px;
+}

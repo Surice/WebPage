@@ -1,22 +1,24 @@
 body{
+    background-color: rgb(18, 63, 118);
     background-image: url("../../img/landscape-dark.jpg");
     background-size: cover;
-    width: 100%;
-    height: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center bottom;
     overflow: hidden;
 }
 
 .head-txt{
-    position: relative;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    margin-top: 2vh;
+
     color: rgb(211, 177, 177);
-    top: 5vh;
-    left: 50%;
-    text-align: center;
-    transform: translate(-50%,-80%);
     font-size: 42px;
     font-weight: bolder;
     font-family: Arial, Helvetica, sans-serif;
-    display: inline-block;
+    text-align: center;
 }
 .content{
     height: 100%;
@@ -29,15 +31,16 @@ body{
 
 .img{
     overflow: scroll;
-
-    height: 80%;
-    width: 70%;
+    height: auto;
+    max-width: 80vw;
+    max-height: 70vh;
+    object-fit: contain;
     background-color: rgb(73, 73, 73);
     border: 2px solid rgb(172, 79, 79);
 }
 
 .reloadBtn{
-    position: absolute;
+    margin: 3em;
     margin-left: 5vw;
     margin-top: 4vh;
     font-size: 1.2em;

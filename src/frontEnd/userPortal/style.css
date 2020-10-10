@@ -7,6 +7,13 @@ body{
     background-position: center;
 }
 
+.content{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-flow: column;
+}
+
 .head-txt{
     text-align: center;
     font-size: 55px;
