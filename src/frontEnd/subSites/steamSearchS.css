@@ -1,13 +1,23 @@
 body{
     background-image: url('../img/cloudly_forrest.jpg');
     background-size: cover;
-    padding: 0%;
-    margin: 0%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right bottom;
+    padding: 0px;
+    margin: 0px;
+}
+
+.siteContent{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .navbar-me{
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row;
     justify-content: flex-end;
     list-style: none;
 }
@@ -18,27 +28,22 @@ body{
 
 .lastScan{
     margin: 5px;
+    margin-top: -2vh;
     text-decoration: underline;
 }
 
 .head-txt{
-    position: absolute;
     color: rgb(133, 65, 27);
-    top: 10%;
-    left: 50%;
     text-align: center;
-    transform: translate(-50%,-80%);
     font-size: 42px;
     font-weight: bolder;
     font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 5vh;
 }
 
 .table-me{
-    margin-left:auto; 
-    margin-right:auto;
-    margin-top: 10%;
-    height: auto;
-    width: 80%;
+    min-width: 65vw;
+    max-width: 80vw;
     text-align: center;
     color: white;
     background-color: rgba(77, 77, 77, 0.7);
@@ -51,8 +56,12 @@ body{
     background-color: rgba(36, 36, 36, 0.95);
 }
 .table-body{
-    border-bottom: 4px solid rgba(255, 255, 255, 0.01);
+    border-top: 6px solid rgba(255, 255, 255, 0.04);
 }
 .link{
     color: rgb(44, 44, 44);
+    word-break: break-word;
+}
+.link:hover{
+    color: rgb(44,44,44);
 }

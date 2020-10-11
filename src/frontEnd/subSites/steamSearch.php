@@ -15,7 +15,15 @@
                     content = content[e];
                 }
                 content.forEach(e=>{
-                    document.getElementById('table-me').innerHTML += `<tr class="table-body"><th class="tableE">${e[0]}</th><th class="tableE"><a class="link" href="${e[1]}")>${e[1]}</a></th></tr>`;
+                    document.getElementById('table-me').innerHTML +=
+                        `
+                            <tr class="table-body">
+                                <th class="tableE">${e[0]}</th>
+                                <th class="tableE">
+                                    <a class="link" href="${e[1]}")>${e[1]}</a>
+                                </th>
+                            </tr>
+                        `;
                 });
             }
         }
@@ -40,15 +48,15 @@
         </ul>
 
         <code id="lastScan" class="lastScan">Last Scan: </code>
+        <div class="siteContent">
+            <h1 class="head-txt">current free games on Steam</h1>
 
-        <h1 class="head-txt">current free games on Steam</h1>
-
-        <table class="table-me" id="table-me">
-            <tr class="table-head">
-                <th class="tableE"><strong>Name</strong></th>
-                <th class="tableE"><strong>Link</strong></th>
-            </tr>
-        </table>
-
+            <table class="table-me" id="table-me">
+                <tr class="table-head">
+                    <th class="tableE"><strong>Name</strong></th>
+                    <th class="tableE"><strong>Link</strong></th>
+                </tr>
+            </table>
+        </div>
     </body>
 </html>
