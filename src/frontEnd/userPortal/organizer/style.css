@@ -4,11 +4,6 @@ body{
     background-position: center bottom;
 }
 
-button, a {
-    transition: all 0.3s ease 0s;
-    outline: none;
-}
-
 @media only screen and (min-width: 821px){
     .nav-links{
         display: block;
@@ -152,6 +147,7 @@ button, a {
     flex-flow: row;
     justify-content: center;
     margin-top: 8vh;
+    transition: height 2s;
 }
 .list{
     padding: 0px;

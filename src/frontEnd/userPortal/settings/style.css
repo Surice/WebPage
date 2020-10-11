@@ -30,9 +30,8 @@ body::-webkit-scrollbar {
 .headline-div{
     display: flex;
     flex-flow: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    width: 60%;
 }
 
 .headline{
@@ -69,14 +68,14 @@ body::-webkit-scrollbar {
 }
 
 .btn-newList{
+    background-color: lightslategrey;
+    margin-left: 4vw;
+    padding: 0.3em;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     font-weight: 450;
     border: none;
     border-radius: 15px;
-    width: 20%;
-    height: 36px;
-    background-color: lightslategrey;
 }
 
 .btn-rename{
