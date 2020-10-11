@@ -19,30 +19,14 @@
         }
 
         async function anayltic(){
-            if(!await getCo()){
-                var cont = {content: navigator},
-                    date = new Date();
-                date.setTime(date.getTime()+(900*1000));
+            if(!sessionStorage['exists']){
+                var cont = {content: navigator}
                 console.log(cont);
-
                 var xml = new XMLHttpRequest();
                 xml.open("POST", "https://sebastian-web.de/api/v1/userInfo");
                 xml.send(cont);
-                document.cookie = `exists=true; expires=${date.toString()}`;
-            }else{
-                console.log("idk");
+                sessionStorage['exists'] = true;
             }
-        }
-
-        function getCo(){
-            var co = document.cookie.split(";"),
-                out = false;
-            co.forEach(e=>{
-                if(e.startsWith("exists=")){
-                    out = true;
-                }
-            });
-            return out;
         }
     </script>
     <head>
@@ -51,21 +35,8 @@
         <link rel="stylesheet" type="text/css" href="./style.css">
         <!-- <script src="./index.js"></script> -->
 
-<<<<<<< HEAD
-    <script src="./index.js"></script>
-    <link rel="stylesheet" type="text/css" href="./style.css">
-    <link rel="stylesheet" href="./fontawesome/css/all.min.css">
-    <a href="#anchor-hash" class="anchor-scrolls"></a>
-    <meta name="viewport" content="width=device-width, initial-scale = 1">
-    <meta charset="utf-8" />
-
-    <!-- Import Bootstrap -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-=======
         <link rel="stylesheet" href="./fontawesome/css/all.min.css">
 <!--        <a href="#anchor-hash" class="anchor-scrolls"></a> -->
->>>>>>> 4f2d7e436c4262eff85065a9552de521a2d1fcc0
 
     <!-- Import Bootstrap -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -84,22 +55,6 @@
             <a href="#impressum" class="navbar-link">Impressum</a>
         </div>
 
-<<<<<<< HEAD
-    <!-- Cookie Banner Scripts -->
-    <script type="text/javascript" src="//www.privacypolicies.com/public/cookie-consent/3.1.0/cookie-consent.js"></script>
-    <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-        cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express","palette":"light","language":"en","website_name":"sebastian-web.de","cookies_policy_url":"https://sebastian-web.de#impressum","change_preferences_selector":""});
-    });
-    </script>
-
-    <!-- Analytics -->
-    <script type="text/plain" cookie-consent="tracking">anayltic()</script>
-    <!-- end of Analytics -->
-
-    <noscript>Cookie Consent by <a href="https://www.PrivacyPolicies.com/cookie-consent/" rel="nofollow">PrivacyPolicies.com</a></noscript>
-    <!-- End Cookie Scripts -->
-=======
 
         <!-- Cookie Consent by https://www.PrivacyPolicies.com -->
         <script type="text/javascript" src="//www.privacypolicies.com/public/cookie-consent/3.1.0/cookie-consent.js"></script>
@@ -115,7 +70,6 @@
 
         <noscript>Cookie Consent by <a href="https://www.PrivacyPolicies.com/cookie-consent/" rel="nofollow">PrivacyPolicies.com</a></noscript>
         <!-- End Cookie Consent -->
->>>>>>> 4f2d7e436c4262eff85065a9552de521a2d1fcc0
 
         
         <div class="container" data-spy="scroll" data-target="#navbar" data-offset="0">
