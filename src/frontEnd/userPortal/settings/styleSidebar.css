@@ -25,6 +25,7 @@ body{
     padding: 0;
     width: 200px;
     background-color: rgb(206, 68, 32);
+    background-color: rgb(213, 179, 142);
     height: 94.6vh;
     overflow: auto;
 }
@@ -37,10 +38,12 @@ body{
 }
 .active{
     background-color: rgb(245, 99, 54);
+    background-color: rgb(245, 207, 160);
 }
 
 .sidebar a:hover:NOT(.active){
     background-color: rgb(163, 58, 33);
+    background-color: rgb(173, 147, 100);
 }
 
 .arrow{
@@ -56,6 +59,7 @@ body{
 }
 .sideArrow{
     color: rgb(206,68,32);
+    color: rgb(213, 179, 142);
     margin-left: 2vw;
     font-size: 2.5em;
 }

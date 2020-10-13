@@ -44,10 +44,58 @@
     //        echo "password wrong";
         }
     }
+    /*
     else if(!empty($_POST) && !empty($_POST['email']) && !empty($_POST['pswrd'])){
-        $email = $_POST['email'];
-        $pass = $_POST['pswrd'];
+        if(verifyDelete()){
+            $email = $_POST['email'];
+            $pass = $_POST['pswrd'];
+            $token = $_COOKIE['token'];
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+              CURLOPT_URL => "https://sebastian-web.de/api/v1/getUserAccount",
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 0,
+              CURLOPT_FOLLOWLOCATION => true,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_HTTPHEADER => array("authorization: $token"),
+            ));
+            $user = curl_exec($curl);
+            $userJson = json_decode($user)[0];
+            curl_close($curl);
+
+            if(password_verify($pass, $userJson->password)){
+                $userData = array('userId' => $userJson->id);
+                print_r($userData);
+                $stmt = $db->prepare('DELETE FROM `user_accounts` WHERE `id` = :userId');
+                $deletedUser = $stmt->execute($userData);
+
+                header( "Location: ../login.php?action=logout");
+                die;
+            }
+        }
+    }*/else{
+    //    echo "cannot get data";
+
+    /*
+         if(!empty($_POST)){
+             if (empty($_POST['email']) && empty($_POST['password'])){
+                 $response = "email and Password must be set";
+             }else if(empty($_POST['email'])){
+                 $response = "email must be set";
+             }else if(empty($_POST['password'])){
+                 $response = "Password must be set";
+             }else{
+                 $response = "unknown error";
+             }
+         }
+     */
+    }
+    function verifyDelete($email, $pass){
         $token = $_COOKIE['token'];
+        print_r($pass);
 
         $curl = curl_init();
 
@@ -72,24 +120,10 @@
 
             header( "Location: ../login.php?action=logout");
             die;
+        }else{
+            print_r('ERROR');
         }
-    }else{
-    //    echo "cannot get data";
-
-    /*
-         if(!empty($_POST)){
-             if (empty($_POST['email']) && empty($_POST['password'])){
-                 $response = "email and Password must be set";
-             }else if(empty($_POST['email'])){
-                 $response = "email must be set";
-             }else if(empty($_POST['password'])){
-                 $response = "Password must be set";
-             }else{
-                 $response = "unknown error";
-             }
-         }
-     */
-     }
+    }
 ?>
 
 <html>
@@ -110,19 +144,19 @@
             <div class="content">
                 <div class="tables">
                     <div class="valueDiv">
-                        <label for="mail">E-Mail:</label>
+                        <label class="inpLabel" for="mail">E-Mail:</label>
                         <br>
-                        <input type="text" name="mail" id="mail">
+                        <input class="inpText" type="text" name="mail" id="mail" placeholder="E-Mail...">
                     </div>
                     <div class="valueDiv">
-                        <label for="firstN">Firstname:</label>
+                        <label class="inpLabel" for="firstN">Firstname:</label>
                         <br>
-                        <input type="text" name="firstN" id="firstN">
+                        <input class="inpText" type="text" name="firstN" id="firstN" placeholder="Firstname...">
                     </div>
                     <div class="valueDiv">
-                        <label for="lastN">Lastname:</label>
+                        <label class="inpLabel" for="lastN">Lastname:</label>
                         <br>
-                        <input type="text" name="lastN" id="lastN">
+                        <input class="inpText" type="text" name="lastN" id="lastN" placeholder="Lastname...">
                     </div>
                 </div>
                 <button class="btn-submit" onclick="saveSettings()">Change Settings</button>
@@ -134,20 +168,20 @@
                 <form method="post" action="index.php#pswrd" class="content-form">
                     <div class="tables">
                         <div class="valueDiv">
-                            <label for="cPswrd">Current Password:</label>
+                            <label class="inpLabel" for="cPswrd">Current Password:</label>
                             <br>
-                            <input type="password" name="cPswrd" id="cPswrd">
+                            <input class="inpText" type="password" name="cPswrd" id="cPswrd" placeholder="Current Password...">
                         </div>
                         <div class="nPswrdDiv">
                             <div class="valueDiv">
-                                <label for="nPswrd">New Password:</label>
+                                <label class="inpLabel" for="nPswrd">New Password:</label>
                                 <br>
-                                <input type="password" name="nPswrd" id="nPswrd">
+                                <input class="inpText" type="password" name="nPswrd" id="nPswrd" placeholder="New Password...">
                             </div>
                             <div class="valueDiv">
-                                <label for="rNPwswrd">Repeat New Password:</label>
+                                <label class="inpLabel" for="rNPwswrd">Repeat New Password:</label>
                                 <br>
-                                <input type="password" name="rNPwswrd" id="rNPwswrd">
+                                <input class="inpText" type="password" name="rNPwswrd" id="rNPwswrd" placeholder="Repeat Password...">
                             </div>
                         </div>
                     </div>
@@ -172,21 +206,19 @@
         <div class="screen" id="delAcc">
             <h1 class="head-txt">Delete Account</h1>
             <div class="content">
-                <form method="post" action="./index.php#delAcc" class="content-form">
-                    <div class="tables">
-                        <div class="valueDiv">
-                            <label for="email">Confirm with E-Mail:</label>
-                            <br>
-                            <input type="text" name="email" id="email">
-                        </div>
-                        <div class="valueDiv">
-                            <label for="pswrd">Confirm with Password:</label>
-                            <br>
-                            <input type="password" name="pswrd" id="pswrd">
-                        </div>
+                <div class="tables">
+                    <div class="valueDiv">
+                        <label class="inpLabel" for="email">Confirm with E-Mail:</label>
+                        <br>
+                        <input class="inpText" type="text" name="DelEmail" id="DelEmail" placeholder="E-Mail...">
                     </div>
-                    <button class="btn-submit" type="submit">Delete Account permanently</button>
-                </form>
+                    <div class="valueDiv">
+                        <label class="inpLabel" for="pswrd">Confirm with Password:</label>
+                        <br>
+                        <input class="inpText" type="password" name="delPswrd" id="delPswrd" placeholder="Password...">
+                    </div>
+                </div>
+                <button onclick="delAccount()" class="btn-submit" type="submit">Delete Account permanently</button>
             </div>
         </div>
     </body>
@@ -199,14 +231,36 @@
             getAllLists();
 
             alt = window.location.hash.slice(1, window.location.hash.length);
-            document.getElementById(window.location.hash.slice(1, window.location.hash.length)).style.display = 'block';
+            console.log(alt);
+            document.getElementById(alt).style.display = 'block';
         }
 
         window.addEventListener('hashchange', function(){
             if(alt) document.getElementById(alt).style.display = 'none';
 
-            document.getElementById(window.location.hash.slice(1, window.location.hash.length)).style.display = 'block';
+            console.log(alt);
             alt = window.location.hash.slice(1, window.location.hash.length);
+            document.getElementById(alt).style.display = 'block';
         });
+
+        function delAccount(){
+            if(confirm("are you sure you want to delete your account permanently?")){
+                console.log("confirmed");
+                const inputData = [document.getElementById('DelEmail').value, document.getElementById('delPswrd').value];
+
+                console.log(inputData);
+                alert(
+                    `<?php
+                        $param1 = inputData[0];
+                        $param2 = inputData[1];
+                        print_r("> $param1");
+
+                        //verifyDelete($param1, $param2);
+                    ?>`
+                );
+            }else{
+                console.log("not confirmed");
+            }
+        }
     </script>
 </html>

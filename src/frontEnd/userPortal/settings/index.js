@@ -189,15 +189,17 @@ async function newList() {
 async function delList(listName) {
     const token = await getCo();
 
-    var xml = new XMLHttpRequest();
-    xml.open('POST', "https://sebastian-web.de/api/v1/deleteUserList");
-    xml.setRequestHeader('authorization', token);
-    xml.setRequestHeader("Content-Type", "application/json");
-    xml.send(JSON.stringify({name: listName}));
+    if(confirm(`bist du sicher, dass du ${listName} löschen willst?`)) {
+        var xml = new XMLHttpRequest();
+        xml.open('POST', "https://sebastian-web.de/api/v1/deleteUserList");
+        xml.setRequestHeader('authorization', token);
+        xml.setRequestHeader("Content-Type", "application/json");
+        xml.send(JSON.stringify({name: listName}));
 
-    xml.onreadystatechange = async function() {
-        if (xml.readyState == 4 && xml.status == 200) {
-            location.reload();
+        xml.onreadystatechange = async function () {
+            if (xml.readyState == 4 && xml.status == 200) {
+                location.reload();
+            }
         }
     }
 }
