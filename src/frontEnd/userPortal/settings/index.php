@@ -32,7 +32,6 @@
 
         if(password_verify($oldPswrd, $userJson->password)){
             if($newPswrd == $repPswrd){
-                echo "success";
                 $userData = array('password' => password_hash($newPswrd, PASSWORD_DEFAULT), 'userId' => $userJson->id);
 
                 $stmt = $db->prepare('UPDATE `user_accounts` SET `password`=:password WHERE id=:userId');
@@ -43,40 +42,7 @@
         }else{
     //        echo "password wrong";
         }
-    }
-    /*
-    else if(!empty($_POST) && !empty($_POST['email']) && !empty($_POST['pswrd'])){
-        if(verifyDelete()){
-            $email = $_POST['email'];
-            $pass = $_POST['pswrd'];
-            $token = $_COOKIE['token'];
-
-            $curl = curl_init();
-
-            curl_setopt_array($curl, array(
-              CURLOPT_URL => "https://sebastian-web.de/api/v1/getUserAccount",
-              CURLOPT_RETURNTRANSFER => true,
-              CURLOPT_MAXREDIRS => 10,
-              CURLOPT_TIMEOUT => 0,
-              CURLOPT_FOLLOWLOCATION => true,
-              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-              CURLOPT_HTTPHEADER => array("authorization: $token"),
-            ));
-            $user = curl_exec($curl);
-            $userJson = json_decode($user)[0];
-            curl_close($curl);
-
-            if(password_verify($pass, $userJson->password)){
-                $userData = array('userId' => $userJson->id);
-                print_r($userData);
-                $stmt = $db->prepare('DELETE FROM `user_accounts` WHERE `id` = :userId');
-                $deletedUser = $stmt->execute($userData);
-
-                header( "Location: ../login.php?action=logout");
-                die;
-            }
-        }
-    }*/else{
+    }else{
     //    echo "cannot get data";
 
     /*
@@ -93,9 +59,9 @@
          }
      */
     }
-    function verifyDelete($email, $pass){
-        $token = $_COOKIE['token'];
-        print_r($pass);
+    function verifyDelete($email){
+        $token = $_COOKIE['token'];     
+        $pass = $_COOKIE['pass'];
 
         $curl = curl_init();
 
@@ -114,12 +80,12 @@
 
         if(password_verify($pass, $userJson->password)){
             $userData = array('userId' => $userJson->id);
-            print_r($userData);
-            $stmt = $db->prepare('DELETE FROM `user_accounts` WHERE `id` = :userId');
+            print_r($userData['userId']);
+
+            $stmt = $db->prepare('DELETE FROM user_accounts WHERE id=:userId');
             $deletedUser = $stmt->execute($userData);
 
-            header( "Location: ../login.php?action=logout");
-            die;
+            header( "Location: ../login.php");
         }else{
             print_r('ERROR');
         }
@@ -231,36 +197,30 @@
             getAllLists();
 
             alt = window.location.hash.slice(1, window.location.hash.length);
-            console.log(alt);
             document.getElementById(alt).style.display = 'block';
         }
 
         window.addEventListener('hashchange', function(){
             if(alt) document.getElementById(alt).style.display = 'none';
 
-            console.log(alt);
             alt = window.location.hash.slice(1, window.location.hash.length);
             document.getElementById(alt).style.display = 'block';
         });
 
         function delAccount(){
             if(confirm("are you sure you want to delete your account permanently?")){
-                console.log("confirmed");
-                const inputData = [document.getElementById('DelEmail').value, document.getElementById('delPswrd').value];
 
-                console.log(inputData);
-                alert(
-                    `<?php
-                        $param1 = inputData[0];
-                        $param2 = inputData[1];
-                        print_r("> $param1");
+                const cookieContent = document.getElementById('delPswrd').value;
+                const email = document.getElementById('DelEmail').value;
 
-                        //verifyDelete($param1, $param2);
-                    ?>`
-                );
-            }else{
-                console.log("not confirmed");
-            }
+                var date = new Date();
+                date.setTime(date.getTime()+(15*1000));
+                document.cookie = `pass=${cookieContent}; expires=${date.toString()};`;
+
+                var phpCode = "<?php $param1 = '"+email+"'; verifyDelete($param1); ?>";
+
+                alert( phpCode );
+            }   
         }
     </script>
 </html>
