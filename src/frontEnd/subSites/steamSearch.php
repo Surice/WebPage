@@ -20,7 +20,7 @@
                             <tr class="table-body">
                                 <th class="tableE">${e[0]}</th>
                                 <th class="tableE">
-                                    <a class="link" href="${e[1]}")>${e[1]}</a>
+                                    <a target="_blank" class="link" href="${e[1]}")>${e[1]}</a>
                                 </th>
                             </tr>
                         `;

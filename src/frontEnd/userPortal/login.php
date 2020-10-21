@@ -33,7 +33,6 @@ if(!empty($_POST) && !empty($_POST['password']) && !empty($_POST['email']) && !e
         $_SESSION["loggedIn"] = true;
         $_SESSION["user"] = "{$user['firstname']} {$user['lastname']}";
 
-
         $payloadData = array('userId' => $user['id'], 'username' => $user['email'], 'role' => $role);
 
         $payload = json_encode($payloadData);

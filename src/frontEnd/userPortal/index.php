@@ -24,3 +24,21 @@ if(!isset($_SESSION) || $_SESSION["loggedIn"] != true){
         </div>
     </body>
 </html>
+
+<script>
+    console.log(`current Token: ${getToken()}`);
+
+    function getToken() {
+        var co = document.cookie.split(";"),
+        out = "none";
+        
+        co.forEach(e=>{
+            if(e.startsWith("token=")){
+                e = e.slice(6);
+    
+                out = e;
+            }
+        });
+        return out;
+    }
+</script>

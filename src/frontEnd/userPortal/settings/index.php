@@ -81,11 +81,11 @@
         if(password_verify($pass, $userJson->password)){
             $userData = array('userId' => $userJson->id);
             print_r($userData['userId']);
-
+/*
             $stmt = $db->prepare('DELETE FROM user_accounts WHERE id=:userId');
             $deletedUser = $stmt->execute($userData);
-
-            header( "Location: ../login.php");
+*/
+//            header( "Location: ../login.php");
         }else{
             print_r('ERROR');
         }
